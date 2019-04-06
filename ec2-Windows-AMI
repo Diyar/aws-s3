@@ -1,0 +1,8 @@
+#Note Before taking a Golden AMI run the mentioned below AWS commands on Windows EC2 instances.
+<Advantage:---> if you copy your AMI to other AWS Regions, you can attach new EC2 key Pairs to it.>
+
+"C:\ProgramData\Amazon\EC2-Windows\Launch\\Scripts\SendWindowsIsReady.ps1 -Schedule",
+"C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\InitializeInstance.ps1 -Schedule",
+"C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\SysprepInstance.ps1 -NoShutdown"
+
+https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
