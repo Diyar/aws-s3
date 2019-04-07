@@ -1,3 +1,6 @@
+Case-1 ---> AMI Created with this, attach your choice .pem file 
+https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
+
 #Note Before taking a Golden AMI run the mentioned below AWS commands on Windows EC2 instances.
 <Advantage:---> if you copy your AMI to other AWS Regions, you can attach new EC2 key Pairs to it.>
 
@@ -5,4 +8,9 @@
 "C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\InitializeInstance.ps1 -Schedule",
 "C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\SysprepInstance.ps1 -NoShutdown"
 
-https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
+
+
+Case-2 ---> Key .pem file provided
+https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ResettingAdminPassword_EC2Launch.html
+#Other Option is detach the Volume & Attach it to Other Volume & Install the mentioned below package.
+https://s3.amazonaws.com/ec2rescue/windows/EC2Rescue_latest.zip
