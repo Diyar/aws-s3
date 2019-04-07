@@ -8,6 +8,8 @@ https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
 "C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\InitializeInstance.ps1 -Schedule",
 "C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\SysprepInstance.ps1 -NoShutdown"
 
+You are logged off the instance and the instance shuts down. If you check the Instances page in the Amazon EC2 console, the instance state changes from running to stopping, and then to stopped. At this point, it is safe to create an AMI from this instance.
+
 
 
 
