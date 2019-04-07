@@ -4,21 +4,12 @@ https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
 #Note Before taking a Golden AMI run the mentioned below AWS commands on Windows EC2 instances.
 <Advantage:---> if you copy your AMI to other AWS Regions, you can attach new EC2 key Pairs to it.>
 
-# "C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\InitializeInstance.ps1 -Schedule"
-OR
-"C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\InitializeInstance.ps1 -SchedulePerBoot",
-
+"C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\InitializeInstance.ps1 -Schedule"
 "C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\InitializeInstance.ps1 -Schedule",
 "C:\ProgramData\Amazon\EC2-Windows\Launch\Scripts\SysprepInstance.ps1 -NoShutdown"
 
 
-Note
 
-When you enable EC2Launch to run on every boot, the following changes will be made to the LaunchConfig.json the next time EC2Launch runs:
-
-AdminPasswordType will be set back to DoNothing so that the password does not change on each boot.
-
-HandleUserData will be set back to false unless the user data has persist set to true. For more information about user data scripts, see User Data Scripts in the Amazon EC2 User Guide.
 
 
 
