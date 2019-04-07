@@ -11,7 +11,7 @@ https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
 
 
 Case-2 ---> Key .pem file provided
-ssh-keygen -f Share-Point-Server.pem > Share-Point-Server.pub
+ssh-keygen -y -f Share-Point-Server.pem > Share-Point-Server.pub
 https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ResettingAdminPassword_EC2Launch.html
 #Other Option is detach the Volume & Attach it to Other Volume & Install the mentioned below package.
 https://s3.amazonaws.com/ec2rescue/windows/EC2Rescue_latest.zip
