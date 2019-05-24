@@ -1,0 +1,95 @@
+###STEP 1###
+https://www.blazemeter.com/blog/how-to-setup-scalable-jenkins-on-top-of-a-kubernetes-cluster
+
+We will be creating storage.yaml
+
+vim storage.yaml
+
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: standard
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  zones: us-west-2a, us-west-2b
+
+---> kubectl apply -f storage.yml
+
+###STEP 2###
+We will be creating volume.yaml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-storage
+  labels:
+    app: jenkins
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+
+---> kubectl apply -f volume.yaml
+
+###STEP 3###
+
+We will be creating jenkins.yaml
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins
+          securityContext:
+            runAsUser: 0
+          env:
+            - name: JAVA_OPTS
+              value: -Djenkins.install.runSetupWizard=false
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: jnlp-port
+              containerPort: 50000
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: "/var/jenkins_home"
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-storage
+
+---> kubectl apply -f jenkins.yaml
+
+
+###STEP 4###
+https://devopscube.com/setup-jenkins-on-kubernetes-cluster/
+
+We will be creating jenkins-service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: jenkins
+
+---> kubectl apply -f jenkins-service.yaml
+
