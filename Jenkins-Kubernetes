@@ -93,3 +93,7 @@ spec:
 
 ---> kubectl apply -f jenkins-service.yaml
 
+---> ### Persistent Storage ###
+
+kubectl get persistentVolumes
+
