@@ -1,5 +1,5 @@
 ###STEP 1###
-
+# https://www.jeffgeerling.com/blog/2019/expanding-k8s-pvs-eks-on-aws
 
 We will be creating storage.yaml
 
@@ -10,9 +10,10 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: standard
 provisioner: kubernetes.io/aws-ebs
+allowVolumeExpansion: true
 parameters:
   type: gp2
-  zones: us-west-2a, us-west-2b
+  zones: us-west-2a, us-west-2b, us-west-2c
 
 ---> kubectl apply -f storage.yml
 
