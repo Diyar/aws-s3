@@ -38,9 +38,11 @@ spec:
 #Note: In case if you want to attach an existing volume or a backup of a volume remove --->requests and add mentioned below.
 #https://medium.com/pablo-perez/launching-a-pod-with-an-existing-ebs-volume-mounted-in-k8s-7b5506fa7fa3
 
-awsElasticBlockStore:
-  volumeID: vol-0b402cb854e070fad
-  fsType: ext4
+volumes:
+  awsElasticBlockStore:
+    volumeID: vol-0b402cb854e070fad
+    
+---> This entry will be done deployments <--- ---> In STEP 3    
   
   
 ###STEP 3###
