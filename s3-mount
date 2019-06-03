@@ -1,0 +1,42 @@
+Dependency Installed:
+
+yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel -y
+
+
+s3fs-fuse Location: git clone https://github.com/s3fs-fuse/s3fs-fuse
+
+cd  s3fs-fuse
+
+./autogen.sh
+
+./configure --prefix=/usr --with-openssl
+
+
+make
+
+make install
+
+which s3fs
+/bin/s3fs
+
+vim /etc/passwd-s3fs   
+
+accesskey:secret
+
+# For the security of /etc/passwd-s3fs   ---> file change the permissions of it.
+
+chmod 640 /etc/passwd-s3fs
+
+s3fs s3_bucket_name -o use_cache=/temp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /directory_name
+
+#For make it persistent
+
+which s3fs
+/bin/s3fs
+
+vim /etc/rc.local
+
+/bin/s3fs s3_bucket_name -o use_cache=/temp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /directory_name
+
+
+
