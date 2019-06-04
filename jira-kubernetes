@@ -16,11 +16,11 @@ spec:
             runAsUser: 0
           env:
             - name: X_PROXY_NAME
-              value: jeera.cloudelligent.com
+              value: "jeera.cloudelligent.com"
             - name: X_PROXY_PORT
-              value: 443
+              value: "443"
             - name: X_PROXY_SCHEME
-              value: true
+              value: "true"
           ports:
             - name: http-port
               containerPort: 8080
