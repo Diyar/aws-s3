@@ -18,9 +18,9 @@ spec:
             - name: X_PROXY_NAME
               value: "jeera.cloudelligent.com"
             - name: X_PROXY_PORT
-              value: "443"
+              value: "80"
             - name: X_PROXY_SCHEME
-              value: "true"
+              value: "https"
           ports:
             - name: http-port
               containerPort: 8080
@@ -33,36 +33,6 @@ spec:
             claimName: jeera-storage
 
 kubectl apply -f jeera.yaml
-
-
-#With Environment variables
-
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: jeera
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: jeera
-    spec:
-      containers:
-        - name: jeera
-          image: cptactionhank/atlassian-jira
-          securityContext:
-            runAsUser: 0
-          ports:
-            - name: http-port
-              containerPort: 8080
-          volumeMounts:
-            - name: jeera-home
-              mountPath: "/var/atlassian/jira"
-      volumes:
-        - name: jeera-home
-          persistentVolumeClaim:
-            claimName: jeera-storage
 
 ###############################################################
 
