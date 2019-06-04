@@ -18,7 +18,7 @@ spec:
             - name: X_PROXY_NAME
               value: "jeera.cloudelligent.com"
             - name: X_PROXY_PORT
-              value: "80"
+              value: "443"
             - name: X_PROXY_SCHEME
               value: "https"
           ports:
