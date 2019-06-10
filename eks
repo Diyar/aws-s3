@@ -187,7 +187,7 @@ Create an administrative account and cluster role binding
 kubectl apply -f eks-admin-service-account.yaml
 kubectl apply -f eks-admin-cluster-role-binding.yaml
 Start proxy
-kubectl proxy --address 0.0.0.0 --accept-hosts '.*' &
+kubectl proxy --address 0.0.0.0 --accept-hosts '.*' &  ---> Use this --->    kubectl proxy  &
 Get a token
 aws-iam-authenticator -i <cluster_name> token
 Log in
