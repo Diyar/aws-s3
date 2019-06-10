@@ -170,6 +170,8 @@ kubectl get nodes --watch
 
 #################################STEP-2-END########################################
 
+Kubernetes DASH-BOARD
+
 #################################STEP-3-START######################################
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
