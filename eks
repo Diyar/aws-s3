@@ -127,3 +127,154 @@ CoreDNS is running at https://069ED5E1B13D5C06E60F75AFDE032409.sk1.us-west-2.eks
 
 ##################################STEP-1-END#########################################
 
+#################################STEP-2-START########################################
+
+# Launching the EKS Worker Nodes
+# Deploying the Kubernetes Dashboard
+
+
+https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-11-07/amazon-eks-nodegroup.yaml
+
+
+
+We will be using Cloudformation and we will deploy a stack for our worker nodes.
+
+---> Go to Cloudformation and use this URL to create this stack from the URL ---> https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-11-07/amazon-eks-nodegroup.yaml
+
+Note: For Amazon Optimized AMI ---> https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
+
+ami-0923e4b35a30a5f53 ---> This is Oregon ---> because we deployed our EKS Cluster ---> eks-cloudelligent    in Oregon.
+
+This is our Bucket automatically created in Oregon for this Cloudformation Template ---> cf-templates-7gd89mj54jv6-us-west-2
+
+These are regular ec2-instances you own and pay for it.
+
+
+---> From Cloudformation go to output section and copy the ARN ---> NodeInstanceRole
+
+#You provisioned the worker nodes from a Cloudformation ---> now time join these nodes ---> Your EKS Cluster ---> We need to apply AWS AUTHENTICATOR configuration map.
+
+arn:aws:iam::898668804275:role/EKS-Cloudelligent-WorkerNodes-NodeInstanceRole-D68SD4Y88L82
+
+curl -O https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-11-07/aws-auth-cm.yaml
+
+NOTE: YOUR CLUSTER SECURITY GROUP MUST BE SEPRATE AND YOUR CONTROLLER SECURITY GROUP MUST BE SEPRATE.
+
+# Edit this file ---> replace the ARN ---> from Cloudformation output.
+
+
+kubectl apply -f aws-auth-cm.yaml 
+
+
+kubectl get nodes --watch
+
+#################################STEP-2-END########################################
+
+#################################STEP-3-START######################################
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
+https://github.com/kubernetes/dashboard
+
+########################################################################################################################################
+Installing the Kubernetes Dashboard
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+Installing Heapster and InfluxDB
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/heapster.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml
+Create an administrative account and cluster role binding
+kubectl apply -f eks-admin-service-account.yaml
+kubectl apply -f eks-admin-cluster-role-binding.yaml
+Start proxy
+kubectl proxy --address 0.0.0.0 --accept-hosts '.*' &
+Get a token
+aws-iam-authenticator -i <cluster_name> token
+Log in
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
+###########################################################################################################################################
+
+
+# By default kubernetes dashboard user has very limited permissions
+
+# In order to login we need create and administrative account and cluster role binding 
+
+so we need to create a file eks-admin-service-account.yaml
+
+vim eks-admin-service-account.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eks-admin
+  namespace: kube-system
+
+
+kubectl apply -f eks-admin-service-account.yaml
+
+#Than we need to create cluster role binding ---> this will associate or link the service account we created above with the CLUSTER ADMIN ROLE.
+
+vim eks-admin-cluster-role-binding.yaml
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+ name: eks-admin
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: eks-admin	
+  namespace: kube-system
+
+
+
+kubectl apply -f eks-admin-cluster-role-binding.yaml
+
+kubectl proxy  &
+
+netstat -antp
+
+aws-iam-authenticator -i eks-cloudelligent token
+
+yum install -y jq
+
+aws-iam-authenticator -i eks-cloudelligent token | jq -r .status.token
+
+k8s-aws-v1.aHR0cHM6Ly9zdHMuYW1hem9uYXdzLmNvbS8_QWN0aW9uPUdldENhbGxlcklkZW50aXR5JlZlcnNpb249MjAxMS0wNi0xNSZYLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUE1Q1BHVlhDWlVBNzZXQVZBJTJGMjAxOTA1MjMlMkZ1cy1lYXN0LTElMkZzdHMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDE5MDUyM1QwMDA1MDBaJlgtQW16LUV4cGlyZXM9MCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTYwNjUxZmQ0YzI1M2RmN2U5Mzk1MWMxOGEwODM3NjFiNWNhNDA4NmU3MTM1ZjA5N2I4YWNlM2RiNjRhNGE5OTg
+
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
+
+kubectl -n kube-system get svc -o wide
+
+
+Example Important Commands
+
+kubectl get pods --all-namespaces
+
+kubectl -n kube-system get svc -o wide
+
+kubectl get deployment --namespace=kube-system
+
+kubectl delete deployment heapster --namespace=kube-system
+
+###ISSUE###
+no endpoints available for service \"kubernetes-dashboard\"
+
+https://stackoverflow.com/questions/52893111/no-endpoints-available-for-service-kubernetes-dashboard
+
+https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network
+
+
+https://github.com/kubernetes/dashboard/issues/3322
+
+kubectl -n kube-system describe pod kubernetes-dashboard
+
+#################################STEP-3-START######################################
+
+
+
+
+
