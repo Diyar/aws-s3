@@ -1,0 +1,129 @@
+##################################STEP-1-START#########################################
+
+Setup IAM Role for EKS
+
+EKS_Cloudelligent
+
+
+Custom VPC Setup via Cloudformation
+
+https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-11-07/amazon-eks-vpc-sample.yaml
+
+
+
+
+
+
+https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
+
+1. Installing kubectl
+curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/kubectl
+
+chmod +x kubectl
+
+mkdir bin
+
+cp kubectl bin/
+
+
+
+2. Installing AWS IAM authenticator ---> (This allows us to administor our EKS Clustor, using our IAM Identity)
+
+https://github.com/kubernetes-sigs/aws-iam-authenticator
+
+We are using the AWS Version of IAM authenticator ---> https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+
+curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.12.7/2019-03-27/bin/linux/amd64/aws-iam-authenticator
+
+chmod +x ./aws-iam-authenticator
+
+mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
+
+
+3. Now we need to configure kubectl for EKS ---> (make sure you have aws cli version 1.16)
+
+ aws --version
+aws-cli/1.16.102 Python/2.7.14 Linux/4.14.114-105.126.amzn2.x86_64 botocore/1.12.92
+
+Note: Update aws cli using PIP instead of YUM
+
+https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html
+
+
+
+curl -O https://bootstrap.pypa.io/get-pip.py
+
+#Add an export command at the end of your profile script that's similar to the following example.
+export PATH=~/.local/bin:$PATH
+
+# Reload the profile into your current session to put those changes into effect.
+
+source ~/.bash_profile
+
+# Upgrade AWS CLI Version
+pip install awscli --upgrade --user
+
+
+4. Now we need to update our cubeconfig file
+
+# Set aws credentials
+AWS Cli installation
+https://www.osradar.com/install-aws-cli-ubuntu-18-04/
+
+aws configure
+
+Provide your user progmatic credentials
+
+than
+
+update our cubeconfig file
+
+aws eks update-kubeconfig --name eks-cloudelligent
+
+Added new context arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent to /root/.kube/config
+
+kubectl config view
+
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://069ED5E1B13D5C06E60F75AFDE032409.sk1.us-west-2.eks.amazonaws.com
+  name: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+contexts:
+- context:
+    cluster: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+    user: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+  name: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+current-context: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+kind: Config
+preferences: {}
+users:
+- name: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1alpha1
+      args:
+      - --region
+      - us-west-2
+      - eks
+      - get-token
+      - --cluster-name
+      - eks-cloudelligent
+      command: aws
+      env: null
+
+
+------------------------------------
+Test Your EKS Cluster
+
+kubectl cluster-info
+
+Kubernetes master is running at https://069ED5E1B13D5C06E60F75AFDE032409.sk1.us-west-2.eks.amazonaws.com
+CoreDNS is running at https://069ED5E1B13D5C06E60F75AFDE032409.sk1.us-west-2.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+
+
+##################################STEP-1-END#########################################
+
