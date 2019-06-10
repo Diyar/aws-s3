@@ -79,7 +79,12 @@ than
 
 update our cubeconfig file
 
-aws eks update-kubeconfig --name eks-cloudelligent
+IMPORTANT TO UPDATE YOUR ./kube
+################################################################
+### MUST ###
+---> aws eks update-kubeconfig --name eks-cloudelligent <---
+##################################################################
+
 
 Added new context arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent to /root/.kube/config
 
