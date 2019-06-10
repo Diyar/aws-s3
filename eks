@@ -272,7 +272,7 @@ https://github.com/kubernetes/dashboard/issues/3322
 
 kubectl -n kube-system describe pod kubernetes-dashboard
 
-#################################STEP-3-START######################################
+#################################STEP-3-END######################################
 
 
 
