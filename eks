@@ -197,6 +197,17 @@ Get a token
 aws-iam-authenticator -i <cluster_name> token
 Log in
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
+
+
+kubectl proxy  &
+
+netstat -antp
+
+aws-iam-authenticator -i eks-cloudelligent token
+
+yum install -y jq
+
+aws-iam-authenticator -i eks-cloudelligent token | jq -r .status.token
 ###########################################################################################################################################
 
 
