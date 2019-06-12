@@ -222,7 +222,7 @@ $ psql template1
 OR
 $ psql -d template1 -U postgres
 
-Step #4: Add a user called tom
+Step #4: Add a user called asim
 
 CREATE USER asim WITH PASSWORD 'asim';
 
@@ -236,9 +236,9 @@ template1=# GRANT ALL PRIVILEGES ON DATABASE jiradb to asim;
 Type \q to quit:
 template1=# \q
 
-Step #6: Test tom user login
+Step #6: Test asim user login
 
-In order to login as tom you need to type following commands. Login as tom or use su command:
+In order to login as asim you need to type following commands. Login as asim or use su command:
 $ su asim
 $ psql -d jiradb -U asim
 
