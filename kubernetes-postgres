@@ -189,22 +189,14 @@ spec:
   selector:
     app: postgres
 
-4. kubectl get pods -o wide
 
-kubectl exec -it postgres-756445dc5b-flvc9 -- bash
-
-5. mysql -u root -p  ---> (Note: provide original root password here ---> cloudelligent.com asim
-
-   CREATE DATABASE jira;
-   ctrl+D
-
-6. kubectl get replicasets
+4. kubectl get replicasets
    kubectl get secrets
    kubectl get pods
    kubectl get services
    kubectl get ep ---> end point
 
-7. pgAdmin Deployment ---> Note: postgres uses pgadmin not phpmyadmin
+5. pgAdmin Deployment ---> Note: postgres uses pgadmin not phpmyadmin
 
 # useful link ---> https://blog.toadworld.com/2017/03/29/postgresql-database-with-kubernetes-for-performance-and-collaboration
 
