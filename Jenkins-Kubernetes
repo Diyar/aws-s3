@@ -63,12 +63,12 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: jenkins
+          image: jenkins/jenkins:2.176.1
           securityContext:
             runAsUser: 0
           env:
             - name: JAVA_OPTS
-              value: -Djenkins.install.runSetupWizard=false
+              value: -Djenkins.install.runSetupWizard=true
           ports:
             - name: http-port
               containerPort: 8080
