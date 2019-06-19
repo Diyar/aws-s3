@@ -295,6 +295,7 @@ kubectl -n kube-system describe pod kubernetes-dashboard
 EKS Important points
 
 1. For us-east-1 region the AMI for Kubernetes 1.12 is "ami-0200e65a38edfb7e1"
+  https://docs.aws.amazon.com/eks/latest/userguide/update-stack.html
 
 2.  "Enable DNS support"
 
