@@ -309,7 +309,24 @@ For reference:
 - https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support
 
 
+##########################################################################################################
+# https://aws.amazon.com/premiumsupport/knowledge-center/amazon-eks-cluster-access/
 
+3.    To allow designated_user to assume the role of cluster_creator, run the following command:
+
+aws sts assume-role –role-arn arn:aws:iam:11122223333:role/cluster_creator --role_session_name test
+The output shows the temporary IAM credentials for designated_user, who is using the assumed role of cluster_creator.
+
+4.    Use the temporary IAM credentials to set the AWS_ACCESS_KEY_ID, AWS_SESSION_TOKEN, and AWS_SECRET_ACCESS_KEY environment variables. See the following example:
+
+export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+export AWS_SESSION_TOKEN=EXAMPLETOKEN
+export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+The AWS CLI now prioritizes the credentials set in the environment variables and uses them to make calls to AWS services.
+
+5.    To verify that the AWS CLI is using the assumed role for cluster_creator, run the following command:
+
+aws sts get-caller-identity
 
 
 
