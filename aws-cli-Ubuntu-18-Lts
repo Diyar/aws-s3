@@ -3,6 +3,7 @@
 #OS: Ubuntu-18-LTS
 
 #https://linuxhint.com/install_aws_cli_ubuntu/
+#https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html#install-linux-path
 
 sudo apt update -y
 
