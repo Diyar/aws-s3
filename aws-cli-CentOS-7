@@ -2,6 +2,8 @@
 #Purpose: AWS-CLI
 #OS: Centos-7
 
+sudo yum update -y
+
 sudo curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
 
 sudo yum install unzip -y > /dev/null
