@@ -1,0 +1,25 @@
+#!/bin/bash
+#Purpose: AWS-CLI
+#OS: Centos-7
+
+sudo curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+
+sudo yum install unzip -y > /dev/null
+
+sudo apt install unzip -y > /dev/null
+
+sudo unzip awscli-bundle.zip > /dev/null
+
+mkdir -p ~/bin
+
+sudo ./awscli-bundle/install -i ~/bin
+
+
+
+#For Centos-7 root user only
+cp ~/bin/bin/aws /usr/local/bin > /dev/null
+
+
+aws --version
+
+#END
