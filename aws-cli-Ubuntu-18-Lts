@@ -14,6 +14,9 @@ sudo pip3 install awscli --upgrade --user
 #This command inserts the path, ~/.local/bin in this example, at the front of the existing PATH variable
 export PATH=~/.local/bin:$PATH
 
+#Reload the profile into your current session to put those changes into effect.
+source ~/.bash_profile
+
 awscli --version
 
 #END
