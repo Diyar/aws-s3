@@ -10,6 +10,9 @@ sudo apt-get install python3-pip -y > /dev/null
 
 sudo pip3 install awscli --upgrade --user
 
+#This command inserts the path, ~/.local/bin in this example, at the front of the existing PATH variable
+export PATH=~/.local/bin:$PATH
+
 python3 -m awscli --version
 
 #END
