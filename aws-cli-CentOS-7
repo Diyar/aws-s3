@@ -16,7 +16,7 @@ sudo ./awscli-bundle/install -i ~/bin
 
 #For Centos-7 root user only
 cp ~/bin/bin/aws /usr/local/bin > /dev/null
-
+cp ~/bin/bin/aws /usr/bin
 
 aws --version
 
