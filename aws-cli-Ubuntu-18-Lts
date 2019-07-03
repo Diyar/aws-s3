@@ -1,0 +1,15 @@
+#!/bin/bash
+#Purpose: AWS-CLI
+#OS: Ubuntu-18-LTS
+
+#https://linuxhint.com/install_aws_cli_ubuntu/
+
+sudo apt update -y
+
+sudo apt-get install python3-pip -y > /dev/null
+
+sudo pip3 install awscli --upgrade --user
+
+python3 -m awscli --version
+
+#END
