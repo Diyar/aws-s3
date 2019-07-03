@@ -6,8 +6,6 @@ sudo curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle
 
 sudo yum install unzip -y > /dev/null
 
-sudo apt install unzip -y > /dev/null
-
 sudo unzip awscli-bundle.zip > /dev/null
 
 mkdir -p ~/bin
