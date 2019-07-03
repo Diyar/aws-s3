@@ -15,4 +15,21 @@ python3 -m awscli --version
 
 #python3 -m awscli configure
 
+#This command inserts the path, ~/.local/bin in this example, at the front of the existing PATH variable.
+export PATH=~/.local/bin:$PATH
+
+#Reload the profile into your current session to put those changes into effect.
+
+#Bash – .bash_profile, .profile, or .bash_login
+
+#Zsh – .zshrc
+
+#Tcsh – .tcshrc, .cshrc or .login
+
+# We are Using Ubuntu
+ source ~/.profile
+ 
+ # AWS-CLI
+ aws --version
+
 #END
