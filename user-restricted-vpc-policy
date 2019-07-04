@@ -1,0 +1,32 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1562246744950",
+      "Action": "*",
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Sid": "Stmt1562246979491",
+      "Action": "iam:*",
+      "Effect": "Deny",
+      "Resource": "arn:aws:iam::898668804275:user/probitra"
+    },
+    {
+      "Sid": "Stmt1562249989480",
+      "Action": "ec2:*",
+      "Effect": "Deny",
+      "Resource": "arn:aws:ec2:us-east-1:898668804275:subnet/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:Vpc": "arn:aws:ec2:us-east-1:898668804275:vpc/vpc-eba8d990"
+        }
+      }
+    }
+  ]
+}
+
+
+
+#https://docs.aws.amazon.com/vpc/latest/userguide/VPC_IAM.html
