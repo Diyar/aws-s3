@@ -11,7 +11,7 @@
       "Sid": "Stmt1562246979491",
       "Action": "iam:*",
       "Effect": "Deny",
-      "Resource": "arn:aws:iam::898668804275:user/probitra"
+      "Resource": "arn:aws:iam::898668804275:user/*"
     },
     {
       "Sid": "Stmt1562249989480",
