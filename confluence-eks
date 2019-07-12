@@ -103,6 +103,8 @@ spec:
               value: "443"
             - name: CATALINA_CONNECTOR_SCHEME
               value: "https"
+            - name: CATALINA_CONNECTOR_SECURE
+              value: "true"
           ports:
             - name: http-port
               containerPort: 8090
