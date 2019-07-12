@@ -21,6 +21,8 @@ spec:
               value: "443"
             - name: X_PROXY_SCHEME
               value: "https"
+            - name: X_PROXY_SECURE
+              value: "true"
           ports:
             - name: http-port
               containerPort: 8080
