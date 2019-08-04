@@ -1,0 +1,61 @@
+#https://medium.com/@stijnbe/using-gitlab-ci-with-aws-container-registry-ecaf4a37d791
+
+
+Using Gitlab CI with AWS Container Registry
+Stijn Beauprez
+Stijn Beauprez
+Follow
+Oct 21, 2017 · 3 min read
+At Outsite we are using AWS Container Services together with AWS Container Registry to deploy our services. We also use Gitlab for our repositories and CI. One of the features they offer is Gitlab CI/CD.
+
+We chose to go with EC2 Container Registry instead of Docker Hub or Gitlab Registry because we don’t want to deal with authentication in EC2 Container Services and it’s included in AWS.
+Create new Container Registry repository
+If this is your first Container Registry repository then you will see below screen. After clicking “Get Started” you will be asked to give your repository a name.
+
+
+2. After clicking Next Step, the repository will be created and you will see instructions on how to use the repository.
+Create new AWS IAM user for Gitlab
+Add a new user for gitlab. This user should only have programmatic access as it will only use the awscli tool.
+
+2. Create a new group called “CI” and add the following 2 policies:
+- AmazonEC2ContainerRegistryFullAccess
+- AmazonEC2ContainerServiceFullAccess
+3. Note down the Access Key and the Secret Key that will be generated after creating the gitlab-ci user. We will need these keys for the environment variables in Gitlab.
+Setup environment variables
+If you want to use ECS and ECR for all projects in your group or Gitlab account, you can configure the variables at the top level. You can also opt to configure these variables on the project level itself.
+In your project/group go to Settings > CI/CD
+Add AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY to the variables. Using this naming the awscli tool will pick them up automatically.
+
+Configure .gitlab-ci.yml
+Create a new file in the root of your repository called .gitlab-ci.yml
+image: docker:latest
+
+variables:
+  REPOSITORY_URL: 363480529736.dkr.ecr.us-east-1.amazonaws.com/outsite/outsite-slackbot
+
+services:
+- docker:dind
+
+before_script:
+  - apk add --no-cache curl jq python py-pip
+  - pip install awscli
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - $(aws ecr get-login --no-include-email --region us-east-1)
+    - docker build -t $REPOSITORY_URL .
+    - docker push $REPOSITORY_URL
+  only:
+    - master
+  tags:
+    - docker
+.gitlab-ci.yml example for docker build with ecr ($1680563) · Snippets
+GitLab.com
+gitlab.com
+2. Commit and push this file to the repository and the Gitlab CI pipeline will start building and pushing your docker container.
+Summary
+Gitlab CI/CD is a really great way to build your docker images and push them to EC2 Container Registry. As it does not require setting up any additional virtual machines or services it’s definitely the way to go.
