@@ -65,7 +65,10 @@ Gitlab CI/CD is a really great way to build your docker images and push them to 
 ############################################################################################
 #https://stackoverflow.com/questions/48692554/how-to-use-eb-init-without-manual-instructions
 
-https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-init.html
+#https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-init.html
+
+#https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-create.html#eb3-createoutput
+
 
 I want to make an eb deploy in a clean environment. It tells me I first need to execute eb init.
 
