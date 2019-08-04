@@ -84,3 +84,25 @@ eb init --region eu-west-1 --platform <platform-name> appname
 #https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-clb.html
 
 eb create test-env --elb-type classic
+
+
+###############################################################################################
+#https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-general.html#command-options-general-elbhealthcheck
+
+Application Healthcheck URL
+
+The path to which to send health check requests. If not set, the load balancer attempts to make a TCP connection on port 80 to verify health. Set to a path starting with / to send an HTTP GET request to that path. You can also include a protocol (HTTP, HTTPS, TCP, or SSL) and port prior to the path to check HTTPS connectivity or use a non-default port.
+
+Note
+
+If you use the Elastic Beanstalk console to create an environment, you can't set this option in a configuration file. The console overrides this option with a recommended value.
+
+None
+
+/ (HTTP GET to root path)
+
+/health
+
+HTTPS:443/
+
+HTTPS:443/health
