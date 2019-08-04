@@ -79,3 +79,8 @@ Looks like you've solved this problem, but I'll clarify anyway: The EBCLI requir
 You're almost there. In order to suppress the interactive mode, which is what you are trying to do, you need to pass the --platform flag. I can clearly see how inconvenient this is, but what you need is:
 
 eb init --region eu-west-1 --platform <platform-name> appname
+
+#############################################################################################
+#https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-clb.html
+
+eb create test-env --elb-type classic
