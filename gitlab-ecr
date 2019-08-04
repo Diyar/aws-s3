@@ -106,3 +106,31 @@ None
 HTTPS:443/
 
 HTTPS:443/health
+
+
+###############################################################################################################################################################################
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-alb.html
+
+
+
+Example
+.ebextensions/alb-default-process.config
+
+The following configuration file modifies health check and stickiness settings on the default process.
+
+option_settings:
+  aws:elasticbeanstalk:environment:process:default:
+    DeregistrationDelay: '20'
+    HealthCheckInterval: '15'
+    HealthCheckPath: /
+    HealthCheckTimeout: '5'
+    HealthyThresholdCount: '3'
+    UnhealthyThresholdCount: '5'
+    Port: '80'
+    Protocol: HTTP
+    StickinessEnabled: 'true'
+    StickinessLBCookieDuration: '43200'
+
+
+
+
