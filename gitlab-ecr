@@ -59,3 +59,18 @@ gitlab.com
 2. Commit and push this file to the repository and the Gitlab CI pipeline will start building and pushing your docker container.
 Summary
 Gitlab CI/CD is a really great way to build your docker images and push them to EC2 Container Registry. As it does not require setting up any additional virtual machines or services it’s definitely the way to go.
+
+
+
+############################################################################################
+#https://stackoverflow.com/questions/48692554/how-to-use-eb-init-without-manual-instructions
+
+I want to make an eb deploy in a clean environment. It tells me I first need to execute eb init.
+
+Looks like you've solved this problem, but I'll clarify anyway: The EBCLI requires that the present working directory be rooted at an eb init-ed application. The EBCLI looks for a .elasticbeanstalk/config.yml directory to determine whether the PWD has been eb init-ed. Almost all eb operations require the PWD to have been init-ed with a Beanstalk application.
+
+        EDIT I tried: eb init --region eu-west-1 appname ...
+
+You're almost there. In order to suppress the interactive mode, which is what you are trying to do, you need to pass the --platform flag. I can clearly see how inconvenient this is, but what you need is:
+
+eb init --region eu-west-1 --platform <platform-name> appname
