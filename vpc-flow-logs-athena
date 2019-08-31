@@ -5,7 +5,7 @@ PARTITIONED BY (dt string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ' LOCATIO
 
 #And use this script to account for the table partitions:
 
-#ALTER TABLE vpc_flow_logs ADD PARTITION (dt='YYYY-MM-dd') location 's3://your_log_bucket/prefix/AWSLogs/{account_id}/vpcflowlogs/{region_code}/YYYY/MM/dd';
+ALTER TABLE vpc_flow_logs ADD PARTITION (dt='YYYY-MM-dd') location 's3://your_log_bucket/prefix/AWSLogs/{account_id}/vpcflowlogs/{region_code}/YYYY/MM/dd';
 
 
 #Note
