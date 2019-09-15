@@ -33,3 +33,15 @@ export PATH=~/.local/bin:$PATH
  aws --version
 
 #END
+
+
+##########################################################################################
+#!/bin/bash
+
+apt update -y
+apt  install awscli  -y
+apt install python3-pip -y
+pip3 install --upgrade --user awscli
+
+#END
+
