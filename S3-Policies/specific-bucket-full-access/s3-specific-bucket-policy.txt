@@ -33,4 +33,32 @@
 }
 
 
-# https://www.crybit.com/give-access-only-to-a-folder/
+# https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_s3_rw-bucket.html
+
+# https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
+
+# https://github.com/miztiik/AWS-Demos/tree/master/How-To/setup-sftp-for-s3
+
+
+
+
+################################################################################################################
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListObjectsInBucket",
+            "Effect": "Allow",
+            "Action": ["s3:ListBucket"],
+            "Resource": ["arn:aws:s3:::bucket-name"]
+        },
+        {
+            "Sid": "AllObjectActions",
+            "Effect": "Allow",
+            "Action": "s3:*Object",
+            "Resource": ["arn:aws:s3:::bucket-name/*"]
+        }
+    ]
+}
