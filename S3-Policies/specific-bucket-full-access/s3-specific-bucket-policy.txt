@@ -31,3 +31,6 @@
         }
     ]
 }
+
+
+# https://www.crybit.com/give-access-only-to-a-folder/
