@@ -24,3 +24,13 @@ docker run --name wordpress \
 -p 80:80 -d wordpress
 
 #END
+
+
+
+### Encryption ###
+
+#1. aws kms list-keys --region us-west-2
+
+#2. aws kms encrypt --region us-west-2 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > username.txt
+
+#3. aws kms decrypt --region us-west-2 --ciphertext-blob fileb://username.txt --output text --query Plaintext | base64 --decode 
