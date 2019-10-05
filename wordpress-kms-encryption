@@ -1,0 +1,26 @@
+#bin/bash
+# Purpose: KMS Encryption Decryption
+
+docker network ls
+
+docker network create cloudelligent 
+
+
+# Secrets with AWS Encryption
+
+MYSQL_USER=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/username.txt --output text --query Plaintext | base64 --decode`
+MYSQL_PASSWORD=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/password.txt --output text --query Plaintext | base64 --decode`
+MYSQL_DATABASE=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/databasename.txt --output text --query Plaintext | base64 --decode`
+
+# Application
+
+docker run --name mysql --network cloudelligent -v ~/mysql:/var/lib/mysql -e MYSQL_USER="$MYSQL_USER" -e MYSQL_PASSWORD="$MYSQL_PASSWORD" -e MYSQL_ROOT_PASSWORD="$MYSQL_USER" -e MYSQL_DATABASE="MYSQL_DATABASE" --restart unless-stopped -d mysql:5.7
+
+docker run --name wordpress \
+--network cloudelligent \
+--link=mysql:db \
+-v ~/cloudelligent.com:/var/www/html \
+--restart unless-stopped \
+-p 80:80 -d wordpress
+
+#END
