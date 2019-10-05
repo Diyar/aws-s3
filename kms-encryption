@@ -14,7 +14,7 @@ MYSQL_DATABASE=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///ro
 
 # Application
 
-docker run --name mysql --network cloudelligent -v /root/mysql:/var/lib/mysql -e MYSQL_USER="$MYSQL_USER" -e MYSQL_PASSWORD="$MYSQL_PASSWORD" -e MYSQL_ROOT_PASSWORD="$MYSQL_USER" -e MYSQL_DATABASE="MYSQL_DATABASE" --restart unless-stopped -d mysql:5.7
+docker run --name mysql --network cloudelligent -v ~/mysql:/var/lib/mysql -e MYSQL_USER="$MYSQL_USER" -e MYSQL_PASSWORD="$MYSQL_PASSWORD" -e MYSQL_ROOT_PASSWORD="$MYSQL_USER" -e MYSQL_DATABASE="MYSQL_DATABASE" --restart unless-stopped -d mysql:5.7
 
 docker run --name wordpress \
 --network cloudelligent \
