@@ -33,3 +33,40 @@ docker run --name wordpress \
 #2. aws kms encrypt --region us-west-2 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > username.txt
 
 #3. aws kms decrypt --region us-west-2 --ciphertext-blob fileb://username.txt --output text --query Plaintext | base64 --decode 
+
+
+# KMS Policy
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "kms:DescribeCustomKeyStores",
+                "kms:ListKeys",
+                "kms:DeleteCustomKeyStore",
+                "kms:GenerateRandom",
+                "kms:UpdateCustomKeyStore",
+                "kms:ListAliases",
+                "kms:DisconnectCustomKeyStore",
+                "kms:CreateKey",
+                "kms:ConnectCustomKeyStore",
+                "kms:CreateCustomKeyStore"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "kms:*",
+            "Resource": [
+                "arn:aws:kms:*:*:alias/*",
+                "arn:aws:kms:us-west-2:898668804275:key/YOURKMSKEYID"
+            ]
+        }
+    ]
+}
+
+
