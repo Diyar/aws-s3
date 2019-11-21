@@ -438,3 +438,8 @@ https://learn.hashicorp.com/terraform/aws/eks-intro#base-vpc-networking
 
 https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
 
+
+# Worker Nodes Fail to Join Cluster
+
+https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html
+
