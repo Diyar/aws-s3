@@ -445,3 +445,5 @@ https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html
 
 The ClusterName in your worker node AWS CloudFormation template does not exactly match the name of the cluster you want your worker nodes to join. Passing an incorrect value to this field results in an incorrect configuration of the worker node's /var/lib/kubelet/kubeconfig file, and the nodes will not join the cluster. 
 
+
+# https://medium.com/getamis/customize-aws-eks-worker-node-ami-d7b3d203051
