@@ -427,3 +427,6 @@ aws sts get-caller-identity
 ### Terraform EKS Networking ###
 https://learn.hashicorp.com/terraform/aws/eks-intro#base-vpc-networking
 
+
+# https://www.arangodb.com/docs/stable/tutorials-kubernetes-eks.html
+
