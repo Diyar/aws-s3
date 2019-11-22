@@ -144,7 +144,7 @@ CoreDNS is running at https://069ED5E1B13D5C06E60F75AFDE032409.sk1.us-west-2.eks
 
 https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
 
-https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-11-15/amazon-eks-nodegroup-role.yaml
+https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-11-15/amazon-eks-nodegroup.yaml
 
 
 https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-11-07/amazon-eks-nodegroup.yaml
