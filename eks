@@ -456,3 +456,18 @@ The ClusterName in your worker node AWS CloudFormation template does not exactly
 
 
 # https://medium.com/getamis/customize-aws-eks-worker-node-ami-d7b3d203051
+
+
+###################################################################################################################
+### Amazon EKS with OIDC provider, IAM Roles for Kubernetes services accounts ###
+
+https://medium.com/@marcincuber/amazon-eks-with-oidc-provider-iam-roles-for-kubernetes-services-accounts-59015d15cb0c
+
+Amazon EKS with OIDC provider, IAM Roles for Kubernetes services accounts
+
+With the latest release of EKS (1.13 and 1.14), AWS Kubernetes control plane comes with support for IAM roles for service accounts. This feature allows us to associate an IAM role with a Kubernetes service account. We can now provision temporary credentials and then provide AWS permissions to the containers in any pod that uses that service account. Furthermore, we no longer need to provide extended permissions to the worker node IAM role so that pods on that node can call AWS APIs
+
+#####################################################################################################################
+
+
+
