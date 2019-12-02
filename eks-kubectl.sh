@@ -7,6 +7,7 @@
 
 # Terraform Setup
 
+apt update -y && apt install -y curl
 curl -# -LO https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip
 apt update -y && apt install -y unzip 2>&1 >/dev/null
 unzip terraform_0.12.16_linux_amd64.zip
