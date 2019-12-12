@@ -1,0 +1,44 @@
+#!/bin/bash
+#Purpose: Installation of ECS-AGENT, ec2 instance joins the ECS Cluster
+# Note on the SG (security group) open the http port 80
+mkdir -p /etc/ecs
+touch /etc/ecs/ecs.config
+echo ECS_CLUSTER=ecs-demo > /etc/ecs/ecs.config
+
+
+
+
+# Update the packages
+
+sudo yum install -y docker
+sudo service docker start
+sudo usermod -aG docker $USER
+
+sudo yum install -y ecs-init
+sudo stop ecs   2>&1   > /dev/null
+sudo start ecs
+
+#Note: ecs agent will not start unless docker daemon will not start & running
+
+
+# To check the logs
+# cd /var/log/ecs/
+# tail -f ecs*
+
+# ECS_endpoints
+
+# ecs agent listen on port 51678
+
+sudo yum install -y jq
+
+#Note ECS Cluster default port is 51678
+
+curl http://localhost:51678/v1/metadata | jq
+
+# Check the tasks metadata
+
+curl http://localhost:51678/v1/tasks | jq
+
+
+
+##End
