@@ -80,6 +80,8 @@ curl -L "https://github.com/jenkins-x/jx/releases/download/$(curl --silent "http
 
 cp jx /usr/local/bin 2>&1 > /dev/null
 cp jx /usr/bin  2>&1  > /dev/null
+yum install -y git 2>&1  > /dev/null
+apt install -y git 2>&1  > /dev/null
 rm -rf jx
 
 #END
