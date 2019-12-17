@@ -7,23 +7,23 @@
 
 # Terraform Setup
 
-apt update -y && apt install -y curl
+apt update -y && apt install -y curl 2>&1  > /dev/null
 curl -# -LO https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip
 apt update -y && apt install -y unzip 2>&1 >/dev/null
 unzip terraform_0.12.16_linux_amd64.zip
 rm -rf *.zip
-cp terraform /usr/bin/
-cp terraform /usr/local/bin
+cp terraform /usr/bin/ 2>&1  > /dev/null
+cp terraform /usr/local/bin 2>&1  > /dev/null
 rm -rf terraform
 
 
 
 # Install AWS Cli
 
-apt update -y
-apt  install awscli  -y
-apt install python3-pip -y
-pip3 install --upgrade --user awscli
+apt update -y  2>&1  > /dev/null
+apt  install awscli  -y  2>&1  > /dev/null
+apt install python3-pip -y  2>&1  > /dev/null
+pip3 install --upgrade --user awscli  2>&1  > /dev/null
 
 
 
@@ -32,14 +32,14 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 
 chmod +x ./kubectl
 
-mv ./kubectl /usr/bin/kubectl
+mv ./kubectl /usr/bin/kubectl  2>&1  > /dev/null
 
 
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 
 chmod +x ./kubectl
 
-mv ./kubectl /usr/local/bin/kubectl
+mv ./kubectl /usr/local/bin/kubectl  2>&1  > /dev/null
 
 
 
@@ -65,11 +65,11 @@ chmod +x ./aws-iam-authenticator
 
 mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
 
-cp ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator && export PATH=$HOME/usr/local/bin:$PATH
+cp ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator && export PATH=$HOME/usr/local/bin:$PATH   2>&1  > /dev/null
 
-echo 'export PATH=$HOME/usr/local/bin:$PATH' >> ~/.bashrc
+echo 'export PATH=$HOME/usr/local/bin:$PATH' >> ~/.bashrc  2>&1  > /dev/null
 
-rm -rf aws-iam-authenticator
+rm -rf aws-iam-authenticator  2>&1  > /dev/null
 
 # aws-iam-authenticator help
 
