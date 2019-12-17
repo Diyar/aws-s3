@@ -83,5 +83,15 @@ cp jx /usr/bin  2>&1  > /dev/null
 yum install -y git 2>&1  > /dev/null
 apt install -y git 2>&1  > /dev/null
 rm -rf jx
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+cp /tmp/eksctl /usr/local/bin 2>&1  > /dev/null
+cp /tmp/eksctl /usr/bin 2>&1  > /dev/null
+curl -# -LO https://github.com/quickbooks2018/aws/raw/master/helm-v2.16.1-linux-amd64.tar.gz
+tar -xzvf helm-v2.16.1-linux-amd64.tar.gz
+cp helm /usr/local/bin 2>&1  > /dev/null
+cp helm /usr/bin 2>&1  > /dev/null
+mv helm /tmp
+mv helm-v2.16.1-linux-amd64.tar.gz /tmp
+
 
 #END
