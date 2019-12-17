@@ -88,9 +88,9 @@ cp /tmp/eksctl /usr/local/bin 2>&1  > /dev/null
 cp /tmp/eksctl /usr/bin 2>&1  > /dev/null
 curl -# -LO https://github.com/quickbooks2018/aws/raw/master/helm-v2.16.1-linux-amd64.tar.gz
 tar -xzvf helm-v2.16.1-linux-amd64.tar.gz
-cp helm /usr/local/bin 2>&1  > /dev/null
-cp helm /usr/bin 2>&1  > /dev/null
-mv helm /tmp
+cp linux-amd64/helm /usr/local/bin 2>&1  > /dev/null
+cp linux-amd64/helm /usr/bin 2>&1  > /dev/null
+rm  -rf linux-amd64
 mv helm-v2.16.1-linux-amd64.tar.gz /tmp
 
 
