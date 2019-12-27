@@ -1,5 +1,6 @@
 # Issue Prevent SSH connection lost after logging into VPN on server machine
 # https://serverfault.com/questions/649792/prevent-ssh-connection-lost-after-logging-into-vpn-on-server-machine/747828
+# https://config9.com/net/prevent-ssh-connection-lost-after-logging-into-vpn-on-server-machine/
 
 #You need to add route-nopull option (and remove redirect-gateway if it exists) to your OpenVPN client's configuration file on your VPS.
 
