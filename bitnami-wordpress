@@ -137,3 +137,17 @@ docker run --name nginx --network="bitnami-wordpress-tier" --restart unless-stop
 
 
 #END
+
+
+
+# Cleanup
+
+#!/bin/bash
+
+
+docker rm -f $(docker ps -aq)
+
+docker rmi -f $(docker images -aq)
+
+docker builder prune
+
