@@ -7,3 +7,10 @@
 
 2. chmod 400 ~/.ssh/aws-nick.pem
 
+# Verify the keypair has been created
+
+3. aws ec2 describe-key-pairs --key-name Linux-Academy
+
+# (Optionally)Delete the keypair
+
+4. aws ec2 delete-key-pair --key-name Linux-Academy
