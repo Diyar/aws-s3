@@ -5,7 +5,7 @@
 1. aws ec2 create-key-pair --key-name Linux-Academy --query 'KeyMaterial' \
 --output text > ~/.ssh/Linux-Academy.pem
 
-2. chmod 400 ~/.ssh/aws-nick.pem
+2. chmod 400 ~/.ssh/Linux-Academy.pem
 
 # Verify the keypair has been created
 
