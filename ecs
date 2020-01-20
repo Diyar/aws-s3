@@ -72,7 +72,7 @@ curl http://localhost:51678/v1/tasks | jq
 
 # Deep Dive with Amazon ECS
 # Clusters
-# Create a cluster
+# Create a cluster (Note: It will use FarGate by default)
 
 aws ecs create-cluster --cluster-name deepdive
 
