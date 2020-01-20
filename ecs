@@ -89,3 +89,21 @@ aws ecs describe-clusters --clusters deepdive
 aws ecs delete-cluster --cluster deepdive
 
 # ● Do not delete it now unless you're experimenting on your own
+
+# List IAM users
+
+5. aws iam list-users
+
+# Create the S3 bucket
+
+6. aws s3api create-bucket --bucket cloudelligent-learning-ecs
+
+# Copy the ECS config file you downloaded to the S3 bucket
+
+7. aws s3 cp ecs.config s3://cloudelligent-learning-ecs/ecs.config
+
+# Verify the ECS config is in the S3 bucket
+
+8. aws s3 ls s3://cloudelligent-learning-ecs
+
+
