@@ -42,3 +42,50 @@ curl http://localhost:51678/v1/tasks | jq
 
 
 ##End
+
+
+
+
+# Creating an SSH Keypair
+
+#OSX / Linux: Create a keypair
+
+1. aws ec2 create-key-pair --key-name Linux-Academy --query 'KeyMaterial' \
+--output text > ~/.ssh/Linux-Academy.pem
+
+2. chmod 400 ~/.ssh/Linux-Academy.pem
+
+# Verify the keypair has been created
+
+3. aws ec2 describe-key-pairs --key-name Linux-Academy
+
+# (Optionally)Delete the keypair
+
+4. aws ec2 delete-key-pair --key-name Linux-Academy
+
+# List IAM users
+
+5. aws iam list-users
+
+
+############################################# ECS Command Line #############################################################################
+
+# Deep Dive with Amazon ECS
+# Clusters
+# Create a cluster
+
+aws ecs create-cluster --cluster-name deepdive
+
+#List all clusters
+
+aws ecs list-clusters
+
+# A deeper look into the cluster's state
+
+aws ecs describe-clusters --clusters deepdive
+
+# (Optionally)Delete the cluster
+
+aws ecs delete-cluster --cluster deepdive
+
+# ● Do not delete it now unless you're experimenting on your own
