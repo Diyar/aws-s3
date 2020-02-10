@@ -1,0 +1,32 @@
+# AWS SSM Installation
+
+https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-manual-agent-install.html#agent-install-centos
+
+# AWS SSM Policy
+
+# https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-profile.html
+
+# Centos 7
+
+# https://superuser.com/questions/769514/add-a-sudoer-non-interactively-from-command-line
+
+useradd -m asim
+useradd -m qasim
+useradd -m saqlain
+useradd -m taha
+useradd -m ssm-user
+
+cat <<EOF >> /etc/sudoers
+asim ALL=(ALL) NOPASSWD: ALL
+qasim ALL=(ALL) NOPASSWD: ALL
+saqlain ALL=(ALL) NOPASSWD: ALL
+taha ALL=(ALL) NOPASSWD: ALL
+ssm-user ALL=(ALL) NOPASSWD: ALL
+
+EOF
+
+
+
+
+
+
