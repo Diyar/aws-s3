@@ -46,6 +46,11 @@ sudo systemctl enable amazon-ssm-agent
 
 amazon-ssm-agent -register -code "Activation Code" -id "Activation ID" --region "us-east-1"
 
+# ssm-agent
+
+https://github.com/aws/amazon-ssm-agent/releases
+
+https://github.com/aws/amazon-ssm-agent/releases/tag/2.3.714.0
 
 
 
