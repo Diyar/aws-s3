@@ -92,7 +92,7 @@ sudo systemctl start amazon-ssm-agent
 
 
 
-### Worked ###
+### Specific package ###
 
 #!/bin/bash
 mkdir /tmp/ssm
