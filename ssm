@@ -38,7 +38,7 @@ cd /tmp/ssm
 
 wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb
 
-sudo dpkg -i amazon-ssm-agent.deb
+sudo dpkg -i /tmp/ssm/amazon-ssm-agent.deb
 
 sudo systemctl status amazon-ssm-agent
 
@@ -72,7 +72,7 @@ Ubuntu 16 (Deb Installer), Debian 8 and 9
 mkdir /tmp/ssm
 cd /tmp/ssm
 wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb
-sudo dpkg -i amazon-ssm-agent.deb
+sudo dpkg -i /tmp/ssm/amazon-ssm-agent.deb
 sudo systemctl enable amazon-ssm-agent
 
 Ubuntu 14 (Deb installer)
@@ -100,7 +100,7 @@ sudo systemctl start amazon-ssm-agent
 mkdir /tmp/ssm
 cd /tmp/ssm
 wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/2.3.714.0/debian_amd64/amazon-ssm-agent.deb
-sudo dpkg -i amazon-ssm-agent.deb
+sudo dpkg -i /tmp/ssm/amazon-ssm-agent.deb
 sudo systemctl enable amazon-ssm-agent
 #END
 
