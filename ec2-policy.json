@@ -35,7 +35,12 @@
                 "ec2:GetConsole*",
                 "ec2:Describe*"
            ],
-           "Resource": "*"
+           "Resource": "*",
+           "Condition":{
+               "StringEquals":{
+               "ec2:Region":"us-east-1"
+        }
+           }
          },
            {
             "Effect": "Allow",
@@ -48,7 +53,12 @@
                "arn:aws:ec2:*::image/ami-*",
                "arn:aws:ec2:*:*:key-pair/*",
                "arn:aws:ec2:*:*:security-group/*"
-           ]
+           ],
+           "Condition":{
+              "StringEquals":{
+              "ec2:Region":"us-east-1"
+        }
+           }
      
           }
           
