@@ -6,6 +6,15 @@
 
 aws-nuke-v2.14.0-linux-amd64 -c config.yml --profile default --no-dry-run
 
+Note: Set account alias
+
+aws iam list-account-aliases
+
+aws iam create-account-alias --account-alias examplecorp
+
+
+
+
 
 
 config.yml
