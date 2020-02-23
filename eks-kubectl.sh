@@ -7,23 +7,27 @@
 
 # Terraform Setup
 
-apt update -y && apt install -y curl
-curl -# -LO https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip
+apt update -y && apt install -y curl 2>&1 >/dev/null
+curl -# -LO https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip
 apt update -y && apt install -y unzip 2>&1 >/dev/null
-unzip terraform_0.12.16_linux_amd64.zip
-rm -rf *.zip
-cp terraform /usr/bin/
-cp terraform /usr/local/bin
+unzip terraform_0.12.16_linux_amd64.zip 2>&1 >/dev/null
+rm -rf *.zip  2>&1 >/dev/null
+cp terraform /usr/bin/  2>&1 >/dev/null
+cp terraform /usr/local/bin  2>&1 >/dev/null
 rm -rf terraform
 
 
 
 # Install AWS Cli
 
-apt update -y
-apt  install awscli  -y
-apt install python3-pip -y
-pip3 install --upgrade --user awscli
+apt update -y  2>&1 >/dev/null
+apt  install awscli  -y   2>&1 >/dev/null
+apt install python3-pip -y   2>&1 >/dev/null
+pip3 install --upgrade --user awscli  2>&1 >/dev/null
+
+
+yum update -y && yum install -y awscli 2>&1 >/dev/null
+
 
 
 
@@ -33,13 +37,6 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 chmod +x ./kubectl
 
 mv ./kubectl /usr/bin/kubectl
-
-
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-
-chmod +x ./kubectl
-
-mv ./kubectl /usr/local/bin/kubectl
 
 
 
