@@ -540,3 +540,22 @@ eksctl create cluster \
 ################################################################
 eksctl delete cluster --region=us-east-1 --name=cloudelligent-eks
 #################################################################
+
+############################################################################################################################
+# Existing EKS VPC
+
+eksctl create cluster \
+  --vpc-private-subnets=subnet-0ff156e0c4a6d300c,subnet-0426fb4a607393184 \
+  --vpc-public-subnets=subnet-0153e560b3129a696,subnet-009fa0199ec203c37
+
+To create a cluster using 3x private subnets and make initial nodegroup use those subnets, run:
+
+eksctl create cluster \
+  --vpc-private-subnets=subnet-0ff156e0c4a6d300c,subnet-0549cdab573695c03,subnet-0426fb4a607393184 \
+  --node-private-networking
+
+To create a cluster using 4x public subnets, run:
+
+eksctl create cluster \
+  --vpc-public-subnets=subnet-0153e560b3129a696,subnet-0cc9c5aebe75083fd,subnet-009fa0199ec203c37,subnet-018fa0176ba320e45
+############################################################################################################################
