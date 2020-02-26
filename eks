@@ -484,8 +484,9 @@ With the latest release of EKS (1.13 and 1.14), AWS Kubernetes control plane com
 Download and extract the latest release of eksctl with the following command.
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 
-
+#######################################################################################
 eksctl create cluster --name=cloudelligent-eks --region=us-east-1 --node-type=t2.medium
+#######################################################################################
 
 2. Move the extracted binary to /usr/local/bin.
 
@@ -494,5 +495,23 @@ sudo mv /tmp/eksctl /usr/local/bin
 3. Test that your installation was successful with the following command.
 
 eksctl version
+
+### Details ###
+https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
+
+eksctl create cluster \
+--name prod \
+--version 1.14 \
+--region us-west-2 \
+--nodegroup-name standard-workers \
+--node-type t3.medium \
+--nodes 3 \
+--nodes-min 1 \
+--nodes-max 4 \
+--ssh-access \
+--ssh-public-key my-public-key.pub \
+--managed
+
+# Note: Managed mean managed node group by EKS
 
 
