@@ -532,6 +532,8 @@ eksctl create cluster \
 
 ###################################################
 
+# Don't specify the version, it will launch with latest eks available version on aws
+
 # Delete an eks cluster
 ################################################################
 eksctl delete cluster --region=us-east-1 --name=cloudelligent-eks
