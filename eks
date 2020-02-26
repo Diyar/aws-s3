@@ -514,4 +514,24 @@ eksctl create cluster \
 
 # Note: Managed mean managed node group by EKS
 
+https://eksctl.io/usage/vpc-networking/
+##################################################
+eksctl create cluster \
+--name cloudelligent-eks \
+--version 1.14 \
+--region us-east-1 \
+--vpc-cidr 10.11.0.0\16 \
+--nodegroup-name cloudelligent-eks-workers \
+--node-type t2.medium \
+--nodes 2 \
+--nodes-min 1 \
+--nodes-max 4 \
+--ssh-access \
+--ssh-public-key cloudelligent-eks.pub
 
+###################################################
+
+# Delete an eks cluster
+################################################################
+eksctl delete cluster --region=us-east-1 --name=cloudelligent-eks
+#################################################################
