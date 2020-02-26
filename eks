@@ -515,12 +515,14 @@ eksctl create cluster \
 # Note: Managed mean managed node group by EKS
 
 https://eksctl.io/usage/vpc-networking/
+
+# Create a key-pair cloudelligent-eks\
 ##################################################
 eksctl create cluster \
 --name cloudelligent-eks \
 --version 1.14 \
 --region us-east-1 \
---vpc-cidr 10.11.0.0\16 \
+--vpc-cidr 10.11.0.0/16 \
 --node-private-networking \
 --nodegroup-name cloudelligent-eks-workers \
 --node-type t2.medium \
@@ -528,7 +530,7 @@ eksctl create cluster \
 --nodes-min 1 \
 --nodes-max 4 \
 --ssh-access \
---ssh-public-key cloudelligent-eks.pub
+--ssh-public-key cloudelligent-eks
 
 ###################################################
 
