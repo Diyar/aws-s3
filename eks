@@ -640,7 +640,170 @@ kubectl edit deployment.apps/alb-ingress-controller -n kube-system
 kubectl get pods -n kube-system
 
 
+##################################################################################################################
 
+# https://kubernetes-sigs.github.io/aws-alb-ingress-controller/guide/ingress/annotation/
+
+# https://github.com/quickbooks2018/Terraform-V-12/tree/master/terraform.v12/eks
+
+# https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
+
+# https://kubernetes-sigs.github.io/aws-alb-ingress-controller/guide/ingress/annotation/
+
+# https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html#create-service-account-iam-role
+
+# Terraform EKS  ---> ALB Ingress 
+
+# To deploy the ALB Ingress Controller to an Amazon EKS cluster
+
+# https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
+
+Tag the subnets in your VPC that you want to use for your load balancers so that the ALB Ingress Controller knows that it can use them. For more information, see Subnet Tagging Requirement. If you deployed your cluster with ekctl, then the tags are already applied.
+
+All subnets in your VPC should be tagged accordingly so that Kubernetes can discover them.
+
+Key	Value
+kubernetes.io/cluster/<cluster-name>
+
+shared
+
+Public subnets in your VPC should be tagged accordingly so that Kubernetes knows to use only those subnets for external load balancers.
+
+Key	                        Value
+kubernetes.io/role/elb       1
+
+Private subnets in your VPC should be tagged accordingly so that Kubernetes knows that it can use them for internal load balancers:
+
+Key	                                      Value
+kubernetes.io/role/internal-elb            1
+
+2. Create an IAM OIDC provider and associate it with your cluster. If you don't have eksctl version 0.14.0 or later installed, complete the instructions in Installing or Upgrading eksctl to install or upgrade it. You can check your installed version with eksctl version.
+
+eksctl utils associate-iam-oidc-provider \
+    --region us-east-1 \
+    --cluster cloudelligent-eks \
+    --approve
+
+3. Create an IAM policy called ALBIngressControllerIAMPolicy for the ALB Ingress Controller pod that allows it to make calls to AWS APIs on your behalf. Use the following AWS CLI command to create the IAM policy in your AWS account. You can view the policy document on GitHub.
+
+aws iam create-policy \
+    --policy-name ALBIngressControllerIAMPolicy \
+    --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+    
+ 4. Create a Kubernetes service account named alb-ingress-controller in the kube-system namespace, a cluster role, and a cluster role binding for the ALB Ingress Controller to use with the following command. If you don't have kubectl installed, complete the instructions in Installing kubectl to install it.
+ 
+ kubectl create serviceaccount alb-ingress-controller -n kube-system
+ 
+ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/rbac-role.yaml
+ 
+ 
+ 5. Create an IAM role for the ALB ingress controller and attach the role to the service account created in the previous step. If you didn't create your cluster with eksctl, then use the instructions on the AWS Management Console or AWS CLI tabs.
+ 
+ 
+a. Using the instructions in Create an IAM Role, create an IAM role named eks-alb-ingress-controller and attach the ALBIngressControllerIAMPolicy IAM policy that you created in a previous step to it. Note the Amazon Resource Name (ARN) of the role, once you've created it.
+
+A ---> Create an IAM Role
+Create an IAM role for your service accounts. Select the tab with the name of the tool that you want to use to create the role.
+
+1. Set your AWS account ID to an environment variable with the following command.
+
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+
+2. Set your OIDC identity provider to an environment variable with the following command, replacing your cluster name.
+
+# Important
+# You must use at least version 1.18.10 of the AWS CLI to receive the proper output from this command. For more information, see Installing the AWS CLI in the AWS Command Line Interface User Guide.
+
+OIDC_PROVIDER=$(aws eks describe-cluster --name cloudelligent-eks --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///")
+
+3. Set the service account namespace to an environment variable with the following command, replacing your namespace name.
+
+SERVICE_ACCOUNT_NAMESPACE=kube-system
+
+4. Set the service account name to an environment variable with the following command, replacing service-account-name with your service account name.
+
+kubectl create serviceaccount alb-ingress-controller -n kube-system
+
+SERVICE_ACCOUNT_NAME=alb-ingress-controller
+
+5. Copy the block of text below into a file named trust.json.
+
+read -r -d '' TRUST_RELATIONSHIP <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::${AWS_ACCOUNT_ID}:oidc-provider/${OIDC_PROVIDER}"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "${OIDC_PROVIDER}:sub": "system:serviceaccount:${SERVICE_ACCOUNT_NAMESPACE}:${SERVICE_ACCOUNT_NAME}"
+        }
+      }
+    }
+  ]
+}
+EOF
+echo "${TRUST_RELATIONSHIP}" > trust.json
+
+
+6. Run the following AWS CLI command to create the role, replacing your IAM role name and description.
+
+aws iam create-role --role-name alb-ingress-controller --assume-role-policy-document file://trust.json --description "alb-ingress-controller IAM_ROLE_DESCRIPTION"
+
+7. Run the following command to attach your IAM policy to your role, replacing your IAM role name and policy ARN.
+
+# aws iam attach-role-policy --role-name IAM_ROLE_NAME --policy-arn=IAM_POLICY_ARN
+
+aws iam attach-role-policy --role-name alb-ingress-controller --policy-arn=IAM_POLICY_ARN
+
+8. Associate the IAM role with a Kubernetes service account. For more information, see Specifying an IAM Role for your Service Account.
+
+# https://docs.aws.amazon.com/eks/latest/userguide/specify-service-account-role.html
+
+# Specifying an IAM Role for your Service Account
+
+In Kubernetes, you define the IAM role to associate with a service account in your cluster by adding the following annotation to the service account.
+
+# Note
+If you created an IAM role to use with your service account using eksctl, this has already been done for you with the service account that you specified when creating the role.
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::AWS_ACCOUNT_ID:role/IAM_ROLE_NAME
+    
+    
+ To patch a service account to use with IAM roles
+
+1. Use the following command to annotate your service account with the ARN of the IAM role that you want to use with your service account. Be sure to substitute your own values for the alternate-colored example values to use with your pods.   
+
+kubectl annotate serviceaccount -n SERVICE_ACCOUNT_NAMESPACE SERVICE_ACCOUNT_NAME \
+eks.amazonaws.com/role-arn=arn:aws:iam::AWS_ACCOUNT_ID:role/IAM_ROLE_NAME
+
+2. Delete and re-create any existing pods that are associated with the service account to apply the credential environment variables. The mutating web hook does not apply them to pods that are already running. The following command deletes the existing the aws-node DaemonSet pods and deploys them with the service account annotation. You can modify the namespace, deployment type, and label to update your specific pods.
+
+kubectl delete pods -n kube-system -l k8s-app=aws-node
+
+3. Confirm that the pods all restarted.
+
+kubectl get pods -n kube-system  -l k8s-app=aws-node
+
+4. Describe one of the pods and verify that the AWS_WEB_IDENTITY_TOKEN_FILE and AWS_ROLE_ARN environment variables exist.
+
+kubectl exec -n kube-system aws-node-9rgzw env | grep AWS
+
+Output:
+
+AWS_VPC_K8S_CNI_LOGLEVEL=DEBUG
+AWS_ROLE_ARN=arn:aws:iam::AWS_ACCOUNT_ID:role/IAM_ROLE_NAME
+AWS_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/eks.amazonaws.com/serviceaccount/token
+The IAM role was created by eksctl when you created the Kubernetes service account in a previous step.
+    
 
 
 
