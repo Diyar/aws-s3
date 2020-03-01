@@ -524,7 +524,7 @@ eksctl create cluster \
 --region us-east-1 \
 --vpc-cidr 10.11.0.0/16 \
 --node-private-networking \
---nodegroup-name cloudelligent-eks-workers \
+--nodegroup-name workers \
 --node-type t2.medium \
 --nodes 2 \
 --nodes-min 1 \
