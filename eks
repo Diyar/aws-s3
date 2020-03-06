@@ -87,7 +87,7 @@ update our cubeconfig file
 IMPORTANT TO UPDATE YOUR ./kube
 ################################################################
 ### MUST ###
----> aws eks update-kubeconfig --name eks-cloudelligent --region us-east-1 <---
+---> aws eks update-kubeconfig --name cloudelligent-eks --region us-east-1 <---
 ##################################################################
 https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html
 
