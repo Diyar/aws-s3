@@ -119,3 +119,10 @@ openssl x509 -in "${DIR}/"$DOMAIN".crt" -noout -text
 
 # In Ubuntu 18 LTS case, the private key will be placed in /etc/ssl/private/my.key while the CRT will be placed in /etc/ssl/certs/my.crt
 
+
+### https://uwnthesis.wordpress.com/2019/06/13/openssl-how-to-generate-a-2nd-certificate-csr-from-an-existing-private-key-so-that-the-new-cert-contains-the-same-public-key-as-the-expired-cert/
+
+### openssl x509 -req -in server.csr -signkey server.key -out server.crt
+
+### openssl x509 -req -in cloudelligent.com.csr -signkey cloudelligent.com.key -out cloudelligent.com.crt
+
