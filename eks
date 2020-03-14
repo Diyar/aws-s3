@@ -641,6 +641,7 @@ kubectl get pods -n kube-system
 
 
 ##################################################################################################################
+# https://eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/
 
 # https://kubernetes-sigs.github.io/aws-alb-ingress-controller/guide/ingress/annotation/
 
