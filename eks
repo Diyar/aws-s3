@@ -640,6 +640,15 @@ kubectl edit deployment.apps/alb-ingress-controller -n kube-system
 kubectl get pods -n kube-system
 
 
+
+# Issues
+# https://github.com/kubernetes-sigs/aws-alb-ingress-controller/issues/970
+
+# Deploy the RBAC roles manifest
+
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.2/docs/examples/rbac-role.yaml
+
 ##################################################################################################################
 # https://eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/
 
