@@ -635,6 +635,15 @@ kubectl edit deployment.apps/alb-ingress-controller -n kube-system
         - --aws-vpc-id=vpc-0419355bf920ef189
         - --aws-region=us-east-1
         
+        
+        
+  8a. # Note
+  
+# If your Ingress has not been created after several minutes, run the following command to view the Ingress controller logs. These logs may contain error messages that can help you diagnose any issues with your deployment.
+  
+    kubectl logs -n kube-system   deployment.apps/alb-ingress-controller
+    
+    
 9. Confirm that the ALB Ingress Controller is running with the following command.
 
 kubectl get pods -n kube-system
