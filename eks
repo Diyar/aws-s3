@@ -658,6 +658,93 @@ kubectl get pods -n kube-system
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.2/docs/examples/rbac-role.yaml
 
+
+
+########################################################################################################################################################
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ ALB INGRESS SETUP $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+#########################################################################################################################################################
+
+
+# Step-1
+vim nginx-backend.yaml
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.15.2
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256M
+
+
+# Step-2
+
+vim alb-infress.yaml
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx.saqlainmushtaq.com
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    lb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    
+  labels:
+    app: nginx
+spec:
+  tls:
+  - hosts:
+    - nginx.saqlainmushtaq.com
+    secretName: saqlainmushtaq-com-tls
+  rules:
+    - host: nginx.saqlainmushtaq.com
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: nginx
+            servicePort: 80
+
+
+kubectl apply -f .
+
 ##################################################################################################################
 # https://eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/
 
