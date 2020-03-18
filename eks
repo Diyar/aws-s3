@@ -516,6 +516,15 @@ eksctl create cluster \
 
 https://eksctl.io/usage/vpc-networking/
 
+# Create a key-pair
+
+#!/bin/bash
+
+aws ec2 create-key-pair --key-name cloudelligent-eks --query 'KeyMaterial' --output text > ~/.ssh/cloudelligent-eks.pem
+
+#END
+
+
 # Create a key-pair cloudelligent-eks\
 ##################################################
 eksctl create cluster \
