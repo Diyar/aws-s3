@@ -1,4 +1,4 @@
-#bin/bash
+#/bin/bash
 # Purpose: KMS Encryption Decryption
 
 docker network ls
