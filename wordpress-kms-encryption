@@ -35,7 +35,7 @@ docker run --name wordpress \
 #3. aws kms decrypt --region us-west-2 --ciphertext-blob fileb://username.txt --output text --query Plaintext | base64 --decode 
 
 
-# KMS Policy
+# KMS Policy to attach with ec2 instance
 
 {
     "Version": "2012-10-17",
