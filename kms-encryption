@@ -118,29 +118,27 @@ mkdir -p /root/secrets
 
 # Encryption
 
-REGION='us-east-1'
 
-
-aws kms encrypt --region $REGION --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext 12345678 --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-root-password.txt
-aws kms encrypt --region $REGION --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext bitnami_wordpress --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-database.txt 
-aws kms encrypt --region $REGION --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext asim.arain --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-user.txt 
-aws kms encrypt --region $REGION --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext 12345678 --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-password.txt 
+aws kms encrypt --region us-east-1 --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext 12345678 --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-root-password.txt
+aws kms encrypt --region us-east-1 --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext bitnami_wordpress --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-database.txt 
+aws kms encrypt --region us-east-1 --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext asim.arain --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-user.txt 
+aws kms encrypt --region us-east-1 --key-id baa7e043-02e1-4a87-8ece-4b13d957d3dd  --plaintext 12345678 --output text --query CiphertextBlob | base64 --decode > /root/secrets/mariadb-password.txt 
 
 
 
 # Decryption
 
-aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-root-password.txt --output text --query Plaintext | base64 --decode
-aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-database.txt --output text --query Plaintext | base64 --decode
-aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-user.txt --output text --query Plaintext | base64 --decode
-aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-password.txt  --output text --query Plaintext | base64 --decode
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-root-password.txt --output text --query Plaintext | base64 --decode
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-database.txt --output text --query Plaintext | base64 --decode
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-user.txt --output text --query Plaintext | base64 --decode
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-password.txt  --output text --query Plaintext | base64 --decode
 #END
 
 
-MARIADB_ROOT_PASSWORD=`aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-root-password.txt --output text --query Plaintext | base64 --decode`
-MARIADB_DATABASE=`aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-database.txt --output text --query Plaintext | base64 --decode`
-MARIADB_USER=`aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-user.txt --output text --query Plaintext | base64 --decode`
-MARIADB_PASSWORD=`aws kms decrypt --region $REGION --ciphertext-blob fileb:///root/secrets/mariadb-password.txt  --output text --query Plaintext | base64 --decode`
+MARIADB_ROOT_PASSWORD=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-root-password.txt --output text --query Plaintext | base64 --decode`
+MARIADB_DATABASE=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-database.txt --output text --query Plaintext | base64 --decode`
+MARIADB_USER=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-user.txt --output text --query Plaintext | base64 --decode`
+MARIADB_PASSWORD=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/mariadb-password.txt  --output text --query Plaintext | base64 --decode`
 
 
 echo "\n"
@@ -150,5 +148,4 @@ echo " This is Mariadb root password = $MARIADB_ROOT_PASSWORD "
 echo " This is Mariadb database name  = $MARIADB_DATABASE "
 echo " This is Mariadb User = $MARIADB_USER "
 echo " This is Mariadb password = $MARIADB_PASSWORD "
-
 
