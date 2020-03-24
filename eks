@@ -526,12 +526,14 @@ aws ec2 create-key-pair --key-name cloudelligent-eks --query 'KeyMaterial' --out
 
 #END
 
+# https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-creation-errors/
+
 
 # Create a key-pair cloudelligent-eks\
 ##################################################
 eksctl create cluster \
 --name cloudelligent-eks \
---version 1.14 \
+--version 1.15 \
 --region us-east-1 \
 --vpc-cidr 10.11.0.0/16 \
 --node-private-networking \
@@ -541,6 +543,7 @@ eksctl create cluster \
 --nodes-min 1 \
 --nodes-max 4 \
 --ssh-access \
+--zones us-east-1a,us-east-1b,us-east-1c \
 --ssh-public-key cloudelligent-eks
 
 ###################################################
