@@ -2,7 +2,7 @@
 # OS: RHEL-7/8 Centos-7/8
 
 
-ELASTIC_SEARCH_URL="vpc-abc-oeydc53oi53pes74763ztbukge.us-east-1.es.amazonaws.com/_plugin/kibana/"
+ELASTIC_SEARCH_URL="vpc-abc-oeydc53oi53pes74763ztbukge.us-east-1.es.amazonaws.com:443"
 
 
 # Java Requirement
