@@ -1,0 +1,46 @@
+#!/bin/bash
+
+
+ALIAS_NAME="wordpress"
+
+ALIAS_NAME_KMS_KEY_ID=`aws kms create-key | tail -n4 | head -n1 | awk '{print $2}' | cut -d ":" -f6 | cut -c 5- | cut -d "," -f1 | cut -d '"' -f1`
+
+aws kms create-alias \
+    --alias-name alias/$ALIAS_NAME \
+    --target-key-id $ALIAS_NAME_KMS_KEY_ID
+
+mkdir -p /root/secrets/mariadb
+mkdir -p /root/secrets/wordpress
+
+# Encryption
+
+
+aws kms encrypt --region us-east-1 --key-id $ALIAS_NAME_KMS_KEY_ID  --plaintext abc --output text --query CiphertextBlob | base64 --decode > /root/secrets/wordpress/wordpress-database-password.txt
+aws kms encrypt --region us-east-1 --key-id $ALIAS_NAME_KMS_KEY_ID  --plaintext bitnami_wordpress --output text --query CiphertextBlob | base64 --decode > /root/secrets/wordpress/wordpress-database-name.txt 
+aws kms encrypt --region us-east-1 --key-id $ALIAS_NAME_KMS_KEY_ID  --plaintext asim.arain --output text --query CiphertextBlob | base64 --decode > /root/secrets/wordpress/wordpress-database-user.txt 
+aws kms encrypt --region us-east-1 --key-id $ALIAS_NAME_KMS_KEY_ID  --plaintext mariadb --output text --query CiphertextBlob | base64 --decode > /root/secrets/wordpress/wordpress-database-host.txt 
+
+
+
+# Decryption
+
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-password.txt --output text --query Plaintext | base64 --decode
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-name.txt --output text --query Plaintext | base64 --decode
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-user.txt --output text --query Plaintext | base64 --decode
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-host.txt  --output text --query Plaintext | base64 --decode
+#END
+
+
+WORDPRESS_DATABASE_PASSWORD=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-password.txt --output text --query Plaintext | base64 --decode`
+WORDPRESS_DATABASE_NAME=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-name.txt --output text --query Plaintext | base64 --decode`
+WORDPRESS_DATABASE_USER=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-user.txt --output text --query Plaintext | base64 --decode`
+WORDPRESS_DATABASE_HOST=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/wordpress/wordpress-database-host.txt  --output text --query Plaintext | base64 --decode`
+
+
+echo "\n"
+echo "Credentials Decrypted"
+
+echo " This is Wordpress Database Password            = $WORDPRESS_DATABASE_PASSWORD "
+echo " This is Wordpress Database Name                = $WORDPRESS_DATABASE_NAME "
+echo " This is Wordpress Database User                = $WORDPRESS_DATABASE_USER "
+echo " This is Wordpress Database Host ---> POD       = $WORDPRESS_DATABASE_HOST "
