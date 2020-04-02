@@ -3,7 +3,7 @@
 
 ALIAS_NAME="wordpress"
 
-ALIAS_NAME_KMS_KEY_ID=`aws kms create-key | tail -n4 | head -n1 | awk '{print $2}' | cut -d ":" -f6 | cut -c 5- | cut -d "," -f1 | cut -d '"' -f1`
+ALIAS_NAME_KMS_KEY_ID=`aws kms create-key | grep -i "KeyId" | awk -F[,:] '{print $2}' | cut -d '"' -f2`
 
 aws kms create-alias \
     --alias-name alias/$ALIAS_NAME \
