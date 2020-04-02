@@ -1,13 +1,8 @@
 #!/bin/bash
 
+# Create a Key from AWS Console
 
-ALIAS_NAME="wordpress"
-
-ALIAS_NAME_KMS_KEY_ID=`aws kms create-key | grep -i "KeyId" | awk -F[,:] '{print $2}' | cut -d '"' -f2`
-
-aws kms create-alias \
-    --alias-name alias/$ALIAS_NAME \
-    --target-key-id $ALIAS_NAME_KMS_KEY_ID
+ALIAS_NAME_KMS_KEY_ID='27c3b11a-eda4-444d-9b1d-721ed053e00d'
 
 mkdir -p /root/secrets/mariadb
 mkdir -p /root/secrets/wordpress
