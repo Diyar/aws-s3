@@ -4,24 +4,9 @@
 
 # https://aws.amazon.com/premiumsupport/knowledge-center/sftp-iam-user-cli/
 
-aws iam create-instance-profile --instance-profile-name Linux-Academy-ECS-Instance-Role
+1. aws iam create-instance-profile --instance-profile-name Linux-Academy-ECS-Instance-Role
 
-aws iam create-role --role-name Linux-Academy-ECS-Instance-Role --assume-role-policy-document file://ec2-trust-relationship.json --description "EC2 Access"
-
-# Note: Attaching AWS Managed Policy ARN is fixed
-
-aws iam attach-role-policy --role-name Linux-Academy-ECS-Instance-Role --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role
-
-aws iam attach-role-policy --role-name Linux-Academy-ECS-Instance-Role --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-
-# Add the s3access role to the s3access-profile instance profile.
-
-aws iam add-role-to-instance-profile --instance-profile-name Linux-Academy-ECS-Instance-Role --role-name Linux-Academy-ECS-Instance-Role
-
-
-
-
-cat <<EOF >ec2-trust-relationship.json
+2. cat <<EOF >ec2-trust-relationship.json
 {
   "Version": "2008-10-17",
   "Statement": [
@@ -36,6 +21,22 @@ cat <<EOF >ec2-trust-relationship.json
   ]
 }
 EOF
+
+aws iam create-role --role-name Linux-Academy-ECS-Instance-Role --assume-role-policy-document file://ec2-trust-relationship.json --description "EC2 Access"
+
+# Note: Attaching AWS Managed Policy ARN is fixed
+
+3. aws iam attach-role-policy --role-name Linux-Academy-ECS-Instance-Role --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role
+
+aws iam attach-role-policy --role-name Linux-Academy-ECS-Instance-Role --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+
+# Add the s3access role to the s3access-profile instance profile.
+4. aws iam add-role-to-instance-profile --instance-profile-name Linux-Academy-ECS-Instance-Role --role-name Linux-Academy-ECS-Instance-Role
+
+
+
+
+
 
 # Create a keypair
 
