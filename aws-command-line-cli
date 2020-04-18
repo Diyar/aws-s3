@@ -1,3 +1,25 @@
+# KMS KEY & ALIAS CREATION
+#######################################################################################
+#!/bin/bash
+
+# https://docs.aws.amazon.com/cli/latest/reference/kms/create-alias.html
+
+
+
+KMS_KEY=`aws kms create-key | grep "key" | awk '{print $3}' | cut -f6 -d":" | cut -d"/" -f2`
+ALIAS_NAME="jenkins"
+
+aws kms create-alias --alias-name alias/"$ALIAS_NAME" --target-key-id "$KMS_KEY"
+
+aws kms list-aliases | grep "$ALIAS_NAME"
+
+
+
+
+
+#END
+
+##############################################################################################
 # List All Stopped instances
 
 # https://stackoverflow.com/questions/46457899/aws-cli-command-to-list-stopped-instances
