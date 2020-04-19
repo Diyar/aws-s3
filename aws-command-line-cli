@@ -4,13 +4,14 @@
 
 # https://docs.aws.amazon.com/cli/latest/reference/kms/create-alias.html
 
+# Best is to create the KMS Key Manually, because I foud the fields do change & behave differently because of A/c "string" length, so this is a demo, that is why I am using it.
 
-
-KMS_KEY=`aws kms create-key | grep "key" | awk '{print $3}' | cut -f6 -d":" | cut -d"/" -f2`
+kMS_KEY=`aws kms create-key | grep "key" | awk '{print $2}' | cut -f6 -d":" | cut -d"/" -f2 | cut -d '"' -f1`
+#KMS_KEY=`aws kms create-key | grep "key" | awk '{print $3}' | cut -f6 -d":" | cut -d"/" -f2`
 ALIAS_NAME="jenkins"
 
-aws kms create-alias --alias-name alias/"$ALIAS_NAME" --target-key-id "$KMS_KEY"
 
+aws kms create-alias --alias-name alias/"$ALIAS_NAME" --target-key-id "$KMS_KEY"
 aws kms list-aliases | grep "$ALIAS_NAME"
 
 
