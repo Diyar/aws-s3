@@ -8,17 +8,21 @@ echo -e "\nBest is to create the KMS Key Manually, because I foud the fields do 
 
 
 ACCOUNT_ID=`aws sts get-caller-identity | grep -i "account" | cut -d':' -d'"' -f4`
-KMS_KEY=`aws kms create-key | grep "key" | awk '{print $3}' | cut -f6 -d":" | cut -d"/" -f2`
+#KMS_KEY=`aws kms create-key | grep "key" | awk '{print $3}' | cut -f6 -d":" | cut -d"/" -f2`
 ALIAS_NAME="jenkins"
 
+KMS_KEY=`aws kms create-key | grep "key" `
 
 echo -e "\nYour AWS A/c ID is "$ACCOUNT_ID"\n"
-aws kms create-alias --alias-name alias/"$ALIAS_NAME" --target-key-id "$KMS_KEY"
-aws kms list-aliases | grep "$ALIAS_NAME"
+
+echo "$KMS_KEY"
+echo -e 'aws kms create-alias --alias-name alias/YourAlias --target-key-id CopyTheTargetKMSkeyFromAbove&PasteHere'
+echo 'aws kms list-aliases | grep "YourAlias"'
 
 
 
 #END
+
 
 
 ##############################################################################################
