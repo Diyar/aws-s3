@@ -38,6 +38,9 @@ aws ec2 describe-instances --filters  "Name=instance-state-name,Values=stopped" 
 
 aws ec2 describe-instances --filters  "Name=instance-state-name,Values=running" --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value }'
 
+# List Running Instances of a Specific VPC
+
+aws ec2 describe-instances --filters  "Name=instance-state-name,Values=running" Name=vpc-id,Values=YOURVPCID --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value }'
 ################################################################################################
 
 #!/bin/bash
