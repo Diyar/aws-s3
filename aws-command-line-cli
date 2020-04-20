@@ -34,9 +34,11 @@ aws ec2 describe-instances --filters  "Name=instance-state-name,Values=stopped" 
 
 aws ec2 describe-instances --filters  "Name=instance-state-name,Values=stopped" --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value }'
 
+# List All Running Instances
 
+aws ec2 describe-instances --filters  "Name=instance-state-name,Values=running" --query 'Reservations[].Instances[].{ID: InstanceId,Hostname: PublicDnsName,Name: Tags[?Key==`Name`].Value }'
 
-
+################################################################################################
 
 #!/bin/bash
 
