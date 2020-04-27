@@ -1,3 +1,17 @@
+# https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html
+# Identifying the EBS Device
+
+# Other Linux
+nvme id-ctrl -v /dev/nvme8n1p1 | head -n5
+NVME Identify Controller:
+
+# AmazonLinux
+
+[ec2-user ~]$ sudo /sbin/ebsnvme-id /dev/nvme1n1
+Volume ID: vol-01324f611e2463981
+/dev/sdf
+
+
 # KMS KEY & ALIAS CREATION
 #######################################################################################
 #!/bin/bash
