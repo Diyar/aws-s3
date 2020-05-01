@@ -14,7 +14,7 @@ scottlinux.com rocks
 
 
 ############################################################################################
-echo -n 'cloudelligent.com asim' | base64
+echo -n 'infragurus.com asim' | base64
 
 Y2xvdWRlbGxpZ2VudC5jb20gYXNpbQ==
 
@@ -22,7 +22,7 @@ Y2xvdWRlbGxpZ2VudC5jb20gYXNpbQ==
 
 echo Y2xvdWRlbGxpZ2VudC5jb20gYXNpbQ== | base64 -d
 
-cloudelligent.com asim
+infragurus.com asim
 #############################################################################################
 
 #RANDOM PASSWORD
@@ -186,7 +186,7 @@ spec:
 
 kubectl exec -it mysql-ksmv8 -- bash
 
-5. mysql -u root -p  ---> (Note: provide original root password here ---> cloudelligent.com asim
+5. mysql -u root -p  ---> (Note: provide original root password here ---> infragurus.com asim
 
    CREATE DATABASE jira;
    ctrl+D

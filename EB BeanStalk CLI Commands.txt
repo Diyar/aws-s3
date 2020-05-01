@@ -42,7 +42,7 @@ https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-create.html
 17. EB CLI important switches
 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-create.html
 
-Example: eb create cloudelligent-single-ec2 --instance_profile cloudelligent-ecr-frankfurt
+Example: eb create infragurus-single-ec2 --instance_profile infragurus-ecr-frankfurt
 
 18.eb create
 

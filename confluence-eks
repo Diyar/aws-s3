@@ -57,7 +57,7 @@ spec:
             runAsUser: 0
           env:
             - name: CATALINA_CONNECTOR_PROXYNAME
-              value: "confluence-eks.cloudelligent.com"
+              value: "confluence-eks.infragurus.com"
             - name: CATALINA_CONNECTOR_PROXYPORT
               value: "443"
             - name: CATALINA_CONNECTOR_SCHEME
@@ -98,7 +98,7 @@ spec:
             runAsUser: 0
           env:
             - name: CATALINA_CONNECTOR_PROXYNAME
-              value: "confluence-eks.cloudelligent.com"
+              value: "confluence-eks.infragurus.com"
             - name: CATALINA_CONNECTOR_PROXYPORT
               value: "443"
             - name: CATALINA_CONNECTOR_SCHEME
@@ -141,7 +141,7 @@ spec:
             runAsUser: 0
           env:
             - name: CATALINA_CONNECTOR_PROXYNAME
-              value: "confluence-eks.cloudelligent.com"
+              value: "confluence-eks.infragurus.com"
             - name: CATALINA_CONNECTOR_PROXYPORT
               value: "443"
             - name: CATALINA_CONNECTOR_SCHEME

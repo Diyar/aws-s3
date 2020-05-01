@@ -16,7 +16,7 @@ spec:
             runAsUser: 0
           env:
             - name: X_PROXY_NAME
-              value: "jeera.cloudelligent.com"
+              value: "jeera.infragurus.com"
             - name: X_PROXY_PORT
               value: "443"
             - name: X_PROXY_SCHEME

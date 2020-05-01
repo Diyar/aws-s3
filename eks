@@ -2,7 +2,7 @@
 
 Setup IAM Role for EKS
 
-EKS_Cloudelligent
+EKS_infragurus
 
 
 Custom VPC Setup via Cloudformation
@@ -87,12 +87,12 @@ update our cubeconfig file
 IMPORTANT TO UPDATE YOUR ./kube
 ################################################################
 ### MUST ###
----> aws eks update-kubeconfig --name cloudelligent-eks --region us-east-1 <---
+---> aws eks update-kubeconfig --name infragurus-eks --region us-east-1 <---
 ##################################################################
 https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting.html
 
 
-Added new context arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent to /root/.kube/config
+Added new context arn:aws:eks:us-west-2:898668804275:cluster/eks-infragurus to /root/.kube/config
 
 kubectl config view
 
@@ -101,17 +101,17 @@ clusters:
 - cluster:
     certificate-authority-data: DATA+OMITTED
     server: https://069ED5E1B13D5C06E60F75AFDE032409.sk1.us-west-2.eks.amazonaws.com
-  name: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+  name: arn:aws:eks:us-west-2:898668804275:cluster/eks-infragurus
 contexts:
 - context:
-    cluster: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
-    user: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
-  name: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
-current-context: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+    cluster: arn:aws:eks:us-west-2:898668804275:cluster/eks-infragurus
+    user: arn:aws:eks:us-west-2:898668804275:cluster/eks-infragurus
+  name: arn:aws:eks:us-west-2:898668804275:cluster/eks-infragurus
+current-context: arn:aws:eks:us-west-2:898668804275:cluster/eks-infragurus
 kind: Config
 preferences: {}
 users:
-- name: arn:aws:eks:us-west-2:898668804275:cluster/eks-cloudelligent
+- name: arn:aws:eks:us-west-2:898668804275:cluster/eks-infragurus
   user:
     exec:
       apiVersion: client.authentication.k8s.io/v1alpha1
@@ -121,7 +121,7 @@ users:
       - eks
       - get-token
       - --cluster-name
-      - eks-cloudelligent
+      - eks-infragurus
       command: aws
       env: null
 
@@ -161,7 +161,7 @@ We will be using Cloudformation and we will deploy a stack for our worker nodes.
 
 Note: For Amazon Optimized AMI ---> https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
 
-ami-0923e4b35a30a5f53 ---> This is Oregon ---> because we deployed our EKS Cluster ---> eks-cloudelligent    in Oregon.
+ami-0923e4b35a30a5f53 ---> This is Oregon ---> because we deployed our EKS Cluster ---> eks-infragurus    in Oregon.
 
 This is our Bucket automatically created in Oregon for this Cloudformation Template ---> cf-templates-7gd89mj54jv6-us-west-2
 
@@ -172,7 +172,7 @@ These are regular ec2-instances you own and pay for it.
 
 #You provisioned the worker nodes from a Cloudformation ---> now time join these nodes ---> Your EKS Cluster ---> We need to apply AWS AUTHENTICATOR configuration map.
 
-arn:aws:iam::898668804275:role/EKS-Cloudelligent-WorkerNodes-NodeInstanceRole-D68SD4Y88L82
+arn:aws:iam::898668804275:role/EKS-infragurus-WorkerNodes-NodeInstanceRole-D68SD4Y88L82
 
 curl -O https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-11-07/aws-auth-cm.yaml
 
@@ -314,11 +314,11 @@ kubectl proxy  &
 
 netstat -antp
 
-aws-iam-authenticator -i eks-cloudelligent token
+aws-iam-authenticator -i eks-infragurus token
 
 yum install -y jq
 
-aws-iam-authenticator -i eks-cloudelligent token | jq -r .status.token
+aws-iam-authenticator -i eks-infragurus token | jq -r .status.token
 ###########################################################################################################################################
 
 
@@ -364,11 +364,11 @@ kubectl proxy  &
 
 netstat -antp
 
-aws-iam-authenticator -i eks-cloudelligent token
+aws-iam-authenticator -i eks-infragurus token
 
 yum install -y jq
 
-aws-iam-authenticator -i eks-cloudelligent token | jq -r .status.token
+aws-iam-authenticator -i eks-infragurus token | jq -r .status.token
 
 k8s-aws-v1.aHR0cHM6Ly9zdHMuYW1hem9uYXdzLmNvbS8_QWN0aW9uPUdldENhbGxlcklkZW50aXR5JlZlcnNpb249MjAxMS0wNi0xNSZYLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUE1Q1BHVlhDWlVBNzZXQVZBJTJGMjAxOTA1MjMlMkZ1cy1lYXN0LTElMkZzdHMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDE5MDUyM1QwMDA1MDBaJlgtQW16LUV4cGlyZXM9MCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QlM0J4LWs4cy1hd3MtaWQmWC1BbXotU2lnbmF0dXJlPTYwNjUxZmQ0YzI1M2RmN2U5Mzk1MWMxOGEwODM3NjFiNWNhNDA4NmU3MTM1ZjA5N2I4YWNlM2RiNjRhNGE5OTg
 
@@ -490,7 +490,7 @@ Download and extract the latest release of eksctl with the following command.
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 
 #######################################################################################
-eksctl create cluster --name=cloudelligent-eks --region=us-east-1 --node-type=t2.medium
+eksctl create cluster --name=infragurus-eks --region=us-east-1 --node-type=t2.medium
 #######################################################################################
 
 2. Move the extracted binary to /usr/local/bin.
@@ -527,17 +527,17 @@ https://eksctl.io/usage/vpc-networking/
 
 mkdir ~/.ssh 2>&1 >/dev/null
 
-aws ec2 create-key-pair --key-name cloudelligent-eks --query 'KeyMaterial' --output text > ~/.ssh/cloudelligent-eks.pem
+aws ec2 create-key-pair --key-name infragurus-eks --query 'KeyMaterial' --output text > ~/.ssh/infragurus-eks.pem
 
 #END
 
 # https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-creation-errors/
 
 
-# Create a key-pair cloudelligent-eks\
+# Create a key-pair infragurus-eks\
 ##################################################
 eksctl create cluster \
---name cloudelligent-eks \
+--name infragurus-eks \
 --version 1.15 \
 --region us-east-1 \
 --vpc-cidr 10.11.0.0/16 \
@@ -549,7 +549,7 @@ eksctl create cluster \
 --nodes-max 4 \
 --ssh-access \
 --zones us-east-1a,us-east-1b,us-east-1c \
---ssh-public-key cloudelligent-eks
+--ssh-public-key infragurus-eks
 
 ###################################################
 
@@ -557,7 +557,7 @@ eksctl create cluster \
 
 # Delete an eks cluster
 ################################################################
-eksctl delete cluster --region=us-east-1 --name=cloudelligent-eks
+eksctl delete cluster --region=us-east-1 --name=infragurus-eks
 #################################################################
 
 ############################################################################################################################
@@ -607,7 +607,7 @@ kubernetes.io/role/internal-elb            1
 
 eksctl utils associate-iam-oidc-provider \
     --region us-east-1 \
-    --cluster cloudelligent-eks \
+    --cluster infragurus-eks \
     --approve
 
 3. Create an IAM policy called ALBIngressControllerIAMPolicy for the ALB Ingress Controller pod that allows it to make calls to AWS APIs on your behalf. Use the following AWS CLI command to create the IAM policy in your AWS account. You can view the policy document on GitHub.
@@ -631,7 +631,7 @@ eksctl create iamserviceaccount \
     --region us-east-1 \
     --name alb-ingress-controller \
     --namespace kube-system \
-    --cluster cloudelligent-eks \
+    --cluster infragurus-eks \
     --attach-policy-arn arn:aws:iam::394066857791:policy/ALBIngressControllerIAMPolicy \
     --override-existing-serviceaccounts \
     --approve
@@ -650,7 +650,7 @@ kubectl edit deployment.apps/alb-ingress-controller -n kube-system
       containers:
       - args:
         - --ingress-class=alb
-        - --cluster-name=cloudelligent-eks
+        - --cluster-name=infragurus-eks
         - --aws-vpc-id=vpc-0419355bf920ef189
         - --aws-region=us-east-1
         
@@ -809,7 +809,7 @@ kubernetes.io/role/internal-elb            1
 
 eksctl utils associate-iam-oidc-provider \
     --region us-east-1 \
-    --cluster cloudelligent-eks \
+    --cluster infragurus-eks \
     --approve
 
 3. Create an IAM policy called ALBIngressControllerIAMPolicy for the ALB Ingress Controller pod that allows it to make calls to AWS APIs on your behalf. Use the following AWS CLI command to create the IAM policy in your AWS account. You can view the policy document on GitHub.
@@ -842,7 +842,7 @@ AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
 # Important
 # You must use at least version 1.18.10 of the AWS CLI to receive the proper output from this command. For more information, see Installing the AWS CLI in the AWS Command Line Interface User Guide.
 
-OIDC_PROVIDER=$(aws eks describe-cluster --name cloudelligent-eks --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///")
+OIDC_PROVIDER=$(aws eks describe-cluster --name infragurus-eks --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///")
 
 3. Set the service account namespace to an environment variable with the following command, replacing your namespace name.
 

@@ -104,12 +104,12 @@ aws ec2 create-key-pair --key-name Linux-Academy --query 'KeyMaterial' --output 
 
 # Create a s3 bucket
 
-aws s3 mb s3://cloudelligent-ecs-learning
+aws s3 mb s3://infragurus-ecs-learning
 OR
-aws s3api create-bucket --bucket cloudelligent-ecs-learning
+aws s3api create-bucket --bucket infragurus-ecs-learning
 
-aws s3 cp ecs.config s3://cloudelligent-ecs-learning/
-aws s3 ls s3://cloudelligent-ecs-learning
+aws s3 cp ecs.config s3://infragurus-ecs-learning/
+aws s3 ls s3://infragurus-ecs-learning
 
 
 aws ec2 run-instances --image-id ami-2b3b6041 --count 1 \

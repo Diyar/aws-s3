@@ -4,7 +4,7 @@
 
 
 REGION="us-east-1"
-CLUSTER_NAME="cloudelligent-eks"
+CLUSTER_NAME="infragurus-eks"
 POLICY_ARN=`aws sts get-caller-identity |  awk '{ print $2 }' | grep "iam" | cut -d':' -f2,3,4,5`
 
 
@@ -40,7 +40,7 @@ eksctl create iamserviceaccount \
     --region us-east-1 \
     --name alb-ingress-controller \
     --namespace kube-system \
-    --cluster cloudelligent-eks \
+    --cluster infragurus-eks \
     --attach-policy-arn arn:$POLICY_ARN:policy/ALBIngressControllerIAMPolicy \
     --override-existing-serviceaccounts \
     --approve
