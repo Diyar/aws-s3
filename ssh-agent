@@ -1,7 +1,9 @@
 Step 1: Adding the private key (PEM file) to the key chain. This allows the user to access the private instances without copying to the bastion host. This adds an additional layer of security.
 #you need to run ssh-agent before using it:
 
-eval `ssh-agent -s`
+# eval `ssh-agent -s`
+
+eval "$(ssh-agent -s)"   ---> use this command
 
 ssh-add -k <PEM_file_name>
 
