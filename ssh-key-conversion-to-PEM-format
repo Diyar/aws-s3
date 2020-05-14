@@ -1,0 +1,7 @@
+# https://medium.com/@6et/convert-openssh-rsa-key-to-a-pem-file-80753fdbac00
+The solution was to create a RSA private key using the command
+ssh-keygen -p -m PEM -f ~/.ssh/id_rsa
+
+# Example
+ssh-keygen -p -m PEM -f monitoring
+
