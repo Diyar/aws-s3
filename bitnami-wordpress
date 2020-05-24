@@ -1,3 +1,6 @@
+###
+root user
+###
 #!/bin/bash
 
 # https://hub.docker.com/r/bitnami/wordpress
@@ -22,7 +25,9 @@ docker run --name bitnami-wordpress -u root --network="bitnami-wordpress-tier" -
 
 ########################################################################################
 
-
+###
+Non-root user
+###
 
 #!/bin/bash
 
@@ -41,7 +46,8 @@ docker run --name phpmyadmin --network="bitnami-wordpress-tier" --link mariadb:d
 
 
 # Wordpress Setup
-docker run --name bitnami-wordpress --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="quickbooks2018" --link mariadb:db -p 80:80 -v /root/wordpress:/bitnami --restart unless-stopped -d bitnami/wordpress:latest
+docker volume create wordpress
+docker run --name bitnami-wordpress --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="quickbooks2018" --link mariadb:db -p 80:8080 -v wordpress:/bitnami --restart unless-stopped -d bitnami/wordpress:latest
 
 
 
@@ -65,7 +71,7 @@ docker run --name phpmyadmin --network="bitnami-wordpress-tier" --link mariadb:d
 
 
 # Wordpress Setup
-docker run --name bitnami-wordpress --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="ausdermoitoeuropas" --link mariadb:db -p 8000:80 -v /root/wordpress:/bitnami --restart unless-stopped -d bitnami/wordpress:latest
+docker run --name bitnami-wordpress --user=1000 --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="ausdermoitoeuropas" --link mariadb:db -p 8000:8080 -v /root/wordpress:/bitnami --restart unless-stopped -d bitnami/wordpress:latest
 
 
 
@@ -95,7 +101,7 @@ docker run --name phpmyadmin --network="bitnami-wordpress-tier" --link mariadb:d
 
 # Wordpress Setup
 docker create -v /root/wordpress:/bitnami --name  busybox_wordpress busybox:latest
-docker run --name bitnami-wordpress --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="ausdermoitoeuropas" --link mariadb:db -p 8000:80 --volumes-from busybox_wordpress --restart unless-stopped -d bitnami/wordpress:latest
+docker run --name bitnami-wordpress --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="ausdermoitoeuropas" --link mariadb:db -p 8000:8080 --volumes-from busybox_wordpress --restart unless-stopped -d bitnami/wordpress:latest
 
 
 #END
