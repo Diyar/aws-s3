@@ -1,7 +1,7 @@
 image: docker:latest
 
 variables:
-  REPOSITORY_URL: 898668804275.dkr.ecr.eu-central-1.amazonaws.com/infragurus/nginx-web-app
+  REPOSITORY_URL: 898668804275.dkr.ecr.eu-central-1.amazonaws.com/cloudgeeks.ca/nginx-web-app
 
 services:
   - docker:dind

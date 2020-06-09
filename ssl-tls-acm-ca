@@ -1,6 +1,6 @@
 #Define the domain name
 
-DOMAIN='infragurus.com'
+DOMAIN='cloudgeeks.ca.com'
 SUBDOMAIN='vpn'
 
 #Organization Details
@@ -124,5 +124,5 @@ openssl x509 -in "${DIR}/"$DOMAIN".crt" -noout -text
 
 ### openssl x509 -req -in server.csr -signkey server.key -out server.crt
 
-### openssl x509 -req -in infragurus.com.csr -signkey infragurus.com.key -out infragurus.com.crt
+### openssl x509 -req -in cloudgeeks.ca.com.csr -signkey cloudgeeks.ca.com.key -out cloudgeeks.ca.com.crt
 

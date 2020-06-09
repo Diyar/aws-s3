@@ -1,7 +1,7 @@
 image: docker:latest
 
 variables:
-  REPOSITORY_URL: 898668804275.dkr.ecr.eu-central-1.amazonaws.com/infragurus/nginx-web-app
+  REPOSITORY_URL: 898668804275.dkr.ecr.eu-central-1.amazonaws.com/cloudgeeks.ca/nginx-web-app
 
 services:
   - docker:dind
@@ -42,7 +42,7 @@ build:
     - pwd
     - cp /builds/quickbooks2018/aws-eb/Dockerrun.aws.json .
     - ls -a
-    - eb init infragurus-mh --region eu-central-1 --platform "Multi-container Docker 18.06.1-ce (Generic)" --keyname infragurus-Ubuntu-18-Terraform
+    - eb init cloudgeeks.ca-mh --region eu-central-1 --platform "Multi-container Docker 18.06.1-ce (Generic)" --keyname cloudgeeks.ca-Ubuntu-18-Terraform
     - eb codesource local
     - ls -a
     - cat .elasticbeanstalk/config.yml

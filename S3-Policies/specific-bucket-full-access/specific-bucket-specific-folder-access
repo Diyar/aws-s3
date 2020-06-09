@@ -19,7 +19,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::infragurus-sftp"
+                "arn:aws:s3:::cloudgeeks.ca-sftp"
             ],
             "Condition": {
                 "StringEquals": {
@@ -42,7 +42,7 @@
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::infragurus-sftp"
+                "arn:aws:s3:::cloudgeeks.ca-sftp"
             ],
             "Condition": {
                 "StringLike": {
@@ -63,7 +63,7 @@
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::infragurus-sftp/Mulesoft/*"
+                "arn:aws:s3:::cloudgeeks.ca-sftp/Mulesoft/*"
             ]
         }
     ]
@@ -252,8 +252,8 @@ For more general information about IAM roles, see Creating a Role to Delegate Pe
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::infragurus-mulesoft",
-                "arn:aws:s3:::infragurus-zuora"
+                "arn:aws:s3:::cloudgeeks.ca-mulesoft",
+                "arn:aws:s3:::cloudgeeks.ca-zuora"
             ]
         },
         {
@@ -264,9 +264,9 @@ For more general information about IAM roles, see Creating a Role to Delegate Pe
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::infragurus-mulesoft/*",
-                "arn:aws:s3:::infragurus-zuora/Zuora/outbound/*",
-                "arn:aws:s3:::infragurus-zuora/Zuora/archive/*"
+                "arn:aws:s3:::cloudgeeks.ca-mulesoft/*",
+                "arn:aws:s3:::cloudgeeks.ca-zuora/Zuora/outbound/*",
+                "arn:aws:s3:::cloudgeeks.ca-zuora/Zuora/archive/*"
             ]
         },
         {
@@ -277,7 +277,7 @@ For more general information about IAM roles, see Creating a Role to Delegate Pe
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::infragurus-zuora/Zuora/inbound/*"
+                "arn:aws:s3:::cloudgeeks.ca-zuora/Zuora/inbound/*"
             ]
         }
     ]
