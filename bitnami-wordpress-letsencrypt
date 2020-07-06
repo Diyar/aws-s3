@@ -46,7 +46,7 @@ mkdir -p ~/nginx/conf.d
 #    -keyout ~/ssl/certs/nginx-selfsigned.key \
 #    -out ~/ssl/certs/nginx-selfsigned.crt
 #4
-openssl dhparam -out ~/ssl/certs/dhparam.pem 2048
+# openssl dhparam -out ~/ssl/certs/dhparam.pem 2048
 
 #5
 cd ~/nginx/conf.d
