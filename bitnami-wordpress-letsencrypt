@@ -115,8 +115,8 @@ server {
 server {
   server_name wordpress.saqlainmushtaq.com;
   listen 443 ssl;
-  ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-  ssl_certificate_key /etc/ssl/certs/nginx-selfsigned.key;
+  ssl_certificate /etc/ssl/certs/cert1.pem;
+  ssl_certificate_key /etc/ssl/certs/privkey1.pem;
   ssl_dhparam /etc/ssl/certs/dhparam.pem;
     ssl_protocols       TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
     ssl_ciphers    TLS-CHACHA20-POLY1305-SHA256:TLS-AES-256-GCM-SHA384:TLS-AES-128-GCM-SHA256:HIGH:!aNULL:!MD5;
@@ -134,7 +134,7 @@ location / {
 }' >  ~/nginx/conf.d/server.conf
 
 #8
-docker run --name nginx --network=bitnami-wordpress-tier --restart unless-stopped -v ~/ssl/certs:/etc/ssl/certs -v ~/nginx/conf.d:/etc/nginx/conf.d -p 443:443 -p 80:80 -d nginx
+docker run --name nginx --network=bitnami-wordpress-tier --restart unless-stopped -v /etc/letsencrypt/archive/letsencrypt.saqlainmushtaq.com:/etc/ssl/certs -v ~/nginx/conf.d:/etc/nginx/conf.d -p 443:443 -p 80:80 -d nginx
 
 
 #END
