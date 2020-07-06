@@ -117,7 +117,7 @@ server {
   listen 443 ssl;
   ssl_certificate /etc/ssl/certs/cert1.pem;
   ssl_certificate_key /etc/ssl/certs/privkey1.pem;
-  ssl_dhparam /etc/ssl/certs/dhparam.pem;
+  
     ssl_protocols       TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
     ssl_ciphers    TLS-CHACHA20-POLY1305-SHA256:TLS-AES-256-GCM-SHA384:TLS-AES-128-GCM-SHA256:HIGH:!aNULL:!MD5;
 location / {
