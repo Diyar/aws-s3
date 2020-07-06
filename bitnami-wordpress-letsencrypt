@@ -124,15 +124,15 @@ mkdir -p ~/nginx/conf.d
 
 #3
 #openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ~/ssl/certs/nginx-selfsigned.key -out ~/ssl/certs/nginx-selfsigned.crt
-openssl req \
-    -new \
-    -newkey rsa:4096 \
-    -days 365 \
-    -nodes \
-    -x509 \
-    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" \
-    -keyout ~/ssl/certs/nginx-selfsigned.key \
-    -out ~/ssl/certs/nginx-selfsigned.crt
+#openssl req \
+#    -new \
+#    -newkey rsa:4096 \
+#    -days 365 \
+#    -nodes \
+#    -x509 \
+#    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" \
+#    -keyout ~/ssl/certs/nginx-selfsigned.key \
+#    -out ~/ssl/certs/nginx-selfsigned.crt
 #4
 openssl dhparam -out ~/ssl/certs/dhparam.pem 2048
 
