@@ -4,25 +4,46 @@
 
 ### PART-1### ---> Obtaining the Letsencrypt
 
+Ubuntu-18-LTS
+
 ### Run This
 
-#!/bin/bash
+## 1.SSH into the server
+SSH into the server running your HTTP website as a user with sudo privileges.
 
-# https://hub.docker.com/r/bitnami/wordpress
+### 2Add Certbot PPA
+### You'll need to add the Certbot PPA to your list of repositories. To do so, run the following commands on the command line on the machine:
 
-# Create a network
-docker network create bitnami-wordpress-tier
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+Install Certbot
+Run this command on the command line on the machine to install Certbot.
 
-# Mariadb Setup
-docker run --name mariadb --user=root -e MARIADB_DATABASE=bitnami_wordpress -e MARIADB_ROOT_PASSWORD="ausdermoitoeuropas" -v /root/mariadb:/bitnami --network="bitnami-wordpress-tier" --restart unless-stopped -d bitnami/mariadb:latest
+sudo apt-get install certbot python3-certbot-nginx
+#Choose how you'd like to run Certbot
+#Either get and install your certificates...
+#Run this command to get a certificate and have Certbot edit your Nginx configuration automatically to serve it, turning on HTTPS access in a single step.
 
+# sudo certbot --nginx ----------------> NOT Required
+# Or, just get a certificate ----------> Required
 
-# Phpmyadmin Setup
-docker run --name phpmyadmin --network="bitnami-wordpress-tier" --link mariadb:db -id -p 8080:80 --restart unless-stopped phpmyadmin/phpmyadmin
+# If you're feeling more conservative and would like to make the changes to your Nginx configuration by hand, run this command.
 
+sudo certbot certonly --nginx
+# Test automatic renewal
+# The Certbot packages on your system come with a cron job or systemd timer that will renew your certificates automatically before they expire. You will not need to run Certbot again, unless you change your configuration. You can test automatic renewal for your certificates by running this command:
 
-# Wordpress Setup
-docker run --name bitnami-wordpress -u root --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="ausdermoitoeuropas" --link mariadb:db -p 80:8080 -v /root/wordpress:/bitnami --restart unless-stopped -d bitnami/wordpress:latest
+#---> sudo certbot renew --dry-run
+#---> The command to renew certbot is installed in one of the following locations:
+
+/etc/crontab/
+/etc/cron.*/*
+systemctl list-timers
+Confirm that Certbot worked
+To confirm that your site is set up properly, visit https://yourwebsite.com/ in your browser and look for the lock icon in the URL bar. If you want to check that you have the top-of-the-line installation, you can head to https://www.ssllabs.com/ssltest/.
 
 
 
@@ -118,6 +139,24 @@ docker run --name nginx --network=bitnami-wordpress-tier --restart unless-stoppe
 
 #END
 ###########################################################LETSENCRYPT###############################################################################
+#!/bin/bash
+
+# https://hub.docker.com/r/bitnami/wordpress
+
+# Create a network
+docker network create bitnami-wordpress-tier
+
+# Mariadb Setup
+docker run --name mariadb --user=root -e MARIADB_DATABASE=bitnami_wordpress -e MARIADB_ROOT_PASSWORD="ausdermoitoeuropas" -v /root/mariadb:/bitnami --network="bitnami-wordpress-tier" --restart unless-stopped -d bitnami/mariadb:latest
+
+
+# Phpmyadmin Setup
+docker run --name phpmyadmin --network="bitnami-wordpress-tier" --link mariadb:db -id -p 8080:80 --restart unless-stopped phpmyadmin/phpmyadmin
+
+
+# Wordpress Setup
+docker run --name bitnami-wordpress -u root --network="bitnami-wordpress-tier" -e WORDPRESS_DATABASE_NAME="bitnami_wordpress" -e WORDPRESS_DATABASE_USER="root" -e WORDPRESS_DATABASE_PASSWORD="ausdermoitoeuropas" --link mariadb:db -p 80:8080 -v /root/wordpress:/bitnami --restart unless-stopped -d bitnami/wordpress:latest
+
 
 
 ###
