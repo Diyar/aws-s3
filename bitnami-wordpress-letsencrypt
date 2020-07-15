@@ -372,5 +372,5 @@ location / {
 }' >  ~/nginx/conf.d/server.conf
 
 
-#6
+#5
 docker run --name nginx --network computan --restart unless-stopped -v /etc/letsencrypt/archive/letsencrypt.saqlainmushtaq.com:/etc/ssl/certs -v ~/nginx/conf.d:/etc/nginx/conf.d -p 443:443 -p 80:80 -d nginx
