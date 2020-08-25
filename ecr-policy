@@ -1,5 +1,6 @@
 # https://github.com/awsdocs/amazon-ecr-user-guide/blob/master/doc_source/ecr_managed_policies.md
 # https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html
+# https://github.com/marketplace/actions/docker-ecr
 
 {
     "Version": "2012-10-17",
