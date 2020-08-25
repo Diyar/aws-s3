@@ -27,9 +27,7 @@
                 "ecr:CompleteLayerUpload",
                 "ecr:PutImage"
             ],
-            "Resource": [
-                      "arn:aws:ecr:region:account-id:repository/repository-name"
-                        ]
+            "Resource": "*"
         }
     ]
 }
