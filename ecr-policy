@@ -2,6 +2,8 @@
 # https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html
 # https://github.com/marketplace/actions/docker-ecr
 
+# This managed policy allows power user access to Amazon ECR, which allows read and write access to repositories, but does not allow users to delete repositories or change the policy documents applied to them.
+
 {
     "Version": "2012-10-17",
     "Statement": [
