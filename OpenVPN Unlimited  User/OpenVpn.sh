@@ -29,8 +29,8 @@ systemctl enable docker
 
 echo -e "\nWe we are pulling the best Image of OpenVPN for docker on earth by kylemanna/openvpn\n"
 
-docker pull kylemanna/openvpn
-docker pull kylemanna/openvpn:2.4
+docker pull kylemanna/openvpn:latest
+# docker pull kylemanna/openvpn:2.4
 
 #Step 1
 
