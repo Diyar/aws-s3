@@ -1,3 +1,9 @@
+1. Eureka-Server AMI	
+
+2. IAM Role for EC2  with permissions to update Route53
+
+3. Route53 Script
+
 #!/bin/bash
 # Maintainer <Muhammad Asim quickbooks2018@gmail.com>
 # Update route53 record
