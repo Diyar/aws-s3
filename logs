@@ -25,6 +25,18 @@
 }
 
 
-
+# https://docs.docker.com/config/containers/logging/awslogs/
 
 2. docker run --name eureka-server --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group="eureka-server" --log-opt awslogs-stream="eureka-server-log-stream" -p 8080:8761 --restart unless-stopped  -id imageid:tag
+
+
+# http://mvpjava.com/docker-logging-symlink-hack/
+# https://youtu.be/TFCua2yj09Y
+
+3. Dockerfile best practices for logs
+
+---> Simply create Symbolic Links
+
+RUN ln -sf /dev/stdout /log/server.log \
+ && ln -sf /dev/stderr /log/server.log
+
