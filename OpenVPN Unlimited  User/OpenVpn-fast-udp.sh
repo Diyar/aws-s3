@@ -27,10 +27,10 @@ systemctl enable docker
 
 #We we are pulling the best Image of docker for OpenVPN on earth.
 
-echo -e "\nWe we are pulling the best Image of OpenVPN for docker on earth by kylemanna/openvpn\n"
+echo -e "\nWe we are pulling the best Image of OpenVPN for docker on earth by quickbooks2018/openvpn\n"
 
-docker pull kylemanna/openvpn:latest
-# docker pull kylemanna/openvpn:2.4
+docker pull quickbooks2018/openvpn:latest
+
 
 #Step 1
 
@@ -48,13 +48,13 @@ echo -e "\n$OVPN_DATA\n"
 export OVPN_DATA
 
 sleep 1
-read -p "Please enter your Server Main IP Address IP: " IP
+read -p "Please enter your Server Main IP Address IP/DNS: " IP
 
-echo -e "\nYour Server IP is $IP\n"
+echo -e "\nYour Server IP/DNS is $IP\n"
 
 #Step 2
 echo -e "\nStep 2\n"
-docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_genconfig -u udp://$IP
+docker run -v $OVPN_DATA:/etc/openvpn --rm quickbooks2018/openvpn ovpn_genconfig -u udp://$IP
 
 
 echo -e "\nAfter a Shortwhile You need to enter your Server Secure Password details please wait ...\n"
@@ -64,7 +64,7 @@ sleep 3
 
 echo -e "\nWe are now at Step 3\n"
 
-docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki
+docker run -v $OVPN_DATA:/etc/openvpn --rm -it quickbooks2018/openvpn ovpn_initpki
 
 
 
@@ -72,7 +72,7 @@ docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn ovpn_initpki
 sleep 1
 echo -e "\nStep 4, We are Starting OpenVPN server process please wait ...\n"
 
-docker run --name OpenVPN -v $OVPN_DATA:/etc/openvpn -d -p 23525:1194/udp --restart unless-stopped --cap-add=NET_ADMIN kylemanna/openvpn:latest
+docker run --name OpenVPN -v $OVPN_DATA:/etc/openvpn -d -p 23525:1194/udp --restart unless-stopped --cap-add=NET_ADMIN quickbooks2018/openvpn:latest
 
 sleep 3
 
@@ -92,9 +92,9 @@ read -p "Please Provide Your Client Name " CLIENTNAME
 
 echo -e "\nI am adding a client with name $CLIENTNAME\n"
 
-#docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full $CLIENTNAME nopass
+#docker run -v $OVPN_DATA:/etc/openvpn --rm -it quickbooks2018/openvpn easyrsa build-client-full $CLIENTNAME nopass
 
-docker run -v $OVPN_DATA:/etc/openvpn --rm -it kylemanna/openvpn easyrsa build-client-full $CLIENTNAME
+docker run -v $OVPN_DATA:/etc/openvpn --rm -it quickbooks2018/openvpn easyrsa build-client-full $CLIENTNAME
 
 #Step 6
 echo -e "\nWe are now at 6TH Step, don't worry this is last step, you lazy GUY,Now we retrieve the client configuration with embedded certificates\n"
@@ -102,7 +102,7 @@ echo -e "\nWe are now at 6TH Step, don't worry this is last step, you lazy GUY,N
 
 echo -e "\n$CLIENTNAME ok\n"
 
-docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient $CLIENTNAME > $CLIENTNAME.ovpn
+docker run -v $OVPN_DATA:/etc/openvpn --rm quickbooks2018/openvpn ovpn_getclient $CLIENTNAME > $CLIENTNAME.ovpn
 
 
 
@@ -111,4 +111,4 @@ docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient $CLI
 #END
 
 #To revoke a client or user
-# docker run --volumes-from ovpn-data --rm -it kylemanna/openvpn ovpn_revokeclient 1234 remove?
+# docker run --volumes-from ovpn-data --rm -it quickbooks2018/openvpn ovpn_revokeclient 1234 remove?
