@@ -1,4 +1,5 @@
 #!/bin/bash
+# cloudgeeks.ca
 # Maintainer: Muhammad-Asim
 # Purpose: SSM-PORT-FORWARD
 
@@ -116,6 +117,7 @@ done
 #                       --document-name AWS-StartPortForwardingSession \
 #                       --parameters '{"portNumber":["22"],"localPortNumber":["9000"]}'
 
+# aws ssm start-session --target i-0ae9715b441290879  --document-name AWS-StartPortForwardingSession --parameters '{"portNumber":["22"],"localPortNumber":["9000"]}'
 
  # Connection Tip SSH/RDP
 
