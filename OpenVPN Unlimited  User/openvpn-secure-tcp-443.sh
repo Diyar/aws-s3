@@ -116,6 +116,13 @@ remote-cert-tls server
 
 remote vpn.saqlainmushtaq.com 443 tcp -------------------------------------------> Very Important
 
+# For DNS
+
+remote YOURIP/DNS 25530 udp
+dhcp-option DNS  10.20.4.77
+dhcp-option DNS  10.20.5.160
+dhcp-option DOMAIN cloudgeeks.ca.local
+
 <key>
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIFHDBOBgkqhkiG9w0BBQ0wQTApBgkqhkiG9w0BBQwwHAQIaPkMj3iJqt0CAggA
