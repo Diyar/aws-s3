@@ -1,6 +1,7 @@
 ------------------------> TAGGING <---------------------------
 
 # https://stackoverflow.com/questions/43331418/aws-cli-ecr-list-images-get-newest
+# https://stackoverflow.com/questions/12204192/using-multiple-delimiters-in-awk
 
 aws ecr describe-images --repository-name dukaan/api-gateway --query 'sort_by(imageDetails,& imagePushedAt)[*]'
 
