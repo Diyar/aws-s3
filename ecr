@@ -6,7 +6,7 @@
 aws ecr describe-images --repository-name dukaan/api-gateway --query 'sort_by(imageDetails,& imagePushedAt)[*]'
 
 
-API_GATEWAY_TAG=`aws ecr describe-images --repository-name cloudgeeks/api-gateway --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' | awk -F '["]' '{print $2}'`
+API_GATEWAY_TAG=`aws ecr describe-images --repository-name cloudgeeks/api-gateway --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]'  --region us-east-1 | awk -F '["]' '{print $2}'`
 
 
 docker pull 458545444577854445112258833669774455882211255.dkr.ecr.us-east-1.amazonaws.com/cloudgeeks/api-gateway:"$API_GATEWAY_TAG"
@@ -45,7 +45,7 @@ docker rmi -f $(docker images -aq)
 $(aws ecr get-login --no-include-email --region us-east-1)
 
 # API Service
-API_GATEWAY_TAG=`aws ecr describe-images --repository-name cloudgeeks/api-gateway --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' | awk -F '["]' '{print $2}'`
+API_GATEWAY_TAG=`aws ecr describe-images --repository-name cloudgeeks/api-gateway --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]'  --region us-east-1 | awk -F '["]' '{print $2}'`
 
 docker run --name api-service -h api.cloudgeeks.local --log-driver="awslogs" --log-opt awslogs-region="us-east-1" --log-opt awslogs-group="cloudgeeks/api-server" --log-opt awslogs-stream="api-server-log-stream" -p 80:8081 -p 8081:8081 --restart unless-stopped -e "SPRING_PROFILES_ACTIVE=qa" -d 1445445544558555555444444.dkr.ecr.us-east-1.amazonaws.com/cloudgeeks/api-gateway:"$API_GATEWAY_TAG"
 
