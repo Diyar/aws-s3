@@ -1,6 +1,24 @@
 # https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles.html
 
 
+# Assume/Trust Relationship
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+
+# Policy ---> CloudWatchSyntheticsPolicy
+
+
 {
     "Version": "2012-10-17",
     "Statement": [
