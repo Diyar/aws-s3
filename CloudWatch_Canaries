@@ -29,7 +29,7 @@
                 "s3:GetBucketLocation"
             ],
             "Resource": [
-                "arn:aws:s3:::cw-syn-results-YOURAWSACCOUNTID-us-east-1/canary/dukaan-dev-apigateway-672-039c9590d2ab/*"
+                "arn:aws:s3:::cw-syn-results-YOURAWSACCOUNTID-us-east-1/canary/API-672-039c9590d2ab/*"
             ]
         },
         {
@@ -40,7 +40,7 @@
                 "logs:CreateLogGroup"
             ],
             "Resource": [
-                "arn:aws:logs:us-east-1:YOURAWSACCOUNTID:log-group:/aws/lambda/cwsyn-dukaan-dev-apigateway-*"
+                "arn:aws:logs:us-east-1:YOURAWSACCOUNTID:log-group:/aws/lambda/cwsyn-*"
             ]
         },
         {
