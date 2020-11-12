@@ -115,9 +115,7 @@ Policy with VPC
                     "cloudwatch:namespace": "CloudWatchSynthetics"
                 }
             }
-        }
-    ]
-},
+        },
         {
             "Effect": "Allow",
             "Action": [
