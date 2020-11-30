@@ -24,6 +24,8 @@ MAXWAIT=3
 ALLOC_ID=<your eip allocation id>
 AWS_DEFAULT_REGION=<your region>
 
+export AWS_DEFAULT_REGION
+
 # Make sure the EIP is free
 echo "Checking if EIP with ALLOC_ID[$ALLOC_ID] is free...."
 ISFREE=$(aws ec2 describe-addresses --allocation-ids $ALLOC_ID --query Addresses[].InstanceId --output text)
