@@ -20,13 +20,13 @@ eksctl utils associate-iam-oidc-provider \
 
 aws iam create-policy \
     --policy-name ALBIngressControllerIAMPolicy \
-    --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+    --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/iam-policy.json
 
 # Create a Kubernetes service account named alb-ingress-controller in the kube-system namespace, a cluster role, and a cluster role binding for the ALB Ingress Controller to use with the following command. If you don't have kubectl installed, complete the instructions in Installing kubectl to install it.
  
  kubectl create serviceaccount alb-ingress-controller -n kube-system
  
- kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/rbac-role.yaml
+ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/rbac-role.yaml
 
 
 
@@ -48,7 +48,7 @@ eksctl create iamserviceaccount \
 
 # Deploy the ALB Ingress Controller with the following command.
 
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/alb-ingress-controller.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/alb-ingress-controller.yaml
 
 
 echo -e "\nOpen the ALB Ingress Controller deployment manifest for editing with the following command\n"
@@ -75,3 +75,22 @@ echo -e "\n kubectl get pods -n kube-system \n"
 
 
 #END
+
+
+
+# https://aws.amazon.com/premiumsupport/knowledge-center/eks-alb-ingress-controller-setup/
+
+# ALB Ingress EKS Sample app
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-service.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-ingress.yaml
+
+kubectl get ingress/2048-ingress -n 2048-game
+
+kubectl logs -n kube-system deployment.apps/alb-ingress-controller
+
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/$VERSION/docs/examples/2048/2048-namespace.yaml
+
+
