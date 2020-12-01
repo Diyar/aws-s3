@@ -91,6 +91,6 @@ kubectl get ingress/2048-ingress -n 2048-game
 
 kubectl logs -n kube-system deployment.apps/alb-ingress-controller
 
-kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/$VERSION/docs/examples/2048/2048-namespace.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-namespace.yaml
 
 
