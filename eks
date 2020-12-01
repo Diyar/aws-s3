@@ -733,7 +733,7 @@ spec:
 
 # https://kubernetes-sigs.github.io/aws-alb-ingress-controller/guide/ingress/annotation/
 
-vim alb-infress.yaml
+vim alb-ingress.yaml
 
 ---
 apiVersion: extensions/v1beta1
