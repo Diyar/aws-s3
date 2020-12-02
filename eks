@@ -931,6 +931,33 @@ AWS_VPC_K8S_CNI_LOGLEVEL=DEBUG
 AWS_ROLE_ARN=arn:aws:iam::AWS_ACCOUNT_ID:role/IAM_ROLE_NAME
 AWS_WEB_IDENTITY_TOKEN_FILE=/var/run/secrets/eks.amazonaws.com/serviceaccount/token
 The IAM role was created by eksctl when you created the Kubernetes service account in a previous step.
+
+
+# Pod Container SHELL
+
+# List
+# https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-container-images/
+# https://stackoverflow.com/questions/33924198/how-do-you-cleanly-list-all-the-containers-in-a-kubernetes-pod
+
+#######################################################################
+Container in a pod
+kubectl get pods POD_NAME_HERE -o jsonpath='{.spec.containers[*].name}'
+
+kubectl get pods cloudgeeks-bridge-bridge-5694dc7dc5-hf69x -o jsonpath='{.spec.containers[*].name}' -n kafka
+#############################################################################################################
+# Shell
+# https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/
+In a container which is in a POD
+
+#############################################################################################
+kubectl exec -it -n NAMESPACENAME  POD --container CONTAINER -- /bin/bash
+
+kubectl exec -it -n kafka cloudgeeks-bridge-bridge-5694dc7dc5-hf69x --container cloudgeeks-bridge-bridge -- /bin/bash
+
+
+#END
+
+
     
 
 
