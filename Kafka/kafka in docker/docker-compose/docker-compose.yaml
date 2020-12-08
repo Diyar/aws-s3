@@ -4,6 +4,8 @@
 
 # https://docs.docker.com/compose/networking/
 
+# Note: I am running kafka as root but best approach is to create a volume & provide that volume so all permissions will be managed. ---> docker volume create kafka (persistent)
+
 ############################################
 # docker network create kafka --attachable
 ############################################
