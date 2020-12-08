@@ -8,7 +8,7 @@ kubectl apply -f "https://strimzi.io/install/latest?namespace=kafka"
 
 # cloudgeeks-ca Installation with replication (Internal) ---> rack nodeport
 
-cat << EOF | kubectl create -n kafka -f -
+cat << EOF | kubectl apply -n kafka -f -
 apiVersion: kafka.strimzi.io/v1beta1
 kind: Kafka
 metadata:
