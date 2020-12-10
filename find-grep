@@ -2,4 +2,6 @@
 
 find / -type d | grep "directory name" && find / -type f | grep "file name"
 
-find / -type d | grep "abid" && find / -type f | grep "abid"
+find / -type d | grep "abid"
+
+find / -type f | grep "abid"
