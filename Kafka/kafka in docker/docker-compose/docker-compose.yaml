@@ -80,6 +80,9 @@ services:
   # kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic asim-arain
   # kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic qasim-arain
   # kafka-topics.sh  --list --zookeeper zookeeper:2181
+  
+  # Describe a topic
+  # kafka-topics.sh  --describe --topic asim-arain --zookeeper zookeeper:2181
 
 
  # docker-compose -f docker-compose.yml up
