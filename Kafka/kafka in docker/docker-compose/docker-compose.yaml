@@ -77,15 +77,15 @@ services:
   # Important Commands 
 
   # cd /opt/bitnami/scripts 
-  # kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic asim-arain
-  # kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic qasim-arain
+
+
+  # Topic Creation
+  # kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic my-topic
+  
+  # List Topic
   # kafka-topics.sh  --list --zookeeper zookeeper:2181
-  
+
   # Describe a topic
-  # kafka-topics.sh  --describe --topic asim-arain --zookeeper zookeeper:2181
-  
-  
-  
   # kafka-topics.sh  --describe --topic my-topic --zookeeper zookeeper:2181
 
   # Creating Producers
@@ -93,16 +93,18 @@ services:
 
   # Creating Consumers
   # kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning
-  
-  # Consumer Offsets  (Consumer information stored in consumer offsets by kafka)
-  # kafka-topics.sh --bootstrap-server localhost:9092 --list
 
-  
   # Listing Consumers Groups
   # kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
 
   # Describe Consumers Groups
   # kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group GROUPNAME
+
+  # Consumer Offsets  (Consumer information stored in consumer offsets by kafka)
+  # kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+
+
 
   # docker-compose -f docker-compose.yml up
 
