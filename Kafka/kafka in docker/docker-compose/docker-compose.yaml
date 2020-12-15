@@ -93,6 +93,12 @@ services:
 
   # Creating Consumers
   # kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning
+  
+  # Listing Consumers Groups
+  # kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+
+  # Describe Consumers Groups
+  # kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group GROUPNAME
 
   # docker-compose -f docker-compose.yml up
 
