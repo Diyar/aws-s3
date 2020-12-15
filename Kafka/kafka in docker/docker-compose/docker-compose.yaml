@@ -94,6 +94,10 @@ services:
   # Creating Consumers
   # kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning
   
+  # Consumer Offsets  (Consumer information stored in consumer offsets by kafka)
+  # kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+  
   # Listing Consumers Groups
   # kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
 
