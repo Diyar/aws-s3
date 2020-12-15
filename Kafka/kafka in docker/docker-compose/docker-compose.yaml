@@ -83,11 +83,20 @@ services:
   
   # Describe a topic
   # kafka-topics.sh  --describe --topic asim-arain --zookeeper zookeeper:2181
+  
+  
+  
+  # kafka-topics.sh  --describe --topic my-topic --zookeeper zookeeper:2181
 
+  # Creating Producers
+  # kafka-console-producer.sh --bootstrap-server localhost:9092 --topic my-topic
 
- # docker-compose -f docker-compose.yml up
+  # Creating Consumers
+  # kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my-topic --from-beginning
 
- # docker-compose -f docker-compose.yml up -d
+  # docker-compose -f docker-compose.yml up
+
+  # docker-compose -f docker-compose.yml up -d
 
 
   # https://github.com/bitnami/bitnami-docker-kafka
