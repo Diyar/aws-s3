@@ -118,5 +118,37 @@ kubectl port-forward svc/cloudgeeks-ca-bridge-exposed --address 0.0.0.0 31921:80
 
 
 # Simply Open the port 31921 ---> Nodeport shown in kubernetes
-    
+
+#####################################################################
+
+---> Access your kafka cluster from Outside the kubernetes
+
+---> put this URL in browser ---> http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/
+
+curl -v GET http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/
+ 
+curl -v GET  http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/ready
+
+curl -X POST \
+  "http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/my-topic" \
+  -H 'content-type: application/vnd.kafka.json.v2+json' \
+  -d '{
+    "records": [
+        {
+            "key": "key-1",
+            "value": "value-1"
+        },
+        {
+            "key": "key-2",
+            "value": "value-2"
+        },
+        {
+            "key": "key-3",
+            "value": "taha"
+        }
+
+    ]
+}'
+
+
 
