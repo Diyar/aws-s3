@@ -22,6 +22,10 @@ mv ./kind /usr/local/bin
 
 # kind create cluster --name cloudgeeks-ca
 
+# kind create cluster --name cloudgeeks-ca --image kindest/node:v1.19.0
+
+# kind create cluster --name cloudgeeks-ca --image kindest/node:v1.18.8
+
 # kind create cluster --name cloudgeeks-ca --image kindest/node:v1.18.6
 
 # kubectl cluster-info --context kind-cloudgeeks-ca
