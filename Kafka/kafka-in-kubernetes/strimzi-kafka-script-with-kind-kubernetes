@@ -33,14 +33,15 @@ kubectl create ns kafka
 kubectl apply -f "https://strimzi.io/install/latest?namespace=kafka"
 
 
-
+sleep 30
 # cloudgeeks-ca Installation with replication (Internal) ---> ephemeral storage nodeport
 
-cat << 'EOF' | kubectl apply -n kafka -f -
+cat << 'EOF' > strimzi-kafka.yaml
 apiVersion: kafka.strimzi.io/v1beta1
 kind: Kafka
 metadata:
   name: cloudgeeks-ca-kafka
+  namespace: kafka
 spec:
   kafka:
     version: 2.6.0
@@ -75,10 +76,12 @@ spec:
     topicOperator: {}
     userOperator: {}
 EOF
+kubectl apply -f strimzi-kafka.yaml
 
+sleep 30
 # Strimzi Kafka Bridge Setup
 
-cat << 'EOF' | kubectl apply -n kafka -f -
+cat << 'EOF' > strimzi-kafka-bridge.yaml
 apiVersion: kafka.strimzi.io/v1alpha1
 kind: KafkaBridge
 metadata:
@@ -90,7 +93,9 @@ spec:
   http:
     port: 8080
 EOF
+kubectl apply -f strimzi-kafka-bridge.yaml
 
+sleep 30
 # Expose the Stimzi Kafka Bridge
 
 kubectl expose deployment cloudgeeks-ca-bridge-bridge --type=NodePort  --protocol TCP --port 80 --target-port 8080 --name=cloudgeeks-ca-bridge-exposed  -n kafka
@@ -102,5 +107,4 @@ echo -e "\nMentioned below is an example simply replace the ports an shown in me
 echo -e "\nkubectl port-forward svc/cloudgeeks-ca-bridge-exposed --address 0.0.0.0 31921:80 -n kafka &\n"
 
 echo -e "\nEnjoy :)\n"
-    
     
