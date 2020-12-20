@@ -150,5 +150,7 @@ curl -X POST \
     ]
 }'
 
+curl "http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/my-topic/partitions"
+
 
 
