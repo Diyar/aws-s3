@@ -203,11 +203,11 @@ curl "http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-dock
  
 
 # Get info about one topic
-curl "http://localhost:8082/topics/my-topic"
+curl "http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/topics/my-topic"
   
 
 # Get info about a topic's partitions
- curl "http://localhost:8082/topics/my-topic/partitions"
+ curl "http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/topics/my-topic/partitions"
 
 
 
@@ -221,7 +221,7 @@ curl "http://localhost:8082/topics/my-topic"
 
 curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" \
       --data '{"format": "json", "auto.offset.reset": "smallest"}' \
-      http://localhost:8082/consumers/my-group \
+      http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/consumers/my-group \
      -d '{
     "name": "my-consumer",
     "format": "json",
@@ -232,7 +232,7 @@ curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" \
 
 
 # https://docs.confluent.io/2.0.0/kafka-rest/docs/intro.html#produce-and-consume-json-messages
-curl -X POST "http://localhost:8082/consumers/my-group" \
+curl -X POST "http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/consumers/my-group" \
   -H 'content-type: application/vnd.kafka.v2+json' \
   -d '{
     "name": "my-consumer",
@@ -249,13 +249,13 @@ curl -X POST -H 'content-type: application/vnd.kafka.v2+json' \
 
 --data '{"format": "json", "auto.offset.reset": "smallest"}' \
 
-"http://localhost:8082/consumers/my-group/instances/my-consumer/subscription"
+"http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/consumers/my-group/instances/my-consumer/subscription"
 
 
 
 # Consuming messages
 
-curl "http://localhost:8082/consumers/my-group/instances/my-consumer/records" \
+curl "http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/consumers/my-group/instances/my-consumer/records" \
   -H 'accept: application/vnd.kafka.json.v2+json'
 
 
@@ -264,7 +264,7 @@ curl "http://localhost:8082/consumers/my-group/instances/my-consumer/records" \
 # Committing offsets
 
 
-curl -X POST http://localhost:8082/consumers/my-group/instances/my-consumer/offsets \
+curl -X POST http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/consumers/my-group/instances/my-consumer/offsets \
   -H 'content-type: application/vnd.kafka.v2+json' \
   -d '{
     "offsets": [
@@ -279,7 +279,7 @@ curl -X POST http://localhost:8082/consumers/my-group/instances/my-consumer/offs
 
 # Deleting a consumer
 
-curl -X DELETE http://localhost:8082/consumers/my-group/instances/my-consumer
+curl -X DELETE http://ip172-18-0-25-bvfe2rnp2ffg00cj4ea0-31921.direct.labs.play-with-docker.com/consumers/my-group/instances/my-consumer
 
 
 ##############################################################################
