@@ -103,4 +103,20 @@ spec:
   bootstrapServers: cloudgeeks-ca-kafka-kafka-bootstrap:9092
   http:
     port: 8080
+    
+    
+################################################################
+
+ ---> Simply access the POD directly ---> Setup via Deployment
+################################################################################################
+# kubectl expose deployment cloudgeeks-ca-bridge-bridge --type=NodePort  --protocol TCP --port 80 --target-port 8080 --name=cloudgeeks-ca-bridge-exposed  -n kafka
+
+kubectl port-forward svc/cloudgeeks-ca-bridge-exposed --address 0.0.0.0 80:31921 -n kafka 
+
+# Background
+kubectl port-forward svc/cloudgeeks-ca-bridge-exposed --address 0.0.0.0 31921:80 -n kafka &
+
+
+# Simply Open the port 31921 ---> Nodeport shown in kubernetes
+    
 
