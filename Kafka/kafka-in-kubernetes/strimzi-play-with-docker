@@ -149,7 +149,7 @@ curl -v GET http://localhost:8082/ready
 # Producing messages
 
 curl -X POST \
-  "http://localhost:9093/topics/my-topic" \
+  "http://192.168.0.6:31921/topics/my-topics" \
   -H 'content-type: application/vnd.kafka.json.v2+json' \
   -d '{
     "records": [
