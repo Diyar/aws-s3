@@ -35,7 +35,7 @@ kubectl apply -f "https://strimzi.io/install/latest?namespace=kafka"
 
 # cloudgeeks-ca Installation with replication (Internal) ---> ephemeral storage nodeport
 
-cat << EOF | kubectl apply -n kafka -f -
+cat << 'EOF' | kubectl apply -n kafka -f -
 apiVersion: kafka.strimzi.io/v1beta1
 kind: Kafka
 metadata:
@@ -77,7 +77,7 @@ EOF
 
 # Strimzi Kafka Bridge Setup
 
-cat << EOF | kubectl apply -n kafka -f -
+cat << 'EOF' | kubectl apply -n kafka -f -
 apiVersion: kafka.strimzi.io/v1alpha1
 kind: KafkaBridge
 metadata:
