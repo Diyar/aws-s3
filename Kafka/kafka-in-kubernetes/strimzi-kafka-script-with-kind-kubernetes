@@ -1,5 +1,6 @@
 #!/bin/bash
-# Purpose: Kubernetes Cluster
+# Purpose: Kafka Cluster In Kubernetes
+# Maintainer DevOps <Muhammad Asim <quickbooks2018@gmail.com>
 
 # Kubectl Installation
 curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
