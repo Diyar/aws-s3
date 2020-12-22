@@ -196,6 +196,12 @@ curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" --data '{"topics":
 
 curl -X GET -H "Accept: application/vnd.kafka.json.v2+json" \
       http://ip172-18-0-123-bvgvcbfp2ffg00bnkbd0-30031.direct.labs.play-with-docker.com/consumers/my_json_consumer/instances/my_consumer_instance/records
+      
+      
+ # https://strimzi.io/blog/2019/11/05/exposing-http-bridge/
+ curl -X GET http://ip172-18-0-123-bvgvcbfp2ffg00bnkbd0-30031.direct.labs.play-with-docker.com/consumers/my_json_consumer/instances/my_consumer_instance/records \
+-H 'accept: application/vnd.kafka.json.v2+json'     
+
 
 # Expected output from preceding command
   [
