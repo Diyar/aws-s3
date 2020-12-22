@@ -466,3 +466,98 @@ services:
       KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+      
+      
+ ----------------------------------------------------------------------------------------------------------------------------------------------     
+# Rest Api Calls to Confluent
+# https://docs.confluent.io/platform/current/kafka-rest/quickstart.html
+# https://stackoverflow.com/questions/57080839/how-to-create-consumer-using-rest-api-to-read-json-data-from-kafka-topic
+
+
+curl -v GET http://localhost:8082
+
+curl -v GET http://localhost:8082
+
+
+# Topic Creation & Producing messages
+
+curl -X POST \
+  "http://localhost:8082/topics/my-topic" \
+  -H 'content-type: application/vnd.kafka.json.v2+json' \
+  -d '{
+    "records": [
+        {
+            "key": "key-1",
+            "value": "value-1"
+        },
+        {
+            "key": "key-2",
+            "value": "value-2"
+        },
+        {
+            "key": "key-3",
+            "value": "taha"
+        }
+
+    ]
+}'
+
+# Produce a message using JSON with the value '{ "foo": "bar" }' to the topic jsontest
+curl -X POST \
+"http://localhost:8082/topics/jsontest" \
+-H 'content-type: application/vnd.kafka.json.v2+json'  \
+      --data '{"records":[{"value":{"foo":"bar"}}]}' 
+
+
+
+
+------------------------------------------------------------------------------------------------
+
+# https://docs.confluent.io/2.0.0/kafka-rest/docs/intro.html#inspect-topic-metadata
+
+# Get a list of topics
+curl "http://localhost:8082/topics"
+ 
+
+# Get info about one topic
+curl "http://localhost:8082/topics/my-topic"
+  
+
+# Get info about a topic's partitions
+ curl "http://localhost:8082/topics/my-topic/partitions"
+
+------------------------------------------------------------------------------------------------
+  # Creating Consumers
+ curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" \
+      --data '{"name": "my_consumer_instance", "format": "json", "auto.offset.reset": "earliest"}' \
+      http://localhost:8082/consumers/my_json_consumer
+
+
+  ---> Output of creating consumers
+  -------------
+  {"instance_id":"my_consumer_instance","base_uri":"http://rest-proxy:8082/consumers/my_json_consumer/instances/my_consumer_instance"} [node2]
+
+
+
+-----------------------------------------------------------------------------------------------------
+# https://stackoverflow.com/questions/57080839/how-to-create-consumer-using-rest-api-to-read-json-data-from-kafka-topic
+
+curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" --data '{"topics":["jsontest"]}' \
+     http://localhost:8082/consumers/my_json_consumer/instances/my_consumer_instance/subscription
+
+
+curl -X GET -H "Accept: application/vnd.kafka.json.v2+json" \
+      http://localhost:8082/consumers/my_json_consumer/instances/my_consumer_instance/records
+
+# Expected output from preceding command
+  [
+   {"key":null,"value":{"foo":"bar"},"partition":0,"offset":0,"topic":"jsontest"}
+  ]
+
+
+
+
+--------------------------------------------------------------------------------------------
+# No content in response
+curl -X DELETE -H "Content-Type: application/vnd.kafka.v2+json" \
+      http://localhost:8082/consumers/my_json_consumer/instances/my_consumer_instance  
