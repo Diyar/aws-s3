@@ -119,6 +119,7 @@ echo -e "\nEnjoy :)\n"
 
 # https://docs.confluent.io/platform/current/kafka-rest/quickstart.html
 # https://stackoverflow.com/questions/57080839/how-to-create-consumer-using-rest-api-to-read-json-data-from-kafka-topic
+# https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/rest-proxy.html#client-examples-rest-proxy
 
 
 curl -v GET http://ip172-18-0-123-bvgvcbfp2ffg00bnkbd0-30031.direct.labs.play-with-docker.com/healthy
