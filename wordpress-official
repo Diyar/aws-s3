@@ -18,7 +18,7 @@ docker run --name mysql -e MYSQL_DATABASE=mydb -e MYSQL_ROOT_PASSWORD="ausdermoi
 
 # Phpmyadmin Setup
 # https://hub.docker.com/_/phpmyadmin?tab=description
-docker run --name phpmyadmin --network="wordpress" --link mariadb:db -id -p 8080:80 --restart unless-stopped phpmyadmin/phpmyadmin
+docker run --name phpmyadmin --network="wordpress" --link mysql:db -id -p 8080:80 --restart unless-stopped phpmyadmin/phpmyadmin
 
 
 # Wordpress Setup
