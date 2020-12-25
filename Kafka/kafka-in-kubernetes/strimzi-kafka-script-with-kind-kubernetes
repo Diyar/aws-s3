@@ -564,6 +564,11 @@ curl -v -X GET -H "Accept: application/vnd.kafka.json.v2+json" \
 # https://stackoverflow.com/questions/57080839/how-to-create-consumer-using-rest-api-to-read-json-data-from-kafka-topic
 # https://strimzi.io/blog/2019/07/19/http-bridge-intro/
 
+curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" \
+          --data '{"name": "my_consumer_instance", "format": "json", "auto.offset.reset": "earliest"}' \
+          http://localhost:31951/consumers/my_json_consumer
+          
+
 curl -X POST -H 'Origin: http://localhost' -H "Content-Type: application/vnd.kafka.v2+json" --data '{"topics":["jsontest"]}' \
      http://localhost:31951/consumers/my_json_consumer/instances/my_consumer_instance/subscription
 
