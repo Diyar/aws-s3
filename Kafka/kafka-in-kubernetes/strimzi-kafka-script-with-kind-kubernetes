@@ -378,16 +378,12 @@ metadata:
   name: cloudgeeks-ca-bridge
   namespace: kafka
 spec:
-  replicas: 3
+  replicas: 1
   bootstrapServers: cloudgeeks-ca-kafka-kafka-bootstrap:9092
   http:
     port: 8080
-    cors:
-      allowedMethods: "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-  consumer:
-    config:
-      auto.offset.reset: earliest
 EOF
+
 kubectl apply -f strimzi-kafka-bridge.yaml
 
 sleep 30
