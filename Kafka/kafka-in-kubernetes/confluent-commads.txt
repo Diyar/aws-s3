@@ -1,5 +1,6 @@
 # Rest Api Calls to Strimzi
 # https://docs.confluent.io/platform/current/kafka-rest/quickstart.html
+# https://github.com/confluentinc/kafka-rest
 
 curl -v GET http://http://ip172-18-0-55-bvi2hl2g7700009uqlag-30413.direct.labs.play-with-docker.com//healthy
 
