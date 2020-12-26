@@ -1,3 +1,22 @@
+# https://computingforgeeks.com/create-aws-s3-upload-and-list-objects-policy-without-delete-action/
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*",
+                "s3:Put*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+
+
+
 # https://stackoverflow.com/questions/9398541/how-to-remove-delete-permission-on-amazon-s3
 
 {    
