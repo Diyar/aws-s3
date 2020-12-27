@@ -23,8 +23,7 @@ spec:
 # https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 # Simple do ------------------------------>  kubectl edit deployment/cloudgeeks-ca-bridge-bridge -n kafka
 ##############################################################################
-# kubectl rollout status deployment/cloudgeeks-ca-bridge-bridge
-
+# kubectl rollout status deployment/cloudgeeks-ca-bridge-bridge -n kafka
 
 # kubectl expose deployment cloudgeeks-ca-bridge-bridge --type=NodePort  --protocol TCP --port 80 --target-port 8080 --name=cloudgeeks-ca-bridge-exposed  -n kafka
 
