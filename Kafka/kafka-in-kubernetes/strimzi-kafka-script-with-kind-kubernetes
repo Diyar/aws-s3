@@ -133,6 +133,7 @@ echo -e "\nEnjoy :)\n"
 
 
 # https://hub.docker.com/r/strimzi/kafka-bridge
+# https://stackoverflow.com/questions/40366192/kubernetes-how-to-make-deployment-to-update-image
 # Update the image of existing deployment # https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 
 # kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record
