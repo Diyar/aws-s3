@@ -133,6 +133,7 @@ echo -e "\nEnjoy :)\n"
 
 
 # https://hub.docker.com/r/strimzi/kafka-bridge
+# https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_streams_on_rhel/kafka-bridge-concepts-str#proc-downloading-kafka-bridge-kafka-bridge-overview
 # https://stackoverflow.com/questions/40366192/kubernetes-how-to-make-deployment-to-update-image
 # Update the image of existing deployment # https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 
@@ -232,6 +233,7 @@ curl -X DELETE \
 # https://stackoverflow.com/questions/57080839/how-to-create-consumer-using-rest-api-to-read-json-data-from-kafka-topic
 # https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/rest-proxy.html#client-examples-rest-proxy
 # https://strimzi.io/blog/2019/07/19/http-bridge-intro/
+# https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_streams_on_rhel/kafka-bridge-concepts-str#proc-downloading-kafka-bridge-kafka-bridge-overview
 
 
 curl -v GET http://ip172-18-0-123-bvgvcbfp2ffg00bnkbd0-30031.direct.labs.play-with-docker.com/healthy
