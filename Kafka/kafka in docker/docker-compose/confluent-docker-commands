@@ -26,11 +26,11 @@ localhost:9092 --replication-factor 1 --partitions 1 --topic my-topic
 
   # Listing Consumers Groups
   --------------------------
-  # docker exec broker kafka-consumer-groups--bootstrap-server localhost:9092 --list
+  # docker exec broker kafka-consumer-groups --bootstrap-server localhost:9092 --list
 
   # Describe Consumers Groups
   ----------------------------
-  # docker exec broker kafka-consumer-groups--bootstrap-server localhost:9092 --describe --group GROUPNAME
+  # docker exec broker kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group GROUPNAME
 
   # Consumer Offsets  (Consumer information stored in consumer offsets by kafka)
   --------------------------------------------------------------------------------
