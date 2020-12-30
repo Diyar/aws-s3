@@ -6,6 +6,8 @@
 docker-compose exec broker kafka-topics --create --bootstrap-server \
 localhost:9092 --replication-factor 1 --partitions 1 --topic my-topic
 
+# Alter Topic partitions
+docker exec broker kafka-topics --bootstrap-server localhost:9092 --alter --topic my-topic --partitions 5
 
 
 # List Topic
