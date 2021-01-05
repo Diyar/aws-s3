@@ -1,4 +1,59 @@
 # https://github.com/s3fs-fuse/s3fs-fuse
+# https://medium.com/@onclouds/mount-an-s3-bucket-using-fuse-s3fs-a56e34d26f46
+
+#!/bin/bash
+#Purpose: S3 Mount via Role
+#Maintainer: Muhammad Asim <quickbook2018@gmail.com>
+# OS: AmazonLinux
+# S3: Permissions Level Full Access
+
+
+
+
+yum update -y
+amazon-linux-extras install -y epel
+yum install -y s3fs-fuse
+
+
+
+iam_role=s3-mount
+mount_point=/root/s3
+bucket_name=cloudgeeks.ca
+
+mkdir $mount_point
+
+
+/bin/s3fs "$bucket_name" "$mount_point" -o iam_role=${iam_role} -o allow_other -o use_path_request_style
+
+
+
+#DEBUG -o dbglevel=info -f -o curldbg
+# -o url="https://s3.us-east-1.amazonaws.com"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Dependency Installed:
 
