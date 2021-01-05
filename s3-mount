@@ -1,5 +1,6 @@
 # https://github.com/s3fs-fuse/s3fs-fuse
 # https://medium.com/@onclouds/mount-an-s3-bucket-using-fuse-s3fs-a56e34d26f46
+# https://github.com/panubo/docker-s3fs
 
 #!/bin/bash
 #Purpose: S3 Mount via Role
