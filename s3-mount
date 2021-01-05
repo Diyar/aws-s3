@@ -30,7 +30,7 @@ mkdir $mount_point
 # Persistent Mount after reboot  /etc/fstab format
 
 # cloudgeeks.ca   /root/s3       fuse.s3fs _netdev,allow_other,use_path_request_style 0 0
-echo ""$bucket_name" "$mount_point" fuse.s3fs _netdev,allow_other,use_path_request_style 0 0" >> /etc/fstab
+echo ""$bucket_name" "$mount_point" fuse.s3fs _netdev,allow_other,use_path_request_style,iam_role=${iam_role} 0 0" >> /etc/fstab
 
 
 
