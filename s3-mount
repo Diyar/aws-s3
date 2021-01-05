@@ -27,13 +27,18 @@ mkdir $mount_point
 /bin/s3fs "$bucket_name" "$mount_point" -o iam_role=${iam_role} -o allow_other -o use_path_request_style
 
 
+# Persistent Mount after reboot  /etc/fstab format
+
+# cloudgeeks.ca   /root/s3       fuse.s3fs _netdev,allow_other,use_path_request_style 0 0
+echo ""$bucket_name" "$mount_point" fuse.s3fs _netdev,allow_other,use_path_request_style 0 0" >> /etc/fstab
+
+
 
 #DEBUG -o dbglevel=info -f -o curldbg
-# -o url="https://s3.us-east-1.amazonaws.com"
+#PATH  -o url="https://s3.us-east-1.amazonaws.com"
+# cat /etc/fuse.conf
 
-
-
-
+#END
 
 
 
