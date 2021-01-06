@@ -1,3 +1,5 @@
+# S3 Mount with Role
+-----------------------
 #!/bin/bash
 #Purpose: S3 Mount via Role
 #Maintainer: Muhammad Asim <quickbook2018@gmail.com>
@@ -27,6 +29,54 @@ mkdir $mount_point
 
 # cloudgeeks.ca   /root/s3       fuse.s3fs _netdev,allow_other,use_path_request_style 0 0
 echo ""$bucket_name" "$mount_point" fuse.s3fs _netdev,allow_other,use_path_request_style,iam_role=${iam_role} 0 0" >> /etc/fstab
+
+
+
+#DEBUG -o dbglevel=info -f -o curldbg
+#PATH  -o url="https://s3.us-east-1.amazonaws.com"
+# cat /etc/fuse.conf
+
+#END
+
+
+# S3 Mount with Keys
+---------------------
+#!/bin/bash
+#Purpose: S3 Mount via Access Keys
+#Maintainer: Muhammad Asim <quickbook2018@gmail.com>
+# OS: Linux/Mac
+# S3: Permissions Level Full Access
+
+
+ACCESS_KEY_ID=AKIAZOHDTSD75JKM37IF
+SECRET_ACCESS_KEY=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
+mount_point=""$PWD"/s3"
+bucket_name=cloudgeeks-ca
+
+apt update -y
+apt install -y s3fs
+
+#amazon-linux-extras install -y epel
+#yum install -y s3fs-fuse
+
+echo ""$ACCESS_KEY_ID":"$SECRET_ACCESS_KEY"" > ${HOME}/.passwd-s3fs
+chmod 600 ${HOME}/.passwd-s3fs
+
+
+
+
+
+
+mkdir $mount_point
+
+
+s3fs "$bucket_name" "$mount_point" -o passwd_file=${HOME}/.passwd-s3fs -o allow_other -o use_path_request_style
+
+
+# Persistent Mount after reboot  /etc/fstab format
+
+# cloudgeeks.ca   /root/s3       fuse.s3fs _netdev,allow_other,use_path_request_style 0 0
+echo ""$bucket_name" "$mount_point" fuse.s3fs _netdev,allow_other,use_path_request_style,passwd_file=${HOME}/.passwd-s3fs  0 0" >> /etc/fstab
 
 
 
