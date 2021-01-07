@@ -148,10 +148,6 @@ vim /etc/rc.local
 /bin/s3fs s3_bucket_name -o use_cache=/temp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /directory_name
 
 
-### Some Use Links with regard to the rsync and cron job ###
-
-https://www.youtube.com/watch?v=qE77MbDnljA
-https://www.youtube.com/watch?v=QZJ1drMQz1A
 
 
 https://dev-notes.eu/2015/10/backup-rsync-between-devices/
