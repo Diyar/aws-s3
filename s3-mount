@@ -195,7 +195,7 @@ unzip rclone-v1.53.3-windows-amd64.zip
 
 cd rclone-v1.53.3-windows-amd64
 
-./rclone.exe --config
+./rclone.exe config
 
 #########################################################################################################
 
