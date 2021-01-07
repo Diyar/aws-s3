@@ -176,7 +176,9 @@ https://linuxhint.com/run_cron_job_every_minute/
 -------------------
 1. Download ---> Winfsp  ---> Windows Mount as Drive ---> https://github.com/billziss-gh/winfsp/releases
 
-2. Rclone  ---> Rclone ---> OpenSource Cli tools for almost all cloud storages ---> https://rclone.org/downloads/
+2a. Rclone  ---> Rclone ---> OpenSource Cli tools for almost all cloud storages ---> https://rclone.org/downloads/
+
+2b. GIT Bash ---> https://git-scm.com/downloads
 
 3. Create s3 bucket
 
