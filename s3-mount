@@ -183,9 +183,7 @@ https://linuxhint.com/run_cron_job_every_minute/
 3. Create s3 bucket
 
 #######################################################################################################
-4. ./rclone mount cloudgeeks-ca:/ p:  --vfs-cache-mode full 
-
-mkdir /c/rclone
+4. mkdir /c/rclone
 
 curl -# -LO https://downloads.rclone.org/v1.53.3/rclone-v1.53.3-windows-amd64.zip
 
