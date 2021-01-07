@@ -185,7 +185,7 @@ https://linuxhint.com/run_cron_job_every_minute/
 #######################################################################################################
 4. mkdir /c/rclone
 
-curl -# -LO https://downloads.rclone.org/v1.53.3/rclone-v1.53.3-windows-amd64.zip
+cd /c/rclone && curl -# -LO https://downloads.rclone.org/v1.53.3/rclone-v1.53.3-windows-amd64.zip
 
 echo "C:\rclone\rclone.exe mount cloudgeeks-ca:/ S: --vfs-cache-mode full" > rclone-S3.cmd
 
