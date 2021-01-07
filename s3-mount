@@ -226,6 +226,16 @@ As an alternative, you can create a shortcut to C:\Windows\System32\cmd.exe and 
 C:\Windows\System32\cmd.exe /k cd c:\rclone & rclone mount blog-bucket01:blog-bucket01/ S: --vfs-cache-mode full
 
 
+
+
+
+
+
+
+
+
+
+
 # https://www.nakivo.com/blog/mount-amazon-s3-as-a-drive-how-to-guide/
 # https://blog.spikeseed.cloud/mount-s3-as-a-disk/
 
