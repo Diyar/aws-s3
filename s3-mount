@@ -197,26 +197,23 @@ cd rclone-v1.53.3-windows-amd64
 
 ./rclone.exe config
 
+./rclone  mount cloudgeeks-ca:/ S: --vfs-cache-mode full
+
 #########################################################################################################
 
-5. How to automate mounting an S3 bucket on Windows boot
+# Above We have performed this mention below steps via GitBash
+---------------------------------------------------------------
 
-It is convenient when the bucket is mounted as a network drive automatically on Windows boot. Let’s find out how to configure automatic mounting of the S3 bucket in Windows.
+# How to automate mounting an S3 bucket on Windows boot
 
-Create the rclone-S3.cmd file in the C:\rclone\ directory.
+# It is convenient when the bucket is mounted as a network drive automatically on Windows boot. Let’s find out how to configure automatic mounting of the S3 bucket in Windows.
 
-Add the string to the rclone-S3.cmd file:
+# Create the rclone-S3.cmd file in the C:\rclone\ directory.
+
+# Add the string to the rclone-S3.cmd file:
 
 C:\rclone\rclone.exe mount cloudgeeks-ca:/ S: --vfs-cache-mode full
 
-#####################################################################################
-mkdir /c/rclone
-
-curl -# -LO https://downloads.rclone.org/v1.53.3/rclone-v1.53.3-windows-amd64.zip
-
-echo "C:\rclone\rclone.exe mount cloudgeeks-ca:/ S: --vfs-cache-mode full" > rclone-S3.cmd
-
-cp /c/rclone/rclone-S3.cmd  /c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp/rclone-S3.cmd
 #####################################################################################
 Save the CMD file. You can run this CMD file instead of typing the command to mount the S3 bucket manually.
 
