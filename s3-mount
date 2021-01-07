@@ -227,6 +227,7 @@ C:\Windows\System32\cmd.exe /k cd c:\rclone & rclone mount blog-bucket01:blog-bu
 
 
 # https://www.nakivo.com/blog/mount-amazon-s3-as-a-drive-how-to-guide/
+# https://blog.spikeseed.cloud/mount-s3-as-a-disk/
 
 
 
