@@ -1,52 +1,83 @@
 #!/bin/bash
 # Purpose: Debezium & Apache Kafka
 # https://debezium.io/documentation/reference/1.4/tutorial.html#starting-mysql-database
+# https://github.com/debezium/debezium-examples/blob/master/unwrap-smt/docker-compose.yaml
 
 docker network create kafka --attachable
 
 mkdir kafka
 cd kafka
 
+export DEBEZIUM_VERSION=1.4
 echo '
 ---
-version: "3"
+version: '2'
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    networks:
-      - kafka
-    restart: unless-stopped
+    image: debezium/zookeeper:${DEBEZIUM_VERSION}
     ports:
-      - '2181:2181'
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
+     - 2181:2181
+     - 2888:2888
+     - 3888:3888
   kafka:
-    image: 'bitnami/kafka:latest'
-    networks:
-      - kafka
-    restart: unless-stopped
-    user: root
+    image: debezium/kafka:${DEBEZIUM_VERSION}
     ports:
-      - '9092:9092'
-      - '9093:9093'
-    volumes:
-      - $PWD/kafka-persistence:/bitnami/kafka
+     - 9092:9092
+    links:
+     - zookeeper
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
-      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
-      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
-      - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
-    depends_on:
-      - zookeeper
-networks:
-  kafka:
-      external: true
+     - ZOOKEEPER_CONNECT=zookeeper:2181
+  mysql:
+    image: debezium/example-mysql:${DEBEZIUM_VERSION}
+    ports:
+     - 3306:3306
+    environment:
+     - MYSQL_ROOT_PASSWORD=debezium
+     - MYSQL_USER=mysqluser
+     - MYSQL_PASSWORD=mysqlpw 
+     - MYSQL_HOST=18.210.22.11
+     - MYSQL_DATABASE=mysql
+  postgres:
+    image: debezium/postgres:9.6
+    ports:
+     - "5432:5432"
+    environment:
+     - POSTGRES_USER=postgresuser
+     - POSTGRES_PASSWORD=postgrespw
+     - POSTGRES_DB=inventory
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+    ports:
+     - "9200:9200"
+    environment:
+     - http.host=0.0.0.0
+     - transport.host=127.0.0.1
+     - xpack.security.enabled=false
+  connect:
+    image: debezium/connect-jdbc-es:${DEBEZIUM_VERSION}
+    build:
+      context: debezium-jdbc-es
+    ports:
+     - 8083:8083
+     - 5005:5005
+    links:
+     - kafka
+     - mysql
+     - postgres
+     - elastic
+    environment:
+     - BOOTSTRAP_SERVERS=kafka:9092
+     - GROUP_ID=1
+     - CONFIG_STORAGE_TOPIC=my_connect_configs
+     - OFFSET_STORAGE_TOPIC=my_connect_offsets
+     - STATUS_STORAGE_TOPIC=my_source_connect_statuses
 ' > docker-compose.yaml
 
 
 docker-compose up -d
+
+
+##########################################################################################################################################################
 
 # https://hub.docker.com/_/mysql
 # https://debezium.io/documentation/reference/1.4/tutorial.html
