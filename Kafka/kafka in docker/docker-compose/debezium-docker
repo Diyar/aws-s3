@@ -3,7 +3,70 @@
 # https://debezium.io/documentation/reference/1.4/tutorial.html#starting-mysql-database
 # https://github.com/debezium/debezium-examples/blob/master/unwrap-smt/docker-compose.yaml
 
-docker network create kafka --attachable
+mkdir kafka
+cd kafka
+
+export DEBEZIUM_VERSION=1.4
+echo '
+---
+version: '2'
+services:
+  zookeeper:
+    image: debezium/zookeeper:${DEBEZIUM_VERSION}
+    ports:
+     - 2181:2181
+     - 2888:2888
+     - 3888:3888
+  kafka:
+    image: debezium/kafka:${DEBEZIUM_VERSION}
+    ports:
+     - 9092:9092
+    links:
+     - zookeeper
+    environment:
+     - ZOOKEEPER_CONNECT=zookeeper:2181
+  mysql:
+    image: debezium/example-mysql:${DEBEZIUM_VERSION}
+    ports:
+     - 3306:3306
+    environment:
+     - MYSQL_ROOT_PASSWORD=debezium
+     - MYSQL_USER=mysqluser
+     - MYSQL_PASSWORD=mysqlpw 
+     - MYSQL_HOST=18.210.22.11
+     - MYSQL_DATABASE=mysql
+  connect:
+    image: debezium/connect-jdbc-es:${DEBEZIUM_VERSION}
+    build:
+      context: debezium-jdbc-es
+    ports:
+     - 8083:8083
+     - 5005:5005
+    links:
+     - kafka
+     - mysql
+    environment:
+     - BOOTSTRAP_SERVERS=kafka:9092
+     - GROUP_ID=1
+     - CONFIG_STORAGE_TOPIC=my_connect_configs
+     - OFFSET_STORAGE_TOPIC=my_connect_offsets
+     - STATUS_STORAGE_TOPIC=my_source_connect_statuses
+' > docker-compose.yaml
+
+
+docker-compose up -d
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 mkdir kafka
 cd kafka
@@ -81,6 +144,9 @@ docker-compose up -d
 
 # https://hub.docker.com/_/mysql
 # https://debezium.io/documentation/reference/1.4/tutorial.html
+
+
+docker network create kafka --attachable
 
 docker run --name mysql --network kafka -p 3306:3306 -e MYSQL_ROOT_PASSWORD=PAASWORD -e MYSQL_DATABASE=mysql -e MYSQL_HOST=18.210.22.11 -id mysql:5.7
 
