@@ -53,6 +53,11 @@ docker-compose up -d
 
 docker run --name mysql --network kafka -p 3306:3306 -e MYSQL_ROOT_PASSWORD=PAASWORD -e MYSQL_DATABASE=mysql -e MYSQL_HOST=18.210.22.11 -id mysql:5.7
 
+---> check point for remote DB connection ----> docker exec -it mysql bash
+                                                mysql -pPAASWORD   # ---> This will show remote DBS
+                                                
+ ---> Trick ---> link this with local APPS mentioned below                                               
+
 docker run -it --rm --name connect --network kafka -p 8083:8083 -e GROUP_ID=1 -e CONFIG_STORAGE_TOPIC=my_connect_configs -e OFFSET_STORAGE_TOPIC=my_connect_offsets -e STATUS_STORAGE_TOPIC=my_connect_statuses --link kafka_zookeeper_1:zookeeper --link kafka_kafka_1:kafka --link mysql:mysql debezium/connect:1.4
 
 
