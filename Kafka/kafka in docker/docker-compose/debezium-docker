@@ -1,0 +1,65 @@
+#!/bin/bash
+# Purpose: Debezium & Apache Kafka
+# https://debezium.io/documentation/reference/1.4/tutorial.html#starting-mysql-database
+
+docker network create kafka --attachable
+
+mkdir kafka
+cd kafka
+
+echo '
+---
+version: "3"
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    networks:
+      - kafka
+    restart: unless-stopped
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    networks:
+      - kafka
+    restart: unless-stopped
+    user: root
+    ports:
+      - '9092:9092'
+      - '9093:9093'
+    volumes:
+      - $PWD/kafka-persistence:/bitnami/kafka
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
+      - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+    depends_on:
+      - zookeeper
+networks:
+  kafka:
+      external: true
+' > docker-compose.yaml
+
+
+docker-compose up -d
+
+# https://hub.docker.com/_/mysql
+# https://debezium.io/documentation/reference/1.4/tutorial.html
+
+docker run --name mysql --network kafka -p 3306:3306 -e MYSQL_ROOT_PASSWORD=PAASWORD -e MYSQL_DATABASE=mysql -e MYSQL_HOST=18.210.22.11 -id mysql:5.7
+
+docker run -it --rm --name connect --network kafka -p 8083:8083 -e GROUP_ID=1 -e CONFIG_STORAGE_TOPIC=my_connect_configs -e OFFSET_STORAGE_TOPIC=my_connect_offsets -e STATUS_STORAGE_TOPIC=my_connect_statuses --link kafka_zookeeper_1:zookeeper --link kafka_kafka_1:kafka --link mysql:mysql debezium/connect:1.4
+
+
+
+
+
+
+
+
+# END
