@@ -33,7 +33,7 @@ services:
      - MYSQL_ROOT_PASSWORD=debezium
      - MYSQL_USER=mysqluser
      - MYSQL_PASSWORD=mysqlpw 
-     - MYSQL_HOST=18.210.22.11
+     - MYSQL_HOST=18.210.50.50
      - MYSQL_DATABASE=mysql
   connect:
     image: debezium/connect-jdbc-es:${DEBEZIUM_VERSION}
