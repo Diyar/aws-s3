@@ -153,9 +153,21 @@ docker run --name mysql --network kafka -p 3306:3306 -e MYSQL_ROOT_PASSWORD=PAAS
 ---> check point for remote DB connection ----> docker exec -it mysql bash
                                                 mysql -pPAASWORD   # ---> This will show remote DBS
                                                 
- ---> Trick ---> link this with local APPS mentioned below                                               
+ ---> Trick ---> link this with local APPS mentioned below        
+ 
+ 
+ # Postgres
+ 
+ #Postgres Setup
+docker run --name postgres -e POSTGRES_HOST=18.210.50.50:5432 -e POSTGRES_PASSWORD="YourPASSword" -e POSTGRES_USER=asim -e POSTGRES_DB=postgres -e PGDATA=/var/lib/postgresql/data/pgdata -v /root/mount:/var/lib/postgresql/data -id postgres:latest
+psql --user asim --password --dbname mydb -h 18.210.50.50
 
-docker run -it --rm --name connect --network kafka -p 8083:8083 -e GROUP_ID=1 -e CONFIG_STORAGE_TOPIC=my_connect_configs -e OFFSET_STORAGE_TOPIC=my_connect_offsets -e STATUS_STORAGE_TOPIC=my_connect_statuses --link kafka_zookeeper_1:zookeeper --link kafka_kafka_1:kafka --link mysql:mysql debezium/connect:1.4
+# https://hub.docker.com/r/bitnami/postgresql
+docker run --name postgres -e POSTGRESQL_MASTER_HOST=18.210.50.50 -e POSTGRESQL_MASTER_PORT_NUMBER=5432  -e POSTGRESQL_USERNAME=asim  -e POSTGRESQL_PASSWORD=YourPASSword -id bitnami/postgresql:latest
+psql --user asim --password --dbname lyftron -h 18.210.50.50
+\l  ---> list all databases
+
+docker run -it --rm --name connect --network kafka -p 8083:8083 -e GROUP_ID=1 -e CONFIG_STORAGE_TOPIC=my_connect_configs -e OFFSET_STORAGE_TOPIC=my_connect_offsets -e STATUS_STORAGE_TOPIC=my_connect_statuses --link kafka_zookeeper_1:zookeeper --link kafka_kafka_1:kafka --link postgres:postgres debezium/postgres:9.6
 
 
 
