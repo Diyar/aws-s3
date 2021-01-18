@@ -19,7 +19,7 @@ iam_role=s3-mount
 mount_point=/root/s3
 bucket_name=cloudgeeks.ca
 
-mkdir $mount_point
+mkdir -p $mount_point
 
 
 /bin/s3fs "$bucket_name" "$mount_point" -o iam_role=${iam_role} -o allow_other -o use_path_request_style
@@ -73,7 +73,7 @@ chmod 600 ${HOME}/.passwd-s3fs
 
 
 
-mkdir $mount_point
+mkdir -p $mount_point
 
 
 s3fs "$bucket_name" "$mount_point" -o passwd_file=${HOME}/.passwd-s3fs -o allow_other -o use_path_request_style
