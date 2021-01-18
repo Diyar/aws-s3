@@ -10,7 +10,7 @@
             "Action": [
                 "s3:ListBucket"
             ],
-            "Resource": "arn:aws:s3:::YourBucket/*"
+            "Resource": "arn:aws:s3:::YourBucket"
         },
         {
             "Effect": "Allow",
