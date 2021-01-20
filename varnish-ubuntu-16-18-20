@@ -26,6 +26,7 @@ apt install -y varnish
 
 apt install -f nano
 
+# Apache server Port
 nano /etc/apache2/ports.conf
 
 
