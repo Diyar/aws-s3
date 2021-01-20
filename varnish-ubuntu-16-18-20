@@ -55,6 +55,7 @@ nano /etc/apache2/sites-enabled/000-default.conf
 </VirtualHost>
 Press CTRL + X, Y and Enter to save the file
 
+systemctl daemon-reload
 systemctl restart apache2
 systemctl status apache2
 
