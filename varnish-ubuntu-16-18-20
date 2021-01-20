@@ -26,8 +26,6 @@ apt install -y varnish
 
 apt install -f nano
 
-# Apache server Port
-nano /etc/apache2/ports.conf
 
 
 Step 3: Change Apache and Varnish HTTP Cache listening ports
