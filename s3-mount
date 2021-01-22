@@ -232,6 +232,32 @@ As an alternative, you can create a shortcut to C:\Windows\System32\cmd.exe and 
 C:\Windows\System32\cmd.exe /k cd c:\rclone & rclone mount blog-bucket01:blog-bucket01/ S: --vfs-cache-mode full
 
 
+# S3 Policy
+---------------
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": "arn:aws:s3:::BUCKET-NAME"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject*",
+                "s3:GetObject*",
+                "s3:DeleteObject*"
+            ],
+            "Resource": "arn:aws:s3:::BUCKET-NAME/*"
+        }
+    ]
+}
+
+
 
 
 
