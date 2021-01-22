@@ -23,3 +23,5 @@ mv ./kind /usr/local/bin
 
 
  kubectl cluster-info --context kind-cloudgeeks-ca
+
+#END
