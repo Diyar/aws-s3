@@ -23,6 +23,7 @@ mkdir -p $mount_point
 
 
 /bin/s3fs "$bucket_name" "$mount_point" -o iam_role=${iam_role} -o allow_other -o use_path_request_style
+/bin/s3fs "$bucket_name" "$mount_point" -o iam_role=${iam_role} -o allow_other -o use_path_request_style -o dbglevel=info -f -o curldbg
 
 
 # Persistent Mount after reboot  /etc/fstab format
@@ -76,8 +77,9 @@ chmod 600 ${HOME}/.passwd-s3fs
 mkdir -p $mount_point
 
 
-s3fs "$bucket_name" "$mount_point" -o passwd_file=${HOME}/.passwd-s3fs -o allow_other -o use_path_request_style
+/usr/bin/s3fs "$bucket_name" "$mount_point" -o passwd_file=${HOME}/.passwd-s3fs -o allow_other -o use_path_request_style
 
+/usr/bin/s3fs "$bucket_name" "$mount_point" -o passwd_file=${HOME}/.passwd-s3fs -o allow_other -o use_path_request_style o dbglevel=info -f -o curldbg
 
 # Persistent Mount after reboot  /etc/fstab format
 
