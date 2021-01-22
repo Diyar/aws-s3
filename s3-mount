@@ -45,7 +45,7 @@ echo ""$bucket_name" "$mount_point" fuse.s3fs _netdev,allow_other,use_path_reque
 #!/bin/bash
 #Purpose: S3 Mount via Access Keys
 #Maintainer: Muhammad Asim <quickbook2018@gmail.com>
-# OS: Linux/Mac
+# OS: Ubuntu/Mac
 # S3: Permissions Level Full Access
 
 
