@@ -184,11 +184,11 @@ cp -r /etc/easy-rsa /root
 # AWS Client VPN FILE Update for every client
 
 <cert>
-asim.crt
+asim.crt  ---> COPY asim.crt here
 </cert>
 
 <key>
-asim.key
+asim.key  ---> COPY asim.key here
 </key>
 
 
