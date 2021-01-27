@@ -155,7 +155,9 @@ Next, initialize the PKI.
 # Generate the Certificate Authority (CA) Certificate and Key
 # Next, generate the CA certificate and key for signing OpenVPN server and client certificates.
 
-./easyrsa build-ca
+./easyrsa build-ca nopass
+
+---> Common Name cloudgeeks.ca
 
 # BACKUP
 -------
@@ -172,9 +174,9 @@ cp -r tls /etc/easy-rsa/
 # Generate Client Certificates and Keys with Existing CA
 # Make sure you are in directory ---> /etc/easy-rsa/   because here is the easy-rsa executable exist.
 
-# ---> ./easyrsa build-client-full qasim nopass
+# ---> ./easyrsa build-client-full qasim.cloudgeeks.ca nopass
 
-# ----> ./easyrsa build-client-full asim
+# ----> ./easyrsa build-client-full asim.cloudgeeks.ca
 
 # ls /etc/easy-rsa/pki/issued   ---> you will see the asim.crt qasim.crt
 
