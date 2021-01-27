@@ -220,6 +220,96 @@ aws acm import-certificate --certificate file://client1.crt --private-key fileb:
 
 
 
+Certificate Creation
+Clone Easy RSA Git Repo
+
+git clone https://github.com/OpenVPN/easy-rsa.git 
+Initialize Public Key Infrastructure (PKI)
+
+./easyrsa init-pki
+
+# Output
+init-pki complete; you may now create a CA or requests.
+Your newly created PKI dir is: /Users/prasaddomala/gitrepos/external/easy-rsa/easyrsa3/pki 
+Build Certificate Authority
+
+./easyrsa build-ca nopass
+
+# Output
+Using SSL: openssl LibreSSL 2.8.3
+Generating RSA private key, 2048 bit long modulus
+....................................................+++
+...................................+++
+e is 65537 (0x10001)
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Common Name (eg: your user, host, or server name) [Easy-RSA CA]:clientvpndemo.com
+
+CA creation complete and you may now import and sign cert requests.
+Your new CA certificate file for publishing is at:
+/Users/prasaddomala/gitrepos/external/easy-rsa/easyrsa3/pki/ca.crt 
+Build Server Certificate
+
+./easyrsa build-server-full clientvpndemo.com nopass
+
+# Output
+Using SSL: openssl LibreSSL 2.8.3
+Generating a 2048 bit RSA private key
+..............+++
+............+++
+writing new private key to '/Users/prasaddomala/gitrepos/external/easy-rsa/easyrsa3/pki/easy-rsa-8826.owtURY/tmp.5Jx9BY'
+-----
+Using configuration from /Users/prasaddomala/gitrepos/external/easy-rsa/easyrsa3/pki/easy-rsa-8826.owtURY/tmp.M8pVaP
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'clientvpndemo.com'
+Certificate is to be certified until Jul  5 10:27:28 2022 GMT (825 days)
+
+Write out database with 1 new entries
+Data Base Updated 
+Build Client Certificate
+
+./easyrsa build-client-full pdomala.clientvpndemo.com nopass
+
+# Output
+Using SSL: openssl LibreSSL 2.8.3
+Generating a 2048 bit RSA private key
+.......................+++
+...............................................................................................................................+++
+writing new private key to '/Users/prasaddomala/gitrepos/external/easy-rsa/easyrsa3/pki/easy-rsa-9028.BEyiiC/tmp.OQB63G'
+-----
+Using configuration from /Users/prasaddomala/gitrepos/external/easy-rsa/easyrsa3/pki/easy-rsa-9028.BEyiiC/tmp.DZoDDK
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'pdomala.clientvpndemo.com'
+Certificate is to be certified until Jul  5 10:30:45 2022 GMT (825 days)
+
+Write out database with 1 new entries
+Data Base Updated 
+Copy required certificates in to a single folder (optional) and upload to AWS Certificate Manager (ACM)
+
+mkdir acm
+cp pki/ca.crt acm
+cp pki/issued/clientvpndemo.com.crt acm
+cp pki/issued/pdomala.clientvpndemo.com.crt acm
+cp pki/private/clientvpndemo.com.key acm
+cp pki/private/pdomala.clientvpndemo.com.key acm
+cd acm
+
+aws acm import-certificate --certificate fileb://clientvpndemo.com.crt --private-key fileb://clientvpndemo.com.key --certificate-chain fileb://ca.crt --region ap-southeast-2
+aws acm import-certificate --certificate fileb://pdomala.clientvpndemo.com.crt --private-key fileb://pdomala.clientvpndemo.com.key --certificate-chain fileb://ca.crt --region ap-southeast-2
+
+
+
+
+
 
 
 
