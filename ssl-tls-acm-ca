@@ -191,6 +191,12 @@ asim.crt  ---> COPY asim.crt here
 asim.key  ---> COPY asim.key here
 </key>
 
+# Useful Links
+
+# https://www.youtube.com/watch?v=LYqLKH8VoYc&feature=youtu.be&ab_channel=AmazonWebServices
+
+# https://kifarunix.com/install-and-setup-openvpn-server-on-ubuntu-20-04/
+
 
 
 
