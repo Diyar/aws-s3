@@ -203,8 +203,7 @@ aws acm import-certificate --certificate fileb://ca.crt --private-key fileb://ca
 
 CLIENT CERTS
 ------------
-aws acm import-certificate --certificate file://client1.crt --private-key fileb://client2.key --certificate-chan fileb://ca.crt --region us-east-1
-
+aws acm import-certificate --certificate fileb://asim.crt --private-key fileb://asim.key --certificate-chain fileb://ca.crt --region us-east-1
 
 
 
