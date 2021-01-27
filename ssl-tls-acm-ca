@@ -207,6 +207,7 @@ CLIENT CERTS
 ------------
  aws acm import-certificate --certificate fileb://asim.cloudgeeks.ca.crt --private-key fileb://asim.cloudgeeks.ca.key --certificate-chain fileb://CA.crt --region us-east-1
 
+ aws acm import-certificate --certificate fileb://qasim.cloudgeeks.ca.crt --private-key fileb://qasim.cloudgeeks.ca.key --certificate-chain fileb://CA.crt --region us-east-1
 
 
 # Useful Links
