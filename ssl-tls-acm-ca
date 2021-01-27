@@ -126,3 +126,65 @@ openssl x509 -in "${DIR}/"$DOMAIN".crt" -noout -text
 
 ### openssl x509 -req -in cloudgeeks.ca.com.csr -signkey cloudgeeks.ca.com.key -out cloudgeeks.ca.com.crt
 
+
+
+
+# https://github.com/OpenVPN/easy-rsa/blob/master/doc/EasyRSA-Readme.md
+
+# How To SIGN Multiple Certs with existing CA
+
+STEPS
+------
+OS Ubuntu
+---------
+apt update -y
+
+apt install easy-rsa
+
+cp -r /usr/share/easy-rsa /etc/
+
+# Next, initialize the PKI.
+----------------------------
+
+cd /etc/easy-rsa/
+
+Next, initialize the PKI.
+
+# ---> ./easyrsa init-pki
+
+# Generate the Certificate Authority (CA) Certificate and Key
+# Next, generate the CA certificate and key for signing OpenVPN server and client certificates.
+
+./easyrsa build-ca
+
+# BACKUP
+-------
+cp -r /etc/easy-rsa /root
+
+./easyrsa init-pki
+
+# ---> cp CA.crt from tls --->  /etc/easy-rsa/pki/ca.crt
+# ---> cp CA.key from tls --->  /etc/easy-rsa/pki/private/ca.key
+
+# Generate Client Certificates and Keys with Existing CA
+# Make sure you are in directory ---> /etc/easy-rsa/   because here is the easy-rsa executable exist.
+
+# ---> ./easyrsa build-client-full qasim nopass
+
+# ----> ./easyrsa build-client-full asim
+
+# ls /etc/easy-rsa/pki/issued   ---> you will see the asim.crt qasim.crt
+
+# ls /etc/easy-rsa/pki/private  ---> you will see the asim.key qasim.key
+
+# That is how to signed with existing CA
+
+
+
+
+
+
+
+
+
+
