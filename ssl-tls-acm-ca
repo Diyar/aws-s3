@@ -214,6 +214,8 @@ aws acm import-certificate --certificate file://client1.crt --private-key fileb:
 
 # https://www.youtube.com/watch?v=Bv70DoHDDCY&ab_channel=PrasadDomala
 
+# https://prasaddomala.com/2020/04/02/aws-client-vpn-setup-private-access-across-aws-accounts-and-vpcs/
+
 
 
 
