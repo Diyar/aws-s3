@@ -139,7 +139,7 @@ OS Ubuntu
 ---------
 apt update -y
 
-apt install easy-rsa
+apt install -y easy-rsa
 
 cp -r /usr/share/easy-rsa /etc/
 
