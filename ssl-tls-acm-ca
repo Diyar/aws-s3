@@ -159,7 +159,10 @@ Next, initialize the PKI.
 
 # BACKUP
 -------
-cp -r /etc/easy-rsa /root
+cp   -r /etc/easy-rsa /root
+
+cp -r tls /etc/easy-rsa/
+
 
 ./easyrsa init-pki
 
