@@ -199,7 +199,7 @@ ACM Import into AWS
 
 SERVER CERTS
 ------------
-aws acm import-certificate --certificate file://cloudgeeks.ca.crt --private-key fileb://cloudgeeks.ca.key --certificate-chan fileb://ca.crt --region us-east-1
+aws acm import-certificate --certificate fileb://ca.crt --private-key fileb://ca.key --certificate-chain fileb://ca.crt --region us-east-1
 
 CLIENT CERTS
 ------------
