@@ -161,6 +161,8 @@ pkill -19 postgres
 # PG ADMIN
 -----------
 
+kubectl get pods -n default -o wide
+
 https://stackoverflow.com/questions/8288823/query-a-parameter-postgresql-conf-setting-like-max-connections
 SHOW max_connections;
 
