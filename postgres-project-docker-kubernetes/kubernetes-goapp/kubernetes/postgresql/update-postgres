@@ -166,3 +166,10 @@ kubectl get pods -n default -o wide
 https://stackoverflow.com/questions/8288823/query-a-parameter-postgresql-conf-setting-like-max-connections
 SHOW max_connections;
 
+
+# pg-admin connection get the container name
+
+
+kubectl get pods POD_NAME_HERE -o jsonpath='{.spec.containers[*].name}'
+
+Note: container name is the Hostname or put the Ip-address of Pod
