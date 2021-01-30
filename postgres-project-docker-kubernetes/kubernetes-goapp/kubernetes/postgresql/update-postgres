@@ -158,3 +158,9 @@ pkill -9 postgres
 pkill -19 postgres
 
 
+# PG ADMIN
+-----------
+
+https://stackoverflow.com/questions/8288823/query-a-parameter-postgresql-conf-setting-like-max-connections
+SHOW max_connections;
+
