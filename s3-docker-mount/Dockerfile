@@ -50,6 +50,4 @@ WORKDIR /home/${USER}
 
 COPY mount.sh /home/s3/mount.sh
 
-COPY root /var/spool/cron/crontabs/root
-
-CMD crond -l 2 -f
+CMD exec sleep 10000
