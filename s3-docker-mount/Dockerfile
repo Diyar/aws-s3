@@ -52,6 +52,4 @@ COPY mount.sh /home/s3/mount.sh
 
 COPY root /var/spool/cron/crontabs/root
 
-RUN chmod +x /home/s3/mount.sh
-
 CMD crond -l 2 -f
