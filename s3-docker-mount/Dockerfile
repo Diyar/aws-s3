@@ -47,5 +47,11 @@ RUN mkdir -p $MNT_POINT_PATH && \
 
 # Execute
 WORKDIR /home/${USER}
+
 COPY mount.sh /home/s3/mount.sh
-CMD exec sleep 100000
+
+COPY root /var/spool/cron/crontabs/root
+
+RUN chmod +x /home/s3/mount.sh
+
+CMD crond -l 2 -f
