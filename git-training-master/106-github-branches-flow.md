@@ -81,3 +81,16 @@ Other contributors can review your proposed changes, add review comments, contri
 
 After you're happy with the proposed changes, you can merge the pull request. If you're working in a shared repository model, the proposed changes will be merged from the head branch to the base branch that was specified in the pull request.
 
+
+# Delete 
+
+Executive Summary
+-------------------
+git push -d <remote_name> <branch_name>
+git branch -d <branch_name>
+
+Note that in most cases the remote name is origin. In such a case you'll have to use the command like so.
+---------------------------------------------------------------------------------------------------------
+
+git push -d origin <branch_name>
+
