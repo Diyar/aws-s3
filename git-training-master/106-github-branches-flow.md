@@ -1,4 +1,4 @@
-# Understanding the Github flow
+# Understanding the Github branches flow
 
 [There is a good explanation here](https://guides.github.com/introduction/flow/)
 
