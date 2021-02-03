@@ -46,7 +46,7 @@ git push origin master -- this command will push the changes to the github
 origin is actually your remote repository on github 
 
 
-get-config --list --show what configuration setting
+git config --list   >>  what is configuration setting
 
 
 
