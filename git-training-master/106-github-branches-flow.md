@@ -82,6 +82,16 @@ Other contributors can review your proposed changes, add review comments, contri
 After you're happy with the proposed changes, you can merge the pull request. If you're working in a shared repository model, the proposed changes will be merged from the head branch to the base branch that was specified in the pull request.
 
 
+# Pull
+
+git branch -a
+
+git pull <remote> <branch>
+
+# Push
+
+git push <remote> branch
+
 # Delete 
 
 List all branches
