@@ -84,6 +84,10 @@ After you're happy with the proposed changes, you can merge the pull request. If
 
 # Delete 
 
+List all branches
+------------------
+git branch -a
+
 Executive Summary
 -------------------
 git push -d <remote_name> <branch_name>
