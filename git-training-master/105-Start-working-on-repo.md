@@ -61,3 +61,8 @@ git config --list   >>  what is configuration setting
     - git commit -m "Message"
     - git remote add origin URL
     - git push -u origin master
+
+### Diff
+git diff ---> for unstaged ---> unstaged mean no ---> git add 
+
+git diff --staged ---> for staged mean ---> after git add
