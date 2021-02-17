@@ -41,6 +41,8 @@ screen -d -m bash -c 'ping google.com'
 8. Screen run a bash Interative shell, which in turn runs your script.
 ------------------------------------------------------------
 
+screen -dm -U -S taha bash -c 'ping google.com'
+
 screen -dm -U -S taha bash -c '/root/asim.sh'
 
 screen -dm -U -S google bash -c 'echo taha;echo hadi;/root/asim.sh;ping google.com'
