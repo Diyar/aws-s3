@@ -9,3 +9,13 @@
 # https://docs.aws.amazon.com/eks/latest/userguide/security-iam.html
 
 # https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html
+
+
+
+
+
+# https://docs.aws.amazon.com/eks/latest/userguide/troubleshooting_iam.html
+The following example error occurs when an IAM user named marymajor tries to use the console to perform an action in Amazon EKS. However, the action requires the service to have permissions granted by a service role. Mary does not have permissions to pass the role to the service.
+
+User: arn:aws:iam::123456789012:user/marymajor is not authorized to perform: iam:PassRole
+In this case, Mary asks her administrator to update her policies to allow her to perform the iam:PassRole action.
