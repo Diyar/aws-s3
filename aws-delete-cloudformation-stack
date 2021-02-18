@@ -1,6 +1,6 @@
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-deleting-stack.html
 
-aws cloudformation
+aws cloudformation ls
 
 aws cloudformation list-stacks
 
