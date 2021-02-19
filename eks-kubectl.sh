@@ -5,7 +5,7 @@
 
 
 
-# Terraform Setup
+# Terraform Setup Ubuntu
 
 apt update -y && apt install -y curl 2>&1 >/dev/null
 curl -# -LO https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip
@@ -14,6 +14,15 @@ unzip terraform_0.12.16_linux_amd64.zip 2>&1 >/dev/null
 rm -rf *.zip  2>&1 >/dev/null
 cp terraform /usr/bin/  2>&1 >/dev/null
 cp terraform /usr/local/bin  2>&1 >/dev/null
+rm -rf terraform
+
+
+# Terraform Setup AmazonLinux
+
+curl -# -LO https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip
+unzip terraform_0.14.7_linux_amd64.zip
+rm -rf *.zip  2>&1 >/dev/null
+cp terraform /usr/bin/  2>&1 >/dev/null
 rm -rf terraform
 
 
