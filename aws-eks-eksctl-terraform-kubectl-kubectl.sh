@@ -29,7 +29,17 @@ pip3 install --upgrade --user awscli  2>&1 >/dev/null
 yum update -y && yum install -y awscli 2>&1 >/dev/null
 
 
+# EKSCTL AmazonLinux
+# https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+# 1. Download and extract the latest release of eksctl with the following command.
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 
+# 2. Move the extracted binary to /usr/bin
+
+mv /tmp/eksctl /usr//bin
+
+# 3. Test that your installation was successful with the following command.
+eksctl version
 
 # Kubectl Installation
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
