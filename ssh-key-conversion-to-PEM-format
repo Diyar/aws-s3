@@ -13,3 +13,8 @@ Double check if AWS isn't asking for a (X.509) certificate in PEM format, which 
 # Example
 ssh-keygen -f id_rsa -e -m pem
 
+# Complete Steps
+----------------
+ssh-keygen -f rabbitmq
+ssh-keygen -f rabbitmq -e -m pem
+
