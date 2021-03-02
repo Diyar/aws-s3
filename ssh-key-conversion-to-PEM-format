@@ -15,6 +15,6 @@ ssh-keygen -f id_rsa -e -m pem
 
 # Complete Steps
 ----------------
-ssh-keygen -f rabbitmq
-ssh-keygen -f rabbitmq -e -m pem
+ssh-keygen -f rabbitmq.pem
+ssh-keygen -f rabbitmq.pem -e -m pem
 
