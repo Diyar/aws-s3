@@ -1,5 +1,7 @@
 https://aws.amazon.com/premiumsupport/knowledge-center/rds-iam-least-privileges/
 
+https://aws.amazon.com/blogs/security/a-primer-on-rds-resource-level-permissions/
+
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -23,3 +25,6 @@ https://aws.amazon.com/premiumsupport/knowledge-center/rds-iam-least-privileges/
         }
     ]
 }
+
+
+
