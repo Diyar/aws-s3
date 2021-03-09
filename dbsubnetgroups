@@ -28,3 +28,18 @@ https://aws.amazon.com/blogs/security/a-primer-on-rds-resource-level-permissions
 
 
 
+
+
+
+{
+    "Version" : "2012-10-17",
+    "Statement" : [{
+       "Effect" : "Allow",
+       "Action" : [ "rds:AddTagsToResource", "rds:RemoveTagsFromResource" 
+       ],
+       "Resource" : "*",
+       "Condition" : { "streq" : { "rds:req-tag/stage" : [ "test", "qa", 
+       "production" ] } }
+  }
+ ]
+}
