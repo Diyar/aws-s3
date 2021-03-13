@@ -3,13 +3,15 @@
 #Maintainer: Muhammad Asim <quickbooks2018@gmail.com>
 
 VPC_ID=`terraform output vpc-id`
-ACCOUNT_ID=`aws sts get-caller-identity | grep -i account | cut -d '"' -f4`
+################################
+ACCOUNT_ID="YOURAWSACCOUNT"
+################################
 REGION="us-east-1"
 CLUSTER_NAME="cloudgeeks-eks"
 
-# Update Me
+# Update Me 
 ##############################################################################
-Policy_Arn="arn:aws:iam::YOURAWSACCOUNT:policy/ALBIngressControllerIAMPolicy"
+Policy_Arn="arn:aws:iam::${ACCOUNT_ID}:policy/ALBIngressControllerIAMPolicy"
 ##############################################################################
 
 
