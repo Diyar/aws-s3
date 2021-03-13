@@ -6,7 +6,11 @@ VPC_ID=`terraform output vpc-id`
 ACCOUNT_ID=`aws sts get-caller-identity | grep -i account | cut -d '"' -f4`
 REGION="us-east-1"
 CLUSTER_NAME="cloudgeeks-eks"
-POLICY_ARN=`aws sts get-caller-identity |  awk '{ print $2 }' | grep "iam" | cut -d':' -f2,3,4,5`
+
+# Update Me
+##############################################################################
+Policy_Arn="arn:aws:iam::YOURAWSACCOUNT:policy/ALBIngressControllerIAMPolicy"
+##############################################################################
 
 
 # Create an IAM OIDC provider and associate it with your cluster. If you don't have eksctl version 0.14.0 or later installed, complete the instructions in Installing or Upgrading eksctl to install or upgrade it. You can check your installed version with eksctl version.
@@ -33,7 +37,7 @@ eksctl create iamserviceaccount \
     --name alb-ingress-controller \
     --namespace kube-system \
     --cluster $CLUSTER_NAME \
-    --attach-policy-arn arn:$POLICY_ARN:policy/ALBIngressControllerIAMPolicy \
+    --attach-policy-arn $POLICY_ARN \
     --override-existing-serviceaccounts \
     --approve
 
@@ -68,3 +72,25 @@ echo -e "\n kubectl get pods -n kube-system \n"
 
 
 #END
+
+
+
+# https://aws.amazon.com/premiumsupport/knowledge-center/eks-alb-ingress-controller-setup/
+
+# ALB Ingress EKS Sample app
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-service.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-ingress.yaml
+
+
+# Ingress ---> https://aws.amazon.com/premiumsupport/knowledge-center/eks-alb-ingress-controller-fargate/
+# Ingress ---> https://github.com/quickbooks2018/aws/blob/master/eks  ---> SEARCH Annotations or watch video ----> https://www.youtube.com/watch?v=UHpIxQSAM-A&t=94s
+
+kubectl get ingress/2048-ingress -n 2048-game
+
+kubectl logs -n kube-system deployment.apps/alb-ingress-controller
+
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/master/docs/examples/2048/2048-namespace.yaml
+
