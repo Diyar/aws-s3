@@ -6,7 +6,11 @@ VPC_ID=`terraform output vpc-id`
 ACCOUNT_ID=`aws sts get-caller-identity | grep -i account | cut -d '"' -f4`
 REGION="us-east-1"
 CLUSTER_NAME="cloudgeeks-eks"
-POLICY_ARN=`aws sts get-caller-identity |  awk '{ print $2 }' | grep "iam" | cut -d':' -f2,3,4,5`
+
+# Update Me
+##############################################################################
+Policy_Arn="arn:aws:iam::YOURAWSACCOUNT:policy/ALBIngressControllerIAMPolicy"
+##############################################################################
 
 
 # Create an IAM OIDC provider and associate it with your cluster. If you don't have eksctl version 0.14.0 or later installed, complete the instructions in Installing or Upgrading eksctl to install or upgrade it. You can check your installed version with eksctl version.
@@ -33,7 +37,7 @@ eksctl create iamserviceaccount \
     --name alb-ingress-controller \
     --namespace kube-system \
     --cluster $CLUSTER_NAME \
-    --attach-policy-arn arn:$POLICY_ARN:policy/ALBIngressControllerIAMPolicy \
+    --attach-policy-arn $POLICY_ARN \
     --override-existing-serviceaccounts \
     --approve
 
