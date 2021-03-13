@@ -562,6 +562,7 @@ aws cloudformation create-stack --stack-name ${StackName} --template-body file:/
 # END
 
 
+# https://gist.github.com/nackjicholson/7399d45b09211dff6e77e72b61118af4
 
 
 
