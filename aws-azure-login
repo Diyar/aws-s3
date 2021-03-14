@@ -1,0 +1,23 @@
+# https://github.com/sportradar/aws-azure-login
+
+# https://hub.docker.com/repository/docker/quickbooks2018/aws-azure-login
+
+docker run --rm -it -v ~/.aws:/root/.aws quickbooks2018/aws-azure-login --configure
+
+
+Azure Tenant ID   hahahhhshshshshshhshhahahahahhahaha
+
+Azure App ID URI   1254kakajjahahshshhhahahahahhahaha
+
+Default Username   Your Office 365 email address  >>> email@domain.com
+
+Stay Logged in     true
+
+Default Role ARN   leave blank
+
+Default Session    Duration Hours 12
+
+Now you can log in using the following and begin your AWS session:
+
+
+docker run --rm -it -v ~/.aws:/root/.aws quickbooks2018/aws-azure-login aws-azure-login
