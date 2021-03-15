@@ -2,6 +2,8 @@
 
 # https://hub.docker.com/repository/docker/quickbooks2018/aws-azure-login
 
+# https://github.com/kolesnikovIV/aws-azure-login/tree/8b5f4acba0e7f7b82d438cee65ab842126fec852
+
 docker run --rm -it -v ~/.aws:/root/.aws quickbooks2018/aws-azure-login --configure
 
 
