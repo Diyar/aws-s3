@@ -1,32 +1,3 @@
-# https://github.com/sportradar/aws-azure-login
-
-# https://hub.docker.com/repository/docker/quickbooks2018/aws-azure-login
-
-# https://github.com/kolesnikovIV/aws-azure-login/tree/8b5f4acba0e7f7b82d438cee65ab842126fec852
-
-docker run --rm -it -v ~/.aws:/root/.aws quickbooks2018/aws-azure-login --configure
-
-
-Azure Tenant ID   hahahhhshshshshshhshhahahahahhahaha
-
-Azure App ID URI   1254kakajjahahshshhhahahahahhahaha
-
-Default Username   Your Office 365 email address  >>> email@domain.com
-
-Stay Logged in     true
-
-Default Role ARN   leave blank
-
-Default Session    Duration Hours 12
-
-Now you can log in using the following and begin your AWS session:
-
-
-docker run --rm -it -v ~/.aws:/root/.aws quickbooks2018/aws-azure-login aws-azure-login
-
-
-
-
 [![view on npm](http://img.shields.io/npm/v/aws-azure-login.svg)](https://www.npmjs.org/package/aws-azure-login)
 [![npm module downloads per month](http://img.shields.io/npm/dm/aws-azure-login.svg)](https://www.npmjs.org/package/aws-azure-login)
 
@@ -230,19 +201,3 @@ On Windows:
 ## Support for Other Authentication Providers
 
 Obviously, this tool only supports Azure AD as an identity provider. However, there is a lot of similarity with how other logins with other providers would work (especially if they are SAML providers). If you are interested in building support for a different provider let me know. It would be great to build a more generic AWS CLI login tool with plugins for the various providers.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

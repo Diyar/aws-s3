@@ -1,0 +1,10 @@
+.github
+src
+typings
+.dockerignore
+.editorconfig
+.eslintrc.json
+docker-launch.sh
+Dockerfile
+snapcraft.yaml
+tsconfig.json
