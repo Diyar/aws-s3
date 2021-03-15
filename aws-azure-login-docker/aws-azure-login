@@ -20,7 +20,7 @@ Stay Logged in     true
 
 Default Role ARN   leave blank
 
-Default Session    Duration Hours 12
+Default Session    Duration Hours 1
 
 Now you can log in using the following and begin your AWS session:
 
