@@ -5,6 +5,8 @@
 # Dockerfile Source code
 # https://github.com/quickbooks2018/aws/tree/master/aws-azure-login-docker
 
+#############################################################################################
+
 docker run --rm -it -v ~/.aws:/root/.aws quickbooks2018/aws-azure-login --configure
 
 
@@ -25,7 +27,7 @@ Now you can log in using the following and begin your AWS session:
 
 docker run --rm -it -v ~/.aws:/root/.aws quickbooks2018/aws-azure-login aws-azure-login
 
-
+##################################################################################################
 
 
 [![view on npm](http://img.shields.io/npm/v/aws-azure-login.svg)](https://www.npmjs.org/package/aws-azure-login)
