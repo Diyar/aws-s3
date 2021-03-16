@@ -7,35 +7,44 @@ docker network ls
 docker network create cloudgeeks.ca
 
 
+### Encryption ###  ### Plain Text ###
+
+#1. aws kms list-keys --region us-east-1
+
+#2. aws kms encrypt --region us-east-1 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > username.txt
+
+    aws kms encrypt --region us-east-1 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "abc" --output text --query CiphertextBlob | base64 --decode > password.txt
+    
+    aws kms encrypt --region us-east-1 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > databasename.txt
+    
+    
+
+#3. aws kms decrypt --region us-east-1 --ciphertext-blob fileb://username.txt --output text --query Plaintext | base64 --decode 
+
+
 # Secrets with AWS Encryption
 
 ### Decryption ###
 
-MYSQL_USER=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/username.txt --output text --query Plaintext | base64 --decode`
-MYSQL_PASSWORD=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/password.txt --output text --query Plaintext | base64 --decode`
-MYSQL_DATABASE=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/databasename.txt --output text --query Plaintext | base64 --decode`
+MYSQL_USER=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/username.txt --output text --query Plaintext | base64 --decode`
+MYSQL_PASSWORD=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/password.txt --output text --query Plaintext | base64 --decode`
+MYSQL_DATABASE=`aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///root/secrets/databasename.txt --output text --query Plaintext | base64 --decode`
 
-# Application
 
+
+
+# Demo Application Wordpress
+
+# Mysql
 docker run --name mysql --network cloudgeeks.ca -v ~/mysql:/var/lib/mysql -e MYSQL_USER="$MYSQL_USER" -e MYSQL_PASSWORD="$MYSQL_PASSWORD" -e MYSQL_ROOT_PASSWORD="$MYSQL_USER" -e MYSQL_DATABASE="MYSQL_DATABASE" --restart unless-stopped -d mysql:5.7
 
-docker run --name wordpress \
---network cloudgeeks.ca \
---link=mysql:db \
--v ~/cloudgeeks.ca.com:/var/www/html \
---restart unless-stopped \
--p 80:80 -d wordpress
+# Wordpress
+docker run --name wordpress --network cloudgeeks.ca --link=mysql:db -v ~/cloudgeeks.ca.com:/var/www/html --restart unless-stopped -p 80:80 -d wordpress
 
 #END
 
 
-### Encryption ###  ### Plain Text ###
 
-#1. aws kms list-keys --region us-west-2
-
-#2. aws kms encrypt --region us-west-2 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > username.txt
-
-#3. aws kms decrypt --region us-west-2 --ciphertext-blob fileb://username.txt --output text --query Plaintext | base64 --decode 
 
 # Encryption ### ### File ### ---> size 4Kb
 # https://docs.aws.amazon.com/cli/latest/reference/kms/encrypt.html
