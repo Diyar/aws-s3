@@ -51,7 +51,7 @@ aws kms encrypt --region us-east-1 \
     --decode > id_rsa_encrypted  
     
 # Private Key Decryption
-aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///${PWD}/id_rsa_encrypted --output text --query Plaintext | base64 --decode > id_rsa
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb://id_rsa_encrypted --output text --query Plaintext | base64 --decode > id_rsa
 
 
 
