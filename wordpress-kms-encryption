@@ -38,13 +38,9 @@ docker run --name wordpress \
 #3. aws kms decrypt --region us-west-2 --ciphertext-blob fileb://username.txt --output text --query Plaintext | base64 --decode 
 
 # Encryption ### ### File ### ---> size 4Kb
+# https://docs.aws.amazon.com/cli/latest/reference/kms/encrypt.html
 
-aws kms encrypt \
-    --key-id 1234abcd-12ab-34cd-56ef-1234567890ab \
-    --plaintext fileb://ExamplePlaintextFile \
-    --output text \
-    --query CiphertextBlob | base64 \
-    --decode > ExampleEncryptedFile
+aws kms encrypt --key-id 7702849e-2bc0-4697-ad62-303523cacd9a --plaintext fileb://id_rsa --output text --query CiphertextBlob | base64 --decode > id_rsa_encrypted
   
 # Private key Encrypion  
 aws kms encrypt --region us-east-1 \
