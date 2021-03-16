@@ -40,7 +40,7 @@ docker run --name wordpress \
 # Encryption ### ### File ### ---> size 4Kb
 # https://docs.aws.amazon.com/cli/latest/reference/kms/encrypt.html
 
-aws kms encrypt --key-id 7702849e-2bc0-4697-ad62-303523cacd9a --plaintext fileb://id_rsa --output text --query CiphertextBlob | base64 --decode > id_rsa_encrypted
+aws kms encrypt --region us-east-1 --key-id 7702849e-2bc0-4697-ad62-303523cacd9a --plaintext fileb://id_rsa --output text --query CiphertextBlob | base64 --decode > id_rsa_encrypted
   
 # Private key Encrypion  
 aws kms encrypt --region us-east-1 \
