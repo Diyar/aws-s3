@@ -1,5 +1,6 @@
 #!/bin/bash
 # Purpose: KMS Encryption Decryption
+# https://docs.aws.amazon.com/cli/latest/reference/kms/encrypt.html
 
 docker network ls
 
