@@ -11,11 +11,11 @@ docker network create cloudgeeks.ca
 
 #1. aws kms list-keys --region us-east-1
 
-#2. aws kms encrypt --region us-east-1 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > username.txt
+#2. aws kms encrypt --region us-east-1 --key-id 7702849e-2bc0-4697-ad62-303523cacd9a  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > username.txt
 
-    aws kms encrypt --region us-east-1 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "abc" --output text --query CiphertextBlob | base64 --decode > password.txt
+    aws kms encrypt --region us-east-1 --key-id 7702849e-2bc0-4697-ad62-303523cacd9a  --plaintext "abc" --output text --query CiphertextBlob | base64 --decode > password.txt
     
-    aws kms encrypt --region us-east-1 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > databasename.txt
+    aws kms encrypt --region us-east-1 --key-id 7702849e-2bc0-4697-ad62-303523cacd9a  --plaintext "cloudgeeksca" --output text --query CiphertextBlob | base64 --decode > databasename.txt
     
     
 
