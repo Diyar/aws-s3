@@ -9,6 +9,8 @@ docker network create cloudgeeks.ca
 
 # Secrets with AWS Encryption
 
+### Decryption ###
+
 MYSQL_USER=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/username.txt --output text --query Plaintext | base64 --decode`
 MYSQL_PASSWORD=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/password.txt --output text --query Plaintext | base64 --decode`
 MYSQL_DATABASE=`aws kms decrypt --region us-west-2 --ciphertext-blob fileb:///root/secrets/databasename.txt --output text --query Plaintext | base64 --decode`
@@ -27,13 +29,34 @@ docker run --name wordpress \
 #END
 
 
-### Encryption ###
+### Encryption ###  ### Plain Text ###
 
 #1. aws kms list-keys --region us-west-2
 
 #2. aws kms encrypt --region us-west-2 --key-id 3b7a126e-db34-483b-a249-d985389e06a3  --plaintext "asim" --output text --query CiphertextBlob | base64 --decode > username.txt
 
 #3. aws kms decrypt --region us-west-2 --ciphertext-blob fileb://username.txt --output text --query Plaintext | base64 --decode 
+
+# Encryption ### ### File ### ---> size 4Kb
+
+aws kms encrypt \
+    --key-id 1234abcd-12ab-34cd-56ef-1234567890ab \
+    --plaintext fileb://ExamplePlaintextFile \
+    --output text \
+    --query CiphertextBlob | base64 \
+    --decode > ExampleEncryptedFile
+  
+# Private key Encrypion  
+aws kms encrypt --region us-east-1 \
+    --key-id 1234abcd-12ab-34cd-56ef-1234567890ab \
+    --plaintext fileb://id_rsa \
+    --output text \
+    --query CiphertextBlob | base64 \
+    --decode > id_rsa_encrypted  
+    
+# Private Key Decryption
+aws kms decrypt --region us-east-1 --ciphertext-blob fileb:///${PWD}/id_rsa --output text --query Plaintext | base64 --decode > id_rsa
+
 
 
 # KMS Policy to attach with ec2 instance
